@@ -20,6 +20,32 @@ public class RicercatoreDAO {
 		connection = Connessione.getConnessione();
 		statement = connection.getStatement();
 	}
+	//INSERT RICERCATORE 
+	
+	public int InserisciRicercatore(String Nome,String Cognome,String Codice_Fiscale , String Residenza , String Data_Inizio,int Compenso,String sede)
+	{
+		int rowinsert=0;
+		
+		try {
+			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
+					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+			String id_sede = new String();
+			while(rd.next())
+			{
+				id_sede = rd.getString("id_sede");
+			}
+			
+			rowinsert =statement.executeUpdate("INSERT INTO RICERCATORE VALUES (DEFAULT ,'"+Nome+"' , '"+Cognome+"' , '"+Residenza+"' , "
+					+ "'"+Codice_Fiscale+"' , '"+Data_Inizio+"' , null , "+Compenso+", '"+id_sede+"' );");
+			
+			return rowinsert;
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return rowinsert;
+		}
+	}
 	
 	//ELENCO DEI RICERCATORI PER CENTRO 
 		public ArrayList<Ricercatore> ListaRicercatoriPerCentro(String centro)
