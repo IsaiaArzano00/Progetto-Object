@@ -18,6 +18,33 @@ public class Tecnico_di_LaboratorioDAO {
 		connection = Connessione.getConnessione();
 		statement = connection.getStatement();
 	}
+	//INSERT TECNICO DI LABORATORIO
+	
+	public int InserisciTecnico(String Nome,String Cognome,String Codice_Fiscale , String Residenza , String Data_Inizio,int Compenso,String sede)
+	{
+		int rowinsert=0;
+		
+		try {
+			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
+					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+			String id_sede = new String();
+			while(rd.next())
+			{
+				id_sede = rd.getString("id_sede");
+			}
+			
+			rowinsert =statement.executeUpdate("INSERT INTO TECNICO_DI_LABORATORIO VALUES (DEFAULT ,'"+Nome+"' , '"+Cognome+"' , '"+Residenza+"' , "
+					+ "'"+Codice_Fiscale+"' , '"+Data_Inizio+"' , null , "+Compenso+", '"+id_sede+"' );");
+			
+			return rowinsert;
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return rowinsert;
+		}
+	}
+	
 	
 	//LISTA TECNICI PER CENTRO 
 	public ArrayList<Tecnico_di_Laboratorio> ListaTecniciPerCentro(String centro)

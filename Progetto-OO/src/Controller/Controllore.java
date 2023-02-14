@@ -274,11 +274,11 @@ public class Controllore {
 		if(qualifica.equals("Operatore"))
 			 rowinsert=operatore.InserisciOperatore(nome, cognome, cod_fiscale, residenza, date, 0, centro);
 		else if(qualifica.equals("Ricercatore"))
-			 System.out.println("Operatore");
+			rowinsert=ricercatore.InserisciRicercatore(nome, cognome, cod_fiscale, residenza, date, 0, centro);
 		else if(qualifica.equals("Medico Veterinario"))
-			 System.out.println("Operatore");
+			 rowinsert=medico.InserisciMedico(nome, cognome, cod_fiscale, residenza, date, 0, centro);
 		else if(qualifica.equals("Tecnico di Laboratorio"))
-			 System.out.println("Operatore");
+			 rowinsert=tecnico.InserisciTecnico(nome, cognome, cod_fiscale, residenza, date, 0, centro);
 		
 		if(rowinsert>0)
 			check_insert=true;

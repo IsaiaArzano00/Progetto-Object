@@ -19,6 +19,33 @@ public class Medico_VeterinarioDAO {
 		statement = connection.getStatement();
 	}
 
+	//INSERT MEDICO VETERINARIO
+	
+	public int InserisciMedico (String Nome,String Cognome,String Codice_Fiscale , String Residenza , String Data_Inizio,int Compenso,String sede)
+	{
+		int rowinsert=0;
+		
+		try {
+			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
+					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+			String id_sede = new String();
+			while(rd.next())
+			{
+				id_sede = rd.getString("id_sede");
+			}
+			
+			rowinsert =statement.executeUpdate("INSERT INTO MEDICO_VETERINARIO VALUES (DEFAULT ,'"+Nome+"' , '"+Cognome+"' , '"+Residenza+"' , "
+					+ "'"+Codice_Fiscale+"' , '"+Data_Inizio+"' , null , "+Compenso+", '"+id_sede+"' );");
+			
+			return rowinsert;
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return rowinsert;
+		}
+	}
+	
 	
 	//LISTA DEI MEDICI VETERINARI PER CENTRO
 	public ArrayList<Medico_Veterinario> ListaMedici_VetPerCentro(String centro)
