@@ -31,15 +31,17 @@ public class UtenteDAO {
 		}
 	}
 	
-	public void RegisterUser (String username , String password ,String e_mail )
+	public int RegisterUser (String username , String password ,String e_mail )
 	{
+		int rowinsert=0;
 		try {
-			statement.executeQuery("INSERT INTO UTENTE VALUES ('"+username+"' , '"+password+"' , '"+e_mail+"' );");
-			
+			rowinsert=statement.executeUpdate("INSERT INTO UTENTE VALUES ('"+username+"' , '"+password+"' , '"+e_mail+"' );");
+			return rowinsert;
 			
 		}catch(SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();	
+			return rowinsert;
 		}
 	}
 	public boolean CheckUtente(String username , String e_mail)

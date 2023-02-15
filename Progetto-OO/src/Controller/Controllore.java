@@ -41,6 +41,7 @@ public class Controllore {
 	}
 	public Controllore()
 	{
+		
 
 		utente = new UtenteDAO();
 		operatore = new OperatoreDAO();

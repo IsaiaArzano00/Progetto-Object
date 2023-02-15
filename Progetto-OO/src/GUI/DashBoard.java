@@ -43,7 +43,6 @@ public class DashBoard extends JFrame {
 	 * Create the frame.
 	 */
 	public DashBoard(String utente) {
-		
 		setResizable(false);
 		
 		Controllore controller = new Controllore();
@@ -163,6 +162,12 @@ public class DashBoard extends JFrame {
 		panel_logout.add(logout);
 		
 		JLabel lblNewLabel_7 = new JLabel("Info Personale");
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelPersonale personale = new PanelPersonale();
+				controller.SetPanelDashBoard(sfondo_1, personale);			}
+		});
 		
 		
 		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 12));
