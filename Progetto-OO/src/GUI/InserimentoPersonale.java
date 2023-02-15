@@ -6,9 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,7 +23,6 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import org.jdatepicker.util.JDatePickerUtil;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import com.toedter.calendar.JDateChooser;
 

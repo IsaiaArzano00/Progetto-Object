@@ -121,8 +121,5 @@ public class Home extends JFrame {
 		btnNewButton_1.setBounds(74, 334, 291, 64);
 		panel.add(btnNewButton_1);
 		
-		
-		
-		
 	}
 }
