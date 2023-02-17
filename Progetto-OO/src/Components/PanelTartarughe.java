@@ -3,6 +3,7 @@ package Components;
 import javax.swing.JPanel;
 import Components.*;
 import GUI.InserimentoTartaruga;
+import GUI.ViewTartarughe;
 
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -101,5 +102,13 @@ public class PanelTartarughe extends JPanel {
 				inserimentotartaruga.setVisible(true);
 			}
 		});
+		ListaTurtle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ViewTartarughe listatartaruga = new ViewTartarughe();
+				listatartaruga.setVisible(true);
+			}
+		});	
+		
 	}
 }

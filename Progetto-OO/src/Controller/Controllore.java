@@ -343,4 +343,57 @@ public class Controllore {
 		return check_insert;
 		
 	}
+	
+	public JTable SetTableTurtle(String centro)
+	{
+		String[] tblHead={"ID_TARTARUGA","Nome","Età","Data accoglienza","Sede" };
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+		
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		if(centro.equals("Tutti i Centri"))
+		{
+			for ( int i=0 ; i<tartaruga.ListaTartarugheAll().size();i++)
+			{
+				Object[] rowdata = new Object[5];
+				rowdata[0]=tartaruga.ListaTartarugheAll().get(i).getId_tartaruga();
+				rowdata[1]=tartaruga.ListaTartarugheAll().get(i).getNome();
+				rowdata[2]=tartaruga.ListaTartarugheAll().get(i).getEta();
+				rowdata[3]=tartaruga.ListaTartarugheAll().get(i).getData_accoglienza_centro();
+				rowdata[4]=tartaruga.ListaTartarugheAll().get(i).getID_Sede();
+				
+				dtm.addRow(rowdata);
+			}
+		}
+		else
+		{
+			for ( int i=0 ; i<tartaruga.ListaTurtleCenter(centro).size();i++)
+			{
+				Object[] rowdata = new Object[5];
+				rowdata[0]=tartaruga.ListaTurtleCenter(centro).get(i).getId_tartaruga();
+				rowdata[1]=tartaruga.ListaTurtleCenter(centro).get(i).getNome();
+				rowdata[2]=tartaruga.ListaTurtleCenter(centro).get(i).getEta();
+				rowdata[3]=tartaruga.ListaTurtleCenter(centro).get(i).getData_accoglienza_centro();
+				rowdata[4]=tartaruga.ListaTurtleCenter(centro).get(i).getID_Sede();
+				
+				dtm.addRow(rowdata);
+			}
+		}
+		
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+		return tbl;
+	}
+	
+	public void VisualizzaTurtle( String centro ,JPanel actual)
+	{
+		TableTartaruga PanelTable = new TableTartaruga(centro);
+		PanelTable.setBounds(0, 0, 796, 399);
+		actual.removeAll();
+		actual.add(PanelTable);
+		actual.repaint();
+		actual.revalidate();
+		
+		
+	}
 }
