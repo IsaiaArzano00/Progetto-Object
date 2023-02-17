@@ -31,6 +31,8 @@ public class Controllore {
 	private RicercatoreDAO ricercatore;
 	private Medico_VeterinarioDAO medico;
 	private Tecnico_di_LaboratorioDAO tecnico;
+	private TartarugaDAO tartaruga;
+	private VascaDAO vasca;
 
 
 	public static void main(String[] args) {
@@ -49,6 +51,8 @@ public class Controllore {
 		ricercatore = new RicercatoreDAO();
 		medico= new Medico_VeterinarioDAO();
 		tecnico = new Tecnico_di_LaboratorioDAO();
+		tartaruga=new TartarugaDAO();
+		vasca=new VascaDAO();
 	}
 
 	
@@ -293,5 +297,50 @@ public class Controllore {
 			return true;
 		else
 			return false;
+	}
+	
+	public JTable TableTurtleDashBoard()
+	{
+		String[] tblHead={"ID_TARTARUGA","Nome","Età","Data accoglienza","Sede" };
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+		
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		for ( int i=0 ; i<tartaruga.LastTurtleAll().size();i++)
+		{
+			Object[] rowdata = new Object[5];
+			rowdata[0]=tartaruga.LastTurtleAll().get(i).getId_tartaruga();
+			rowdata[1]=tartaruga.LastTurtleAll().get(i).getNome();
+			rowdata[2]=tartaruga.LastTurtleAll().get(i).getEta();
+			rowdata[3]=tartaruga.LastTurtleAll().get(i).getData_accoglienza_centro();
+			rowdata[4]=tartaruga.LastTurtleAll().get(i).getID_Sede();
+			
+			dtm.addRow(rowdata);
+		}
+		
+		return tbl;
+	}
+	
+	public ArrayList<String> getCodiceVasche()
+	{
+		ArrayList<String> nomi = vasca.codiceVascheAll();
+		return nomi;
+	}
+	
+	public ArrayList<String> getCodiceVascheCentro(String centro)
+	{
+		ArrayList<String> nomi = vasca.codiceVascheCentro(centro);
+		return nomi;
+	}
+	
+	public boolean InsertTartaruga(String nome,int eta , String old_number_targhetta ,String data_accoglienza_centro,String sede)
+	{
+		int rowinsert=tartaruga.InserisciTartaruga(nome, eta, old_number_targhetta, data_accoglienza_centro, sede);
+		boolean check_insert = false ;
+		if(rowinsert>0)
+			check_insert=true;
+		
+		return check_insert;
+		
 	}
 }

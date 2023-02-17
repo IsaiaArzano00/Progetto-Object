@@ -103,6 +103,13 @@ public class DashBoard extends JFrame {
 		panel_home.setLayout(null);
 		
 		JLabel Home = new JLabel("HOME");
+		Home.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelHomeDashBoard panel_home=new PanelHomeDashBoard();
+				controller.SetPanelDashBoard(sfondo_1, panel_home);
+			}
+		});
 		Home.setFont(new Font("SansSerif", Font.BOLD, 14));
 		Home.setBounds(10, 0, 255, 41);
 		panel_home.add(Home);

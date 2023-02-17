@@ -24,6 +24,16 @@ public class PanelHomeDashBoard extends JPanel {
 		panel.add(Welcome);
 		Welcome.setOpaque(false);
 		
+		JPanel panel_turtle = new JPanel();
+		panel_turtle.setBounds(101, 336, 790, 305);
+		panel.add(panel_turtle);
+		panel_turtle.setLayout(null);
+		
+		TableTartarugheDashBoard tableTurtle = new TableTartarugheDashBoard();
+		tableTurtle.setBounds(0, 0, 800, 305);
+		
+		panel_turtle.add(tableTurtle);
+		
 
 	}
 }
