@@ -8,7 +8,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class InserimentoTurtle extends JDialog {
+import Components.InsertLaboratorioPanel;
+
+public class InserimentoLaboratorio extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -17,7 +19,7 @@ public class InserimentoTurtle extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			InserimentoTurtle dialog = new InserimentoTurtle();
+			InserimentoLaboratorio dialog = new InserimentoLaboratorio();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -28,27 +30,17 @@ public class InserimentoTurtle extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public InserimentoTurtle() {
-		setBounds(100, 100, 450, 300);
+	public InserimentoLaboratorio() {
+		setModal(true);
+		setBounds(100, 100, 458, 465);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+			InsertLaboratorioPanel panel = new InsertLaboratorioPanel();
+			panel.setBounds(0, 0, 450, 435);
+			contentPanel.add(panel);
 		}
 	}
 

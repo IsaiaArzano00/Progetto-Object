@@ -34,6 +34,8 @@ public class Controllore {
 	private Tecnico_di_LaboratorioDAO tecnico;
 	private TartarugaDAO tartaruga;
 	private VascaDAO vasca;
+	private LaboratorioDAO laboratorio;
+	private SedeDAO sede;
 
 
 	public static void main(String[] args) {
@@ -55,6 +57,8 @@ public class Controllore {
 		tecnico = new Tecnico_di_LaboratorioDAO();
 		tartaruga=new TartarugaDAO();
 		vasca=new VascaDAO();
+		laboratorio=new LaboratorioDAO();
+		sede = new SedeDAO();
 	}
 
 	
@@ -175,6 +179,12 @@ public class Controllore {
 	{
 		ArrayList<String> nomi = centro.getNomeCentri();
 		return nomi;
+	}
+	
+	public ArrayList<String> getIDSede()
+	{
+		ArrayList<String> id_sede = sede.getIDSede();
+		return id_sede;
 	}
 	
 	public JTable FillRicercatoreTab(String centro)
@@ -400,6 +410,16 @@ public class Controllore {
 		
 		
 	}
+	
+	public boolean InserisciLaboratorio(String finalita , int numero_lab , String sede)
+	{
+		int rowinsert = laboratorio.InserisciLaboratorio(numero_lab, finalita, sede);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+	
 	
 
 }

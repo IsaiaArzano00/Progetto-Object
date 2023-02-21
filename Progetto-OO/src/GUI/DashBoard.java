@@ -265,6 +265,11 @@ public class DashBoard extends JFrame {
 				panel_laboratorio.setBackground(new Color(255,255,255));
 				panel_laboratorio.setOpaque(false);
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelLaboratorio panelLab = new PanelLaboratorio();
+				controller.SetPanelDashBoard(sfondo_1, panelLab);
+			}
 		});
 		
 		Turtle.addMouseListener(new MouseAdapter() {
