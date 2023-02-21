@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
@@ -43,6 +44,7 @@ public class Controllore {
 	}
 	public Controllore()
 	{
+	
 		
 
 		utente = new UtenteDAO();
@@ -103,10 +105,12 @@ public class Controllore {
 		PanelRegistrer.revalidate();
 	}
 	
+	
 	public void gotodashboard(JComponent panel, String utente)
 	{
 		panel.getTopLevelAncestor().setVisible(false);
 		DashBoard dashboard = new DashBoard(utente);
+		dashboard.setUndecorated(true);
 		dashboard.setVisible(true);
 		
 		
@@ -396,4 +400,6 @@ public class Controllore {
 		
 		
 	}
+	
+
 }

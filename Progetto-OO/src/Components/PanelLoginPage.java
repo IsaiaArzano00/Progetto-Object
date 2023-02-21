@@ -100,10 +100,11 @@ public class PanelLoginPage extends JPanel {
 		lblNewLabel_1.setBounds(101, 248, 45, 43);
 		panel_1.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Password dimenticata ?");
-		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(156, 300, 151, 28);
-		panel_1.add(lblNewLabel_2);
+		JLabel Password_recovery = new JLabel("Password dimenticata ?");
+		
+		Password_recovery.setFont(new Font("SansSerif", Font.BOLD, 12));
+		Password_recovery.setBounds(156, 300, 151, 28);
+		panel_1.add(Password_recovery);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(SystemColor.controlShadow);
@@ -182,7 +183,8 @@ public class PanelLoginPage extends JPanel {
 				controller.GoToHome(PanelLoginPage.this);
 			}
 		});
-	
+		
+		
 	
 	}
 		

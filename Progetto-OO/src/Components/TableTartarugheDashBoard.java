@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import Controller.Controllore;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TableTartarugheDashBoard extends JPanel {
 private JTable table;
@@ -33,6 +35,8 @@ private JTable table;
 		tbl.setRowHeight(45);
 		tbl.setShowVerticalLines(false);
 		scrollPane.setViewportView(tbl);
+		
+		
 		
 		
 		
