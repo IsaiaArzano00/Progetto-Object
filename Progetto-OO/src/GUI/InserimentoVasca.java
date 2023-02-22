@@ -22,17 +22,20 @@ import javax.swing.border.EmptyBorder;
 
 import Components.PanelCustomBlue;
 import Controller.Controllore;
+import javax.swing.JScrollPane;
 
-public class InserimentoLaboratorio extends JDialog {
-	private JTextField numero_lab;
+public class InserimentoVasca extends JDialog {
+	private JTextField capacita_vasca;
+	private Controllore controller;
 	private final JPanel contentPanel = new JPanel();
+	private JTextField temperatura_vasca;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			InserimentoLaboratorio dialog = new InserimentoLaboratorio();
+			InserimentoVasca dialog = new InserimentoVasca();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -43,12 +46,16 @@ public class InserimentoLaboratorio extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public InserimentoLaboratorio() {
-		Controllore controller = new Controllore();
-		
-		getContentPane().setLayout(null);
-		setBounds(100,100,454,472);
+	public InserimentoVasca() {
+		setModal(true);
 		setResizable(false);
+		setBounds(100, 100, 455, 469);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		Controllore controller = new Controllore();
+		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 658, 508);
@@ -67,32 +74,32 @@ public class InserimentoLaboratorio extends JDialog {
 		panel1.setBackground(new Color(0,0,0,70));
 		
 		JLabel lblNewLabel = new JLabel("\r\n");
-		lblNewLabel.setIcon(new ImageIcon(InserimentoLaboratorio.class.getResource("/Media/Lab Items_100px.png")));
+		lblNewLabel.setIcon(new ImageIcon(InserimentoVasca.class.getResource("/Media/aquarium_100px.png")));
 		lblNewLabel.setBounds(10, 10, 139, 96);
 		panel1.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("LABORATORIO");
+		JLabel lblNewLabel_1 = new JLabel("VASCA");
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblNewLabel_1.setBounds(126, 10, 160, 40);
 		panel1.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Inserire i dati del nuovo laboaratorio");
+		JLabel lblNewLabel_2 = new JLabel("Inserire i dati della nuova vasca");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		lblNewLabel_2.setBounds(126, 60, 293, 24);
 		panel1.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Numero di telefono :");
+		JLabel lblNewLabel_3 = new JLabel("Capacità in litri : ");
 		lblNewLabel_3.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		lblNewLabel_3.setBounds(10, 136, 127, 13);
 		sfondo.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Finalità del laboratorio : ");
+		JLabel lblNewLabel_4 = new JLabel("Temperatura consigliata : ");
 		lblNewLabel_4.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		lblNewLabel_4.setForeground(Color.WHITE);
-		lblNewLabel_4.setBounds(10, 199, 127, 13);
+		lblNewLabel_4.setBounds(10, 199, 157, 13);
 		sfondo.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_6 = new JLabel("Centro : ");
@@ -101,17 +108,17 @@ public class InserimentoLaboratorio extends JDialog {
 		lblNewLabel_6.setBounds(10, 272, 62, 13);
 		sfondo.add(lblNewLabel_6);
 		
-		numero_lab = new JTextField();
-		numero_lab.setForeground(new Color(255, 255, 255));
-		numero_lab.setBounds(147, 134, 169, 19);
-		sfondo.add(numero_lab);
-		numero_lab.setColumns(10);
-		numero_lab.setOpaque(false);
-		numero_lab.setBorder(null);
+		capacita_vasca = new JTextField();
+		capacita_vasca.setForeground(new Color(255, 255, 255));
+		capacita_vasca.setBounds(177, 134, 169, 19);
+		sfondo.add(capacita_vasca);
+		capacita_vasca.setColumns(10);
+		capacita_vasca.setOpaque(false);
+		capacita_vasca.setBorder(null);
 		
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(147, 152, 179, 38);
+		separator.setBounds(177, 153, 179, 38);
 		sfondo.add(separator);
 		
 		
@@ -138,22 +145,31 @@ public class InserimentoLaboratorio extends JDialog {
 		lblNewLabel_10.setBounds(388, 409, 62, 13);
 		sfondo.add(lblNewLabel_10);
 		
+		temperatura_vasca = new JTextField();
+		temperatura_vasca.setOpaque(false);
+		temperatura_vasca.setForeground(Color.WHITE);
+		temperatura_vasca.setColumns(10);
+		temperatura_vasca.setBorder(null);
+		temperatura_vasca.setBounds(177, 197, 169, 19);
+		sfondo.add(temperatura_vasca);
 		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(177, 215, 179, 38);
+		sfondo.add(separator_1);
 		
-		JComboBox comboBoxFinalita = new JComboBox();
-		comboBoxFinalita.setFont(new Font("SansSerif", Font.BOLD, 12));
-		comboBoxFinalita.setModel(new DefaultComboBoxModel(new String[] {"monitoraggio qualita ambiente marino", "raccolta materiale e attivita subacquea", "rilievo idrografici e campionamento", "monitoraggio specie protette", "monitoraggio specie a rischio estinzione"}));
-		comboBoxFinalita.setBounds(157, 195, 242, 21);
-		sfondo.add(comboBoxFinalita);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(113, 268, 244, 23);
+		sfondo.add(scrollPane);
 		
-		JComboBox<String> comboBoxSede = new JComboBox<>();
-		comboBoxSede.setBounds(116, 269, 69, 21);
-		sfondo.add(comboBoxSede);
-		for(int i=0 ; i<controller.getIDSede().size();i++) {
-			comboBoxSede.addItem(controller.getIDSede().get(i).toString());
+		JComboBox<String> comboBoxCentro = new JComboBox<>();
+		scrollPane.setColumnHeaderView(comboBoxCentro);
+		
+		//FILL COMBOBOXCENTRO CON NOMI DEI CENTRI	
+		for(int i=0 ; i<controller.getNomeCentri().size();i++) {
+			comboBoxCentro.addItem(controller.getNomeCentri().get(i).toString());
 		}
 		
-		//ACTION 
+		
 		//ACTION 
 				GoBack.addMouseListener(new MouseAdapter() {
 					@Override
@@ -163,45 +179,44 @@ public class InserimentoLaboratorio extends JDialog {
 				});
 				
 				Inserisci.addMouseListener(new MouseAdapter() {
-					@Override
 					public void mouseClicked(MouseEvent e) {
-					
-						String finalita = (String) comboBoxFinalita.getSelectedItem();
-						String centro = (String) comboBoxSede.getSelectedItem();
-						
-						if(numero_lab.getText().isEmpty())
-							alertNumeroNonInserito();
-						
+						if(capacita_vasca.getText().isEmpty())
+							alertCapacitaNonInserita();
+						else if(temperatura_vasca.getText().isEmpty())
+							alertTemperaturaNonInserita();
 						else
 						{
-							int numero=Integer.parseInt(numero_lab.getText());
-							boolean flag = controller.InserisciLaboratorio(finalita, numero, centro);
-							if(flag=true)
+							double capacita=Double.parseDouble(capacita_vasca.getText());
+							double temperatura=Double.parseDouble(temperatura_vasca.getText());
+							String centro=(String) comboBoxCentro.getSelectedItem();
+							boolean flag = controller.InserisciVasca(capacita, temperatura, centro);
+							if(flag)
 							{
 								alertInserimentoRiuscito();
-							sfondo.getTopLevelAncestor().setVisible(false);
+								sfondo.getTopLevelAncestor().setVisible(false);
 							}
 							else
 								alertInserimentoFallito();
 						}
 						
+																		
 					}
 				});
-	}			
+	}
+				
 				//ALERT
 				public void alertInserimentoFallito() {
-					JOptionPane.showMessageDialog(this, "Inserimento del laboratorio non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Inserimento della vasca non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
 				}
 
-				public void alertNumeroNonInserito() {
-					JOptionPane.showMessageDialog(this, "Numero  non inserito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+				public void alertCapacitaNonInserita() {
+					JOptionPane.showMessageDialog(this, "Capacità della vasca  non inserita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
 				}
-				
+				public void alertTemperaturaNonInserita() {
+					JOptionPane.showMessageDialog(this, "Temperatura della vasca  non inserita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+				}
 				
 				public void alertInserimentoRiuscito() {
-					JOptionPane.showMessageDialog(this, "Inserimento del laboratorio  riuscito!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Inserimento della vasca  riuscito!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
 				}
-				
-	
-
 }

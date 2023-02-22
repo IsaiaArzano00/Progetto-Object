@@ -61,4 +61,17 @@ public class VascaDAO {
 		
 	}
 
+	
+	public int InsertVasca(double capacita , double temperatura , String centro)
+	{
+		int rowinsert=0;
+		try {
+			rowinsert=statement.executeUpdate("INSERT INTO VASCA VALUES (DEFAULT , "+capacita+" , "+temperatura+" , '"+centro+"' );");
+			return rowinsert;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowinsert;
+		}
+	}
 }

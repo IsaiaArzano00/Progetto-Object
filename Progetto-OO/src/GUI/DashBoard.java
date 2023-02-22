@@ -199,7 +199,7 @@ public class DashBoard extends JFrame {
 		panel_laboratorio.setLayout(null);
 		panel_laboratorio.setOpaque(false);
 		
-		JLabel Laboratorio = new JLabel("Laboratorio");
+		JLabel Laboratorio = new JLabel("Laboratorio & Vasche");
 	
 		Laboratorio.setBounds(10, 0, 255, 41);
 		panel_laboratorio.add(Laboratorio);
@@ -212,11 +212,11 @@ public class DashBoard extends JFrame {
 		panel_vasche.setLayout(null);
 		panel_vasche.setOpaque(false);
 		
-		JLabel Vasche = new JLabel("Vasche del Centro");
+		JLabel Vasche = new JLabel("Cartella Degenza");
 		Vasche.setBounds(10, 0, 257, 41);
 		panel_vasche.add(Vasche);
 		Vasche.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Vasche.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/rectangular_aquarium_28px.png")));
+		Vasche.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/medical_history_28px.png")));
 		
 		JPanel panel_donazioni = new JPanel();
 		panel_donazioni.setBounds(0, 405, 277, 41);
@@ -267,7 +267,7 @@ public class DashBoard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelLaboratorio panelLab = new PanelLaboratorio();
+				PanelLaboratorioVasca panelLab = new PanelLaboratorioVasca();
 				controller.SetPanelDashBoard(sfondo_1, panelLab);
 			}
 		});

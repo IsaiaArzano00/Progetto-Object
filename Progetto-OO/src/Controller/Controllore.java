@@ -420,6 +420,13 @@ public class Controllore {
 			return false;
 	}
 	
-	
+	public boolean InserisciVasca (double capacita , double temperatura , String centro)
+	{
+		int rowinsert=vasca.InsertVasca(capacita, temperatura, centro);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
 
 }
