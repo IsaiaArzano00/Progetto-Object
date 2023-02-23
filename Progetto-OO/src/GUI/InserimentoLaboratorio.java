@@ -49,6 +49,7 @@ public class InserimentoLaboratorio extends JDialog {
 		getContentPane().setLayout(null);
 		setBounds(100,100,454,472);
 		setResizable(false);
+		setModal(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 658, 508);

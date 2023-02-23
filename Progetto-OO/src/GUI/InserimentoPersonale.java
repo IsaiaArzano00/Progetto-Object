@@ -235,7 +235,10 @@ public class InserimentoPersonale extends JFrame {
 				{
 					boolean flag = controller.InsertPersonale(qualifica, nome, cognome, residenza, codice_fiscale, date, centro);
 					if(flag)
+					{
 						alertInserimentoRiuscito();
+						sfondo.getTopLevelAncestor().setVisible(false);
+					}	
 					else
 						alertInserimentoFallito();
 				}

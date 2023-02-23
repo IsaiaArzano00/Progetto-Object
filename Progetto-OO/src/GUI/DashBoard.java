@@ -48,7 +48,7 @@ public class DashBoard extends JFrame {
 		Controllore controller = new Controllore();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(50, 50, 1300, 750);
+		setBounds(50, 50, 1266, 750);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -74,10 +74,12 @@ public class DashBoard extends JFrame {
 		lblNewLabel.setBounds(10, 0, 53, 50);
 		panelSuperiore.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(DashBoard.class.getResource("/media/male_user_50px.png")));
-		lblNewLabel_1.setBounds(1230, 0, 53, 68);
-		panelSuperiore.add(lblNewLabel_1);
+		JLabel UserLab = new JLabel("New label");
+	
+		
+		UserLab.setIcon(new ImageIcon(DashBoard.class.getResource("/media/male_user_50px.png")));
+		UserLab.setBounds(1188, 0, 53, 68);
+		panelSuperiore.add(UserLab);
 		
 		txtInserireUsernameDellutente = new JTextField();
 		txtInserireUsernameDellutente.setForeground(new Color(255, 255, 255));
@@ -92,7 +94,7 @@ public class DashBoard extends JFrame {
 		
 		PanelCustomDashboard pannelloMenu = new PanelCustomDashboard();
 		pannelloMenu.setLocation(0, 59);
-		pannelloMenu.setSize(275, 654);
+		pannelloMenu.setSize(275, 674);
 		
 		pannelloMenu.setLayout(null);
 		contentPane.add(pannelloMenu);
@@ -206,15 +208,15 @@ public class DashBoard extends JFrame {
 		Laboratorio.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Laboratorio.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/laboratory_28px.png")));
 		
-		JPanel panel_vasche = new JPanel();
-		panel_vasche.setBounds(0, 243, 277, 41);
-		pannelloMenu.add(panel_vasche);
-		panel_vasche.setLayout(null);
-		panel_vasche.setOpaque(false);
+		JPanel panel_degenza = new JPanel();
+		panel_degenza.setBounds(0, 243, 277, 41);
+		pannelloMenu.add(panel_degenza);
+		panel_degenza.setLayout(null);
+		panel_degenza.setOpaque(false);
 		
-		JLabel Vasche = new JLabel("Cartella Degenza");
+		JLabel Vasche = new JLabel("Degenza");
 		Vasche.setBounds(10, 0, 257, 41);
-		panel_vasche.add(Vasche);
+		panel_degenza.add(Vasche);
 		Vasche.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Vasche.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/medical_history_28px.png")));
 		
@@ -288,14 +290,19 @@ public class DashBoard extends JFrame {
 		Vasche.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panel_vasche.setBackground(new Color(187,187,187));
-				panel_vasche.setOpaque(true);
+				panel_degenza.setBackground(new Color(187,187,187));
+				panel_degenza.setOpaque(true);
 				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_vasche.setBackground(new Color(255,255,255));
-				panel_vasche.setOpaque(false);
+				panel_degenza.setBackground(new Color(255,255,255));
+				panel_degenza.setOpaque(false);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelDegenza paneldegenza = new PanelDegenza();
+				controller.SetPanelDashBoard(sfondo_1, paneldegenza);
 			}
 		});
 			

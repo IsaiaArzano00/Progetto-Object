@@ -12,6 +12,7 @@ import GUI.InserimentoVasca;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
 
 public class PanelLaboratorioVasca extends JPanel {
 
@@ -34,13 +35,13 @@ setLayout(null);
 		
 		PanelCustomBlue panel_assegna = new PanelCustomBlue();
 		panel_assegna.setLayout(null);
-		panel_assegna.setBounds(10, 339, 350, 250);
+		panel_assegna.setBounds(57, 385, 350, 250);
 		sfondo.add(panel_assegna);
 		
 		JLabel elimina_lab = new JLabel("");
 	
 		elimina_lab.setIcon(new ImageIcon(PanelLaboratorioVasca.class.getResource("/Media/remove_100px.png")));
-		elimina_lab.setBounds(118, 72, 164, 144);
+		elimina_lab.setBounds(117, 71, 164, 144);
 		panel_assegna.add(elimina_lab);
 		
 		JLabel lblNewLabel_7 = new JLabel("ELIMINA LABORATORIO");
@@ -51,7 +52,7 @@ setLayout(null);
 		
 		PanelCustomBlue panel_aggiungi = new PanelCustomBlue();
 		panel_aggiungi.setLayout(null);
-		panel_aggiungi.setBounds(10, 28, 350, 250);
+		panel_aggiungi.setBounds(57, 84, 350, 250);
 		sfondo.add(panel_aggiungi);
 		
 		JLabel lblNewLabel_3 = new JLabel("AGGIUNGI LABORATORIO");
@@ -68,7 +69,7 @@ setLayout(null);
 		
 		PanelCustomBlue panel_1_3 = new PanelCustomBlue();
 		panel_1_3.setLayout(null);
-		panel_1_3.setBounds(538, 339, 350, 250);
+		panel_1_3.setBounds(538, 385, 350, 250);
 		sfondo.add(panel_1_3);
 		
 		JLabel elimina_vasca = new JLabel("");
@@ -84,7 +85,7 @@ setLayout(null);
 		
 		PanelCustomBlue panel_1_3_1 = new PanelCustomBlue();
 		panel_1_3_1.setLayout(null);
-		panel_1_3_1.setBounds(538, 28, 350, 250);
+		panel_1_3_1.setBounds(538, 84, 350, 250);
 		sfondo.add(panel_1_3_1);
 		
 		JLabel lblNewLabel_7_1 = new JLabel("AGGIUNGI VASCA");
@@ -102,6 +103,12 @@ setLayout(null);
 		elimina_lab_2.setIcon(new ImageIcon(PanelLaboratorioVasca.class.getResource("/Media/rectangular_aquarium_100px.png")));
 		elimina_lab_2.setBounds(119, 86, 154, 107);
 		panel_1_3_1.add(elimina_lab_2);
+		
+		JLabel lblNewLabel = new JLabel("Aggiungi o rimuovi un laboratorio o una vasca all'interno del Centro.");
+		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lblNewLabel.setBounds(255, 33, 468, 41);
+		sfondo.add(lblNewLabel);
+	
 		
 		//ACTION
 		InserisciLaboratorio.addMouseListener(new MouseAdapter() {

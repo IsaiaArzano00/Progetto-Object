@@ -106,6 +106,21 @@ public class Medico_VeterinarioDAO {
 			return medici;
 		}
 	}
+	
+	//CHECK MATRICOLA MEDICO ESISTE
+	public boolean CheckMatricola(String matricola)
+	{
+		
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM MEDICO_VETERINARIO WHERE MATRICOLA_MEDICO LIKE '"+matricola+"' ;");
+			return rs.next();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
 
 

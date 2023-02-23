@@ -36,6 +36,7 @@ public class Controllore {
 	private VascaDAO vasca;
 	private LaboratorioDAO laboratorio;
 	private SedeDAO sede;
+	private Cartella_Medica_DegenzaDAO degenza;
 
 
 	public static void main(String[] args) {
@@ -59,6 +60,7 @@ public class Controllore {
 		vasca=new VascaDAO();
 		laboratorio=new LaboratorioDAO();
 		sede = new SedeDAO();
+		degenza = new Cartella_Medica_DegenzaDAO();
 	}
 
 	
@@ -427,6 +429,25 @@ public class Controllore {
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean InserisciVisita(String date , String farmaco , int peso , String condizioni , String id_turtle , String medico)
+	{
+		int rowinsert=degenza.InserisciVisita(date, farmaco, peso, condizioni, id_turtle, medico);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean checkMatricoloMedico(String matricola )
+	{
+		return medico.CheckMatricola(matricola);
+	}
+	
+	public boolean checkID_Turtle(String id)
+	{
+		return tartaruga.checkid_turtle(id);
 	}
 
 }

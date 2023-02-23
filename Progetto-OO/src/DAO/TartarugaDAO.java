@@ -43,20 +43,24 @@ public class TartarugaDAO {
 		}
 	}
 	
+	//CHECK ID TARTARUGA ESISTE
+	public boolean checkid_turtle(String id)
+	{
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM TARTARUGA WHERE ID_TARTARUGA LIKE '"+id+"' ;");
+			return rs.next();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	//LISTA TARTARUGHE IN TUTTI I CENTRI 
 	public ArrayList<Tartaruga> ListaTartarugheAll ()

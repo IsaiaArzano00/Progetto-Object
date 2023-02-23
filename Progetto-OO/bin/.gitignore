@@ -1,6 +1,5 @@
-/Components/
-/Media/
-/Controller/
 /GUI/
-/DTO/
+/Media/
 /DAO/
+/Controller/
+/Components/
