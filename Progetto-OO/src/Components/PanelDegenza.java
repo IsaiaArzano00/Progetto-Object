@@ -8,7 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import GUI.InserimentoCibo;
 import GUI.InserimentoVisita;
+import GUI.ViewVisite;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -44,6 +46,7 @@ setLayout(null);
 		panel_1_1.add(lblNewLabel_5);
 		
 		JLabel VisualizzaVisite = new JLabel("");
+		
 	
 		VisualizzaVisite.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/treatment_list_100px.png")));
 		VisualizzaVisite.setBounds(104, 63, 246, 144);
@@ -79,6 +82,7 @@ setLayout(null);
 		panel_1_3.add(lblNewLabel_7);
 		
 		JLabel CiboVasca = new JLabel("");
+		
 		CiboVasca.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/fish_and_vegetables_100px.png")));
 		CiboVasca.setBounds(119, 86, 154, 107);
 		panel_1_3.add(CiboVasca);
@@ -102,6 +106,22 @@ setLayout(null);
 			public void mouseClicked(MouseEvent e) {
 				InserimentoVisita newvisita = new InserimentoVisita();
 				newvisita.setVisible(true);
+			}
+		});
+		
+		VisualizzaVisite.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ViewVisite visite = new ViewVisite();
+				visite.setVisible(true);
+				
+			}
+		});
+		CiboVasca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				InserimentoCibo insertcibo = new InserimentoCibo();
+				insertcibo.setVisible(true);
 			}
 		});
 	}

@@ -60,7 +60,7 @@ public class DashBoard extends JFrame {
 		contentPane.add(panelSuperiore);
 		panelSuperiore.setLayout(null);
 		
-		JPanel sfondo_1 = new JPanel();
+		HomeDashBoard sfondo_1 = new HomeDashBoard();
 		sfondo_1.setBounds(275, 59, 1001, 674);
 		contentPane.add(sfondo_1);
 		sfondo_1.setOpaque(false);
@@ -75,8 +75,6 @@ public class DashBoard extends JFrame {
 		panelSuperiore.add(lblNewLabel);
 		
 		JLabel UserLab = new JLabel("New label");
-	
-		
 		UserLab.setIcon(new ImageIcon(DashBoard.class.getResource("/media/male_user_50px.png")));
 		UserLab.setBounds(1188, 0, 53, 68);
 		panelSuperiore.add(UserLab);
@@ -105,13 +103,7 @@ public class DashBoard extends JFrame {
 		panel_home.setLayout(null);
 		
 		JLabel Home = new JLabel("HOME");
-		Home.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PanelHomeDashBoard panel_home=new PanelHomeDashBoard();
-				controller.SetPanelDashBoard(sfondo_1, panel_home);
-			}
-		});
+	
 		Home.setFont(new Font("SansSerif", Font.BOLD, 14));
 		Home.setBounds(10, 0, 255, 41);
 		panel_home.add(Home);
@@ -174,7 +166,7 @@ public class DashBoard extends JFrame {
 		lblNewLabel_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelPersonale personale = new PanelPersonale();
+				HomeDashBoard personale = new HomeDashBoard();
 				controller.SetPanelDashBoard(sfondo_1, personale);			}
 		});
 		
@@ -356,6 +348,22 @@ public class DashBoard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.GoToHome(sfondo_1);
+			}
+		});
+		
+		Home.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				HomeDashBoard panel_home=new HomeDashBoard();
+				controller.SetPanelDashBoard(sfondo_1, panel_home);
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				panel_home.setBackground(new Color(187, 187, 187));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_home.setBackground(new Color(240,240,240));
 			}
 		});
 	}

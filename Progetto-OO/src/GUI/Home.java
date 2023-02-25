@@ -42,6 +42,7 @@ public class Home extends JFrame {
 	 * @param controllore 
 	 */
 	public Home() {
+		setResizable(false);
 		Controllore controller = new Controllore();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 550);
@@ -85,7 +86,7 @@ public class Home extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				controller.SetLoginPage(panel, panel_1);
+				controller.SetLoginPage(panel_1, panel);
 				
 			}
 		});
@@ -98,7 +99,7 @@ public class Home extends JFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controller.SetRegistrerPage(panel, panel_1);
+				controller.SetRegistrerPage(panel_1, panel);
 				
 			}
 		});

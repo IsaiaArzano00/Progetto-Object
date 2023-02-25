@@ -58,6 +58,23 @@ public class TartarugaDAO {
 	}
 	
 	
+	//NUMERO TARTARUGHE ACCOLTE 
+	public int NumeroTartarugheAccolte()
+	{
+		int number=0;
+		try {
+			ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM TARTARUGA;");
+			while(rs.next())
+			{
+				number = rs.getInt("count");
+			}
+			return number;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return number; 
+		}
+	}
+	
 	
 	
 
@@ -168,6 +185,46 @@ public class TartarugaDAO {
 		{
 			e.printStackTrace();
 			return tartarughe;}
+	}
+	
+	//LISTA DEGLI ID DELLE TARTARUGHE
+	public ArrayList<String> ListaTurtleID()
+	{
+		ArrayList<String> listaid = new ArrayList<String>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT ID_TARTARUGA FROM TARTARUGA ORDER BY ID_TARTARUGA ASC ;");
+			while(rs.next())
+			{
+				String id = rs.getString("id_tartaruga");
+				listaid.add(id);
+			}
+		return listaid;
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return listaid;
+		}
+	}
+	
+	//LISTA DEGLI ID DELLE TARTARUGHE PER SEDE SELEZIONATA
+	public ArrayList<String> ListaTurtleIDSede(String sede)
+	{
+		ArrayList<String> listaid = new ArrayList<String>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT ID_TARTARUGA FROM TARTARUGA WHERE ID_SEDE LIKE '"+sede+"'  ;");
+			while(rs.next())
+			{
+				String id = rs.getString("id_tartaruga");
+				listaid.add(id);
+			}
+		return listaid;
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return listaid;
+		}
 	}
 }
 

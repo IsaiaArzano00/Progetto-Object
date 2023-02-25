@@ -1,8 +1,6 @@
 package DAO;
 
 import java.sql.*;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
@@ -114,6 +112,37 @@ public class OperatoreDAO {
 		}
 	}
 	
+	//CHECK SE MATRICOLA OPERATORE ESISTE 
+	public boolean CheckMatricolaOperatore(String matricola)
+	{
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM OPERATORE WHERE MATRICOLA_OPERATORE LIKE '"+matricola+"' ;");
+			return rs.next();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
+	//NUMERO OPERATORI IN TUTTI I CENTRI 
+	public int NumeroOperatori()
+	{
+		int number=0;
+		try {
+			ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM OPERATORE;");
+			while(rs.next())
+			{
+				number = rs.getInt("count");
+			}
+			return number;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return number; 
+		}
+	}
 	
 	
 }

@@ -37,13 +37,14 @@ public class Controllore {
 	private LaboratorioDAO laboratorio;
 	private SedeDAO sede;
 	private Cartella_Medica_DegenzaDAO degenza;
+	private OccupareVascaDAO occupare;
 
 
 	public static void main(String[] args) {
 		Controllore controller = new Controllore();
 		Home home = new Home();
 		home.setVisible(true);
-		
+
 	}
 	public Controllore()
 	{
@@ -61,6 +62,7 @@ public class Controllore {
 		laboratorio=new LaboratorioDAO();
 		sede = new SedeDAO();
 		degenza = new Cartella_Medica_DegenzaDAO();
+		occupare=new OccupareVascaDAO();
 	}
 
 	
@@ -449,5 +451,95 @@ public class Controllore {
 	{
 		return tartaruga.checkid_turtle(id);
 	}
+	
+	public ArrayList<String> IDTurtle()
+	{
+		ArrayList<String> lista_turtle = tartaruga.ListaTurtleID();
+		return lista_turtle;
+	}
+	
+	public ArrayList<String> IDTurtleSede(String sede)
+	{
+		ArrayList<String> lista_turtle = tartaruga.ListaTurtleIDSede(sede);
+		return lista_turtle;
+	}
+	public JTable SetTableVisite(String turtle)
+	{
+		String[] tblHead={"Data Visita ","Farmaco ","Peso ","Condizioni generali "};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+		
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+	
+		for ( int i=0 ; i<degenza.listavisiteturtle(turtle).size();i++)
+		{
+			Object[] rowdata = new Object[4];
+			rowdata[0]=degenza.listavisiteturtle(turtle).get(i).getData_controllo();
+			rowdata[1]=degenza.listavisiteturtle(turtle).get(i).getFarmaco_somministrato();
+			rowdata[2]=degenza.listavisiteturtle(turtle).get(i).getPeso();
+			rowdata[3]=degenza.listavisiteturtle(turtle).get(i).getValutazione_condizioni_generali();
+			
+			
+			dtm.addRow(rowdata);
+		}
+		
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+		
+		return tbl;
+	}
+	public void VisualizzaVisite( String turtle ,JPanel actual)
+	{
+		PanelViewVisite PanelTable = new PanelViewVisite(turtle);
+		PanelTable.setBounds(0, 0, 865, 460);
+		actual.removeAll();
+		actual.add(PanelTable);
+		actual.repaint();
+		actual.revalidate();
+		
+	}
+	
+	public boolean InserisciCibo(String matricola , String data , String codice_vasca , double cibo_inserito , double cibo_rimosso , String tipologia_cibo)
+	{
+		int rowinsert=occupare.InserisciCibo(matricola, data, codice_vasca, cibo_inserito, cibo_rimosso, tipologia_cibo);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean CheckMatricolaOperatore(String matricola)
+	{
+		return operatore.CheckMatricolaOperatore(matricola);
+	}
+	
+	public boolean CheckCodiceVasca(String cod_vasca)
+	{
+		return vasca.CheckCodiceVasca(cod_vasca); 
+	}
+	
+	public String NumeroCentri()
+	{
+		return String.valueOf(centro.qtaCentri());
+	}
+	
+	public String NumeroTartarugheAccolte()
+	{
+		return String.valueOf(tartaruga.NumeroTartarugheAccolte());
+	}
+	
+	public String NumeroVolontari()
+	{
+		int number = 0;
+		number = operatore.NumeroOperatori();
+		number=number + ricercatore.NumeroRicercatori();
+		number=number + medico.NumeroMedici();
+		number=number + tecnico.NumeroTecnici();
+		
+		return String.valueOf(number);
+	}
+	
+	
+	
 
 }
