@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -20,6 +21,9 @@ import com.toedter.calendar.JDateChooser;
 
 import Components.PanelCustomBlue;
 import Controller.Controllore;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 
 public class InserimentoCibo extends JDialog {
 
@@ -85,10 +89,10 @@ Controllore controller = new Controllore();
 		lblNewLabel_2.setBounds(126, 60, 293, 24);
 		panel1.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Data controllo : ");
+		JLabel lblNewLabel_3 = new JLabel("Data versamento cibo  : ");
 		lblNewLabel_3.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(10, 324, 127, 13);
+		lblNewLabel_3.setBounds(10, 324, 159, 13);
 		sfondo.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Quantità cibo rimosso : ");
@@ -111,6 +115,7 @@ Controllore controller = new Controllore();
 		sfondo.add(GoBack);
 		
 		JLabel Inserisci = new JLabel("");
+	
 		
 		
 		Inserisci.setIcon(new ImageIcon(InserimentoTartaruga.class.getResource("/Media/save_50px.png")));
@@ -205,5 +210,79 @@ Controllore controller = new Controllore();
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(193, 388, 179, 21);
 		sfondo.add(separator_3);
+		
+		//ACTION
+		GoBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				sfondo.getTopLevelAncestor().setVisible(false);
+			}
+		});
+		Inserisci.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String matricola_operatore=matricola_operatoreField.getText();
+				String codice_vasca =codiceVascaField.getText();
+				
+				if(matricola_operatoreField.getText().isEmpty())
+					alertMatricolaNonInserita();
+				else if(!controller.CheckMatricolaOperatore(matricola_operatore))
+					alertMatricolaNonPresente();
+				else if(codiceVascaField.getText().isEmpty())
+					alertCodiceVascaNonInserito();
+				else if(!controller.CheckCodiceVasca(codice_vasca))
+					alertVascaNonPresente();
+				else if(CiboInserito.getText().isEmpty())
+					alertCiboNonInserito();
+				else if(CiboRimosso.getText().isEmpty())
+					alertCiboRimossoNonInserito();
+				else 
+				{
+					
+					String tipologia_cibo = (String) comboBoxCibo.getSelectedItem();
+					SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
+					String date = date_format.format(dateChooser.getDate());
+					double quantita_cibo_inserita =Double.parseDouble(CiboInserito.getText());
+					double quantita_cibo_rimosso=Double.parseDouble(CiboRimosso.getText());
+					
+					boolean flag = controller.InserisciCibo(matricola_operatore, date, codice_vasca, quantita_cibo_inserita, quantita_cibo_rimosso, tipologia_cibo);
+					if(flag)
+					{
+						alertInserimentoRiuscito();
+						sfondo.getTopLevelAncestor().setVisible(false);
+					}else
+						alertInserimentoFallito();
+				}
+					
+					
+			}
+		});
 	}
+	//ALERT
+	public void alertInserimentoFallito() {
+		JOptionPane.showMessageDialog(this, "Inserimento del controllo vasca  non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+
+	public void alertMatricolaNonInserita() {
+		JOptionPane.showMessageDialog(this, "Matricola dell'operatore  non inserita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	public void alertCodiceVascaNonInserito() {
+		JOptionPane.showMessageDialog(this, "Codice della vasca  non inserito !","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	public void alertCiboNonInserito() {
+		JOptionPane.showMessageDialog(this, "Quantità cibo inserito  non inserita !","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	public void alertCiboRimossoNonInserito() {
+		JOptionPane.showMessageDialog(this, "Quantità cibo rimosso   non inserita !","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	public void alertMatricolaNonPresente() {
+		JOptionPane.showMessageDialog(this, "Matricola  dell'operatore  non  presente nel  sistema!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	public void alertVascaNonPresente() {
+		JOptionPane.showMessageDialog(this, "Codice della vasca  non  presente nel  sistema!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	public void alertInserimentoRiuscito() {
+		JOptionPane.showMessageDialog(this, "Inserimento del controllo vasca  riuscito!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
+	}
+
 }

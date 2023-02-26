@@ -76,5 +76,22 @@ public class Tecnico_di_LaboratorioDAO {
 			return tecnici;
 		}
 	}
+	
+	//NUMERO TECNICI IN TUTTI I CENTRI 
+		public int NumeroTecnici()
+		{
+			int number=0;
+			try {
+				ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM TECNICO_DI_LABORATORIO;");
+				while(rs.next())
+				{
+					number = rs.getInt("count");
+				}
+				return number;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return number; 
+			}
+		}
 
 }

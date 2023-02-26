@@ -74,4 +74,18 @@ public class VascaDAO {
 			return rowinsert;
 		}
 	}
+	
+	//CHECK SE CODICE VASCA ESISTE
+	public boolean CheckCodiceVasca(String codice)
+	{
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM VASCA WHERE CODICE_VASCA LIKE '"+codice+"' ;");
+			return rs.next();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

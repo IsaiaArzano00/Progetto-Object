@@ -112,5 +112,21 @@ public class RicercatoreDAO {
 			}
 		}
 		
+		//NUMERO RICERCATROI IN TUTTI I CENTRI 
+			public int NumeroRicercatori()
+			{
+				int number=0;
+				try {
+					ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM RICERCATORE ;");
+					while(rs.next())
+					{
+						number = rs.getInt("count");
+					}
+					return number;
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return number; 
+				}
+			}
 
 }

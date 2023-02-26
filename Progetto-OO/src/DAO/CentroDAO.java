@@ -22,13 +22,18 @@ public class CentroDAO {
 	
 	public int qtaCentri()
 	{
+		int number=0;
 		try {
 			ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM CENTRO;");
-			return rs.getInt(0);
+			while(rs.next())
+			{
+				number = rs.getInt("count");
+			}
+			return number;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
+			return number; 
 		}
 	}
 	

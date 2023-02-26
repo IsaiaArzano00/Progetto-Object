@@ -121,6 +121,23 @@ public class Medico_VeterinarioDAO {
 			return false;
 		}
 	}
+	
+	//NUMERO VETERINARI IN TUTTI I CENTRI 
+		public int NumeroMedici()
+		{
+			int number=0;
+			try {
+				ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM MEDICO_VETERINARIO;");
+				while(rs.next())
+				{
+					number = rs.getInt("count");
+				}
+				return number;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return number; 
+			}
+		}
 }
 
 
