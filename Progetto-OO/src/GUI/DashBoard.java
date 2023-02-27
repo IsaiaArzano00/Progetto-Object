@@ -304,6 +304,11 @@ public class DashBoard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				panel_stats.setBackground(new Color(240,240,240));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelStatistiche panelStatistiche = new PanelStatistiche(controller);
+				controller.SetPanelDashBoard(sfondo_1, panelStatistiche);
+			}
 		});
 		
 		Cartella_Medica.addMouseListener(new MouseAdapter() {
