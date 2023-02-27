@@ -30,23 +30,9 @@ public class InserimentoVasca extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField temperatura_vasca;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			InserimentoVasca dialog = new InserimentoVasca();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public InserimentoVasca() {
+	public InserimentoVasca(Controllore contr) {
+		controller=contr;
+		
 		setModal(true);
 		setResizable(false);
 		setBounds(100, 100, 455, 469);
@@ -54,7 +40,7 @@ public class InserimentoVasca extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		Controllore controller = new Controllore();
+		
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

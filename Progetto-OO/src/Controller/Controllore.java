@@ -115,7 +115,7 @@ public class Controllore {
 	public void gotodashboard(JComponent panel, String utente)
 	{
 		panel.getTopLevelAncestor().setVisible(false);
-		DashBoard dashboard = new DashBoard(utente, this);
+		DashBoard dashboard = new DashBoard(this,utente);
 		dashboard.setUndecorated(true);
 		dashboard.setVisible(true);
 		
@@ -523,7 +523,7 @@ public class Controllore {
 	}
 	public void VisualizzaVisite( String turtle ,JPanel actual)
 	{
-		PanelViewVisite PanelTable = new PanelViewVisite(turtle);
+		PanelViewVisite PanelTable = new PanelViewVisite(this,turtle);
 		PanelTable.setBounds(0, 0, 865, 460);
 		actual.removeAll();
 		actual.add(PanelTable);
