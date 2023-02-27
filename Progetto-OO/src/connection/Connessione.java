@@ -3,60 +3,65 @@ package connection;
 import java.sql.*;
 
 public class Connessione {
-	
-	private static Connection connection;
-	private static Connessione istanza ;
-	private Statement statement ;
-	
-	
-	private  Connessione ()
-	{
-		statement = null;
-		
-		try {
 
-			Class.forName("org.postgresql.Driver");
+    private static Connection connection;
+    private static Connessione istanza;
+    private Statement statement;
+    private PreparedStatement prpdstmt;
 
-		} catch (ClassNotFoundException e) {
+    private Connessione() {
+        //inizializzo lo statement
+        statement = null;
 
-			System.err.println(e);
-		}
-		
-		try {
+        try {
+            //carico i driver per la connessione al db
+            Class.forName("org.postgresql.Driver");
 
-			String url = "jdbc:postgresql://localhost:5432/ProvaPG?currentSchema=progettobdd";
-			connection = DriverManager.getConnection(url, "postgres", "123");
+        } catch (ClassNotFoundException e) {
 
-		} catch (SQLException e) {
+            System.err.println(e);
+        }
 
-			e.printStackTrace();
-			System.out.println("Tentativo di connessione fallito");
+        try {
+            // provo ad effettuare la connessione
+            String url = "jdbc:postgresql://localhost:5433/postgres";
+            connection = DriverManager.getConnection(url, "postgres", "1234");
 
-		}
+        } catch (SQLException e) {
 
-		
-		try {
+            e.printStackTrace();
+            System.out.println("Errore in fase di connessione");
 
-			statement = connection.createStatement();
+        }
 
-		} catch (SQLException e) {
+        try {
+            //se la connessione è andata a buon fine istanzio lo statement
+            statement = connection.createStatement();
+            System.out.println("Connessione OK!");
 
-			e.printStackTrace();
-		}
-		
-	}
+        } catch (SQLException e) {
 
-	public static Connessione getConnessione() {
+            e.printStackTrace();
+        }
+        
+       
+    }
+    //metodo per ritornare la connessione ottenuta
+    public static Connessione getConnessione() {
 
-		if (istanza == null)
-			istanza = new Connessione();
+        if (istanza == null)
+            istanza = new Connessione();
 
-		return istanza;
-	}
+        return istanza;
+    }
+    //ritorno lo statement istanziato
+    public Statement getStatement() {
 
-	public Statement getStatement() {
+        return statement;
+    }
 
-		return statement;
-	}
+    public Connection getConnection(){
+        return connection;
+    }
 
 }
