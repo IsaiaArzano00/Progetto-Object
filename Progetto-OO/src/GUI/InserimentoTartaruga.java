@@ -27,12 +27,13 @@ import Controller.Controllore;
 
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 
-public class InserimentoTartaruga extends JFrame {
+public class InserimentoTartaruga extends JDialog {
 
 	private JPanel contentPane;
 	private PanelCustomBlue sfondo;
@@ -41,27 +42,11 @@ public class InserimentoTartaruga extends JFrame {
 	private JTextField Num_Targhetta;
 	private Controllore controller;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InserimentoTartaruga frame = new InserimentoTartaruga();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public InserimentoTartaruga() {
-		Controllore controller = new Controllore();
+	public InserimentoTartaruga(Controllore contr) {
+		
+		 controller = contr;
+		 
+		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 568);
 		contentPane = new JPanel();
@@ -248,8 +233,10 @@ public class InserimentoTartaruga extends JFrame {
 				{
 					int eta=Integer.parseInt(Eta_Turtle.getText());
 					boolean flag = controller.InsertTartaruga(nome, eta, numero_targhetta, date, centro);
-					if(flag=true)
+					if(flag=true) {
 						alertInserimentoRiuscito();
+						sfondo.getTopLevelAncestor().setVisible(false);
+					}
 					else
 						alertInserimentoFallito();
 				}

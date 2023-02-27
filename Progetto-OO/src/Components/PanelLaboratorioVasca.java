@@ -117,7 +117,7 @@ public class PanelLaboratorioVasca extends JPanel {
 		InserisciLaboratorio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoLaboratorio insertlab = new InserimentoLaboratorio();
+				InserimentoLaboratorio insertlab = new InserimentoLaboratorio(controller);
 				insertlab.setVisible(true);
 			}
 		});

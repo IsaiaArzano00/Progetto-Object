@@ -27,12 +27,13 @@ public class PanelRegister extends JPanel {
 	private JTextField e_mailField;
 	private JPasswordField passwordField;
 	private JPasswordField repeatPasswordField;
+	private Controllore controller;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelRegister() {
-		Controllore controller = new Controllore();
+	public PanelRegister(Controllore contr) {
+		 controller = contr;
 		
 		setLayout(null);
 		
@@ -84,26 +85,6 @@ public class PanelRegister extends JPanel {
 		panel.add(lblNewLabel_2_6);
 		
 		UserField = new JTextField();
-		UserField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				if(UserField.getText().isEmpty())
-				{
-					UserField.setText("Inserire UserName");
-				}
-			}
-		});
-		UserField.setText("Inserire Username");
-		UserField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				UserField.setText("");
-
-			}
-		});
-	
-			
-		
 		UserField.setForeground(new Color(255, 255, 255));
 		UserField.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		UserField.setBounds(160, 119, 180, 25);
@@ -123,22 +104,7 @@ public class PanelRegister extends JPanel {
 		e_mailField.setBorder(null);
 		e_mailField.setBounds(160, 182, 180, 25);
 		panel.add(e_mailField);
-		//LISTENER
-		e_mailField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				if(e_mailField.getText().isEmpty())
-				{
-					e_mailField.setText("Inserire e-mail");
-				}
-			}
-		});
-		e_mailField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				e_mailField.setText("");
-			}
-		});
+		
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(160, 251, 180, 21);
@@ -167,6 +133,44 @@ public class PanelRegister extends JPanel {
 		GoHome.setIcon(new ImageIcon(PanelRegister.class.getResource("/Media/home_50px.png")));
 		GoHome.setBounds(10, 443, 45, 48);
 		panel.add(GoHome);
+		
+		//LISTENER
+				e_mailField.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(e_mailField.getText().isEmpty())
+						{
+							e_mailField.setText("Inserire e-mail");
+						}
+					}
+				});
+				e_mailField.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						e_mailField.setText("");
+					}
+				});
+				
+				UserField.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusLost(FocusEvent e) {
+						if(UserField.getText().isEmpty())
+						{
+							UserField.setText("Inserire UserName");
+						}
+					}
+				});
+				
+				UserField.setText("Inserire Username");
+				UserField.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						UserField.setText("");
+
+					}
+				});
+			
+				
 		// ACTION 
 				btnNewButton.addMouseListener(new MouseAdapter() {
 					@SuppressWarnings("deprecation")

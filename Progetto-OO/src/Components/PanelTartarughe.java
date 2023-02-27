@@ -2,6 +2,7 @@ package Components;
 
 import javax.swing.JPanel;
 import Components.*;
+import Controller.Controllore;
 import GUI.InserimentoTartaruga;
 import GUI.ViewTartarughe;
 
@@ -13,11 +14,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelTartarughe extends JPanel {
-
+	private Controllore controller;
 	/**
 	 * Create the panel.
 	 */
-	public PanelTartarughe() {
+	public PanelTartarughe(Controllore contr) {
+		controller = contr;
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -98,14 +100,14 @@ public class PanelTartarughe extends JPanel {
 		AggiungiTurtle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoTartaruga inserimentotartaruga = new InserimentoTartaruga();
+				InserimentoTartaruga inserimentotartaruga = new InserimentoTartaruga(controller);
 				inserimentotartaruga.setVisible(true);
 			}
 		});
 		ListaTurtle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ViewTartarughe listatartaruga = new ViewTartarughe();
+				ViewTartarughe listatartaruga = new ViewTartarughe(controller);
 				listatartaruga.setVisible(true);
 			}
 		});	

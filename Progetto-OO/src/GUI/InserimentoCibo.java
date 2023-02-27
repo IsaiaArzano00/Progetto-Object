@@ -32,24 +32,10 @@ public class InserimentoCibo extends JDialog {
 	private JTextField codiceVascaField;
 	private JTextField matricola_operatoreField;
 	private JTextField CiboRimosso;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			InserimentoCibo dialog = new InserimentoCibo();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private Controllore controller;
 
-	/**
-	 * Create the dialog.
-	 */
-	public InserimentoCibo() {
-Controllore controller = new Controllore();
+	public InserimentoCibo(Controllore contr) {
+		controller = contr;
 		
 		getContentPane().setLayout(null);
 		setBounds(100,100,454,541);

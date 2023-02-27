@@ -21,30 +21,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ViewVisite extends JFrame {
+public class ViewVisite extends JDialog {
+	private Controllore controller;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewVisite dialog = new ViewVisite();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public ViewVisite() {
-		Controllore controller = new Controllore();
+	public ViewVisite(Controllore contr) {
+		 controller = contr;
+		
+		setModal(true);
 		setBounds(100, 100, 810, 685);
 		getContentPane().setLayout(null);
 		

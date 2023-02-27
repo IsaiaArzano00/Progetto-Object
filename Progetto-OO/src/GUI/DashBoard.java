@@ -127,7 +127,7 @@ public class DashBoard extends JFrame {
 		Turtle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelTartarughe panelTurtle = new PanelTartarughe();
+				PanelTartarughe panelTurtle = new PanelTartarughe(controller);
 				controller.SetPanelDashBoard(sfondo_1, panelTurtle);
 			}
 		});
@@ -290,7 +290,7 @@ public class DashBoard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelDegenza paneldegenza = new PanelDegenza();
+				PanelDegenza paneldegenza = new PanelDegenza(controller);
 				controller.SetPanelDashBoard(sfondo_1, paneldegenza);
 			}
 		});
@@ -332,10 +332,9 @@ public class DashBoard extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sfondo_1.removeAll();
-                sfondo_1.add(new PannelloDonazioni(DashBoard.this.controller));
-                sfondo_1.repaint();
-                sfondo_1.revalidate();
+				PannelloDonazioni panelDonazioni = new PannelloDonazioni(controller);
+				controller.SetPanelDashBoard(sfondo_1, panelDonazioni);
+				
 			}
 		});
 		

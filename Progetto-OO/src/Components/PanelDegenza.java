@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Controller.Controllore;
 import GUI.InserimentoCibo;
 import GUI.InserimentoVisita;
 import GUI.ViewVisite;
@@ -16,12 +17,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelDegenza extends JPanel {
-
+	private Controllore controller;
 	/**
 	 * Create the panel.
 	 */
-	public PanelDegenza() {
-setLayout(null);
+	public PanelDegenza(Controllore contr) {
+		controller = contr;
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 1346, 728);
@@ -112,7 +114,7 @@ setLayout(null);
 		VisualizzaVisite.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ViewVisite visite = new ViewVisite();
+				ViewVisite visite = new ViewVisite(controller);
 				visite.setVisible(true);
 				
 			}
@@ -120,7 +122,7 @@ setLayout(null);
 		CiboVasca.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoCibo insertcibo = new InserimentoCibo();
+				InserimentoCibo insertcibo = new InserimentoCibo(controller);
 				insertcibo.setVisible(true);
 			}
 		});

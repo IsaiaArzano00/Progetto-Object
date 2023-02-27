@@ -25,26 +25,11 @@ import Controller.Controllore;
 
 public class InserimentoLaboratorio extends JDialog {
 	private JTextField numero_lab;
+	private Controllore controller;
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			InserimentoLaboratorio dialog = new InserimentoLaboratorio();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public InserimentoLaboratorio() {
-		Controllore controller = new Controllore();
+	public InserimentoLaboratorio(Controllore contr) {
+		controller = contr;
 		
 		getContentPane().setLayout(null);
 		setBounds(100,100,454,472);

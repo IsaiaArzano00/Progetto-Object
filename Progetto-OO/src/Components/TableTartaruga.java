@@ -16,12 +16,13 @@ import GUI.Home;
 import GUI.ViewPersonale;
 
 public class TableTartaruga extends JPanel {
+	private Controllore controller;
 
 	/**
 	 * Create the panel.
 	 */
-	public TableTartaruga(String centro) {
-		Controllore controller = new Controllore();
+	public TableTartaruga(Controllore contr,String centro) {
+		controller=contr;
 		
 		
 		setLayout(null);
