@@ -42,13 +42,13 @@ public class DashBoard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DashBoard(String utente, Controllore contr) {
-		controller = contr;
+	public DashBoard(Controllore contr,String utente) {
 		setResizable(false);
 		
+		controller = contr;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(50, 50, 1300, 750);
+		setBounds(50, 50, 1266, 750);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -60,7 +60,7 @@ public class DashBoard extends JFrame {
 		contentPane.add(panelSuperiore);
 		panelSuperiore.setLayout(null);
 		
-		JPanel sfondo_1 = new JPanel();
+		HomeDashBoard sfondo_1 = new HomeDashBoard(controller);
 		sfondo_1.setBounds(275, 59, 1001, 674);
 		contentPane.add(sfondo_1);
 		sfondo_1.setOpaque(false);
@@ -74,10 +74,10 @@ public class DashBoard extends JFrame {
 		lblNewLabel.setBounds(10, 0, 53, 50);
 		panelSuperiore.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(DashBoard.class.getResource("/media/male_user_50px.png")));
-		lblNewLabel_1.setBounds(1230, 0, 53, 68);
-		panelSuperiore.add(lblNewLabel_1);
+		JLabel UserLab = new JLabel("New label");
+		UserLab.setIcon(new ImageIcon(DashBoard.class.getResource("/media/male_user_50px.png")));
+		UserLab.setBounds(1188, 0, 53, 68);
+		panelSuperiore.add(UserLab);
 		
 		txtInserireUsernameDellutente = new JTextField();
 		txtInserireUsernameDellutente.setForeground(new Color(255, 255, 255));
@@ -92,7 +92,7 @@ public class DashBoard extends JFrame {
 		
 		PanelCustomDashboard pannelloMenu = new PanelCustomDashboard();
 		pannelloMenu.setLocation(0, 59);
-		pannelloMenu.setSize(275, 654);
+		pannelloMenu.setSize(275, 674);
 		
 		pannelloMenu.setLayout(null);
 		contentPane.add(pannelloMenu);
@@ -103,13 +103,7 @@ public class DashBoard extends JFrame {
 		panel_home.setLayout(null);
 		
 		JLabel Home = new JLabel("HOME");
-		Home.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PanelHomeDashBoard panel_home=new PanelHomeDashBoard();
-				controller.SetPanelDashBoard(sfondo_1, panel_home);
-			}
-		});
+	
 		Home.setFont(new Font("SansSerif", Font.BOLD, 14));
 		Home.setBounds(10, 0, 255, 41);
 		panel_home.add(Home);
@@ -172,7 +166,7 @@ public class DashBoard extends JFrame {
 		lblNewLabel_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelPersonale personale = new PanelPersonale(controller);
+				HomeDashBoard personale = new HomeDashBoard(controller);
 				controller.SetPanelDashBoard(sfondo_1, personale);			}
 		});
 		
@@ -199,24 +193,24 @@ public class DashBoard extends JFrame {
 		panel_laboratorio.setLayout(null);
 		panel_laboratorio.setOpaque(false);
 		
-		JLabel Laboratorio = new JLabel("Laboratorio");
+		JLabel Laboratorio = new JLabel("Laboratorio & Vasche");
 	
 		Laboratorio.setBounds(10, 0, 255, 41);
 		panel_laboratorio.add(Laboratorio);
 		Laboratorio.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Laboratorio.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/laboratory_28px.png")));
 		
-		JPanel panel_vasche = new JPanel();
-		panel_vasche.setBounds(0, 243, 277, 41);
-		pannelloMenu.add(panel_vasche);
-		panel_vasche.setLayout(null);
-		panel_vasche.setOpaque(false);
+		JPanel panel_degenza = new JPanel();
+		panel_degenza.setBounds(0, 243, 277, 41);
+		pannelloMenu.add(panel_degenza);
+		panel_degenza.setLayout(null);
+		panel_degenza.setOpaque(false);
 		
-		JLabel Vasche = new JLabel("Vasche del Centro");
+		JLabel Vasche = new JLabel("Degenza");
 		Vasche.setBounds(10, 0, 257, 41);
-		panel_vasche.add(Vasche);
+		panel_degenza.add(Vasche);
 		Vasche.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Vasche.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/rectangular_aquarium_28px.png")));
+		Vasche.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/medical_history_28px.png")));
 		
 		JPanel panel_donazioni = new JPanel();
 		panel_donazioni.setBounds(0, 405, 277, 41);
@@ -224,11 +218,11 @@ public class DashBoard extends JFrame {
 		panel_donazioni.setLayout(null);
 		panel_donazioni.setOpaque(false);
 		
-		JLabel labelDonazioni = new JLabel("Donazioni\r\n");
-		labelDonazioni.setBounds(10, 0, 265, 34);
-		panel_donazioni.add(labelDonazioni);
-		labelDonazioni.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/bank_euro_28px.png")));
-		labelDonazioni.setFont(new Font("SansSerif", Font.BOLD, 12));
+		JLabel Donazioni = new JLabel("Donazioni\r\n");
+		Donazioni.setBounds(10, 0, 265, 34);
+		panel_donazioni.add(Donazioni);
+		Donazioni.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/bank_euro_28px.png")));
+		Donazioni.setFont(new Font("SansSerif", Font.BOLD, 12));
 		
 	
 		//LISTENER 
@@ -265,6 +259,11 @@ public class DashBoard extends JFrame {
 				panel_laboratorio.setBackground(new Color(255,255,255));
 				panel_laboratorio.setOpaque(false);
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelLaboratorioVasca panelLab = new PanelLaboratorioVasca();
+				controller.SetPanelDashBoard(sfondo_1, panelLab);
+			}
 		});
 		
 		Turtle.addMouseListener(new MouseAdapter() {
@@ -283,14 +282,19 @@ public class DashBoard extends JFrame {
 		Vasche.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panel_vasche.setBackground(new Color(187,187,187));
-				panel_vasche.setOpaque(true);
+				panel_degenza.setBackground(new Color(187,187,187));
+				panel_degenza.setOpaque(true);
 				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_vasche.setBackground(new Color(255,255,255));
-				panel_vasche.setOpaque(false);
+				panel_degenza.setBackground(new Color(255,255,255));
+				panel_degenza.setOpaque(false);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelDegenza paneldegenza = new PanelDegenza();
+				controller.SetPanelDashBoard(sfondo_1, paneldegenza);
 			}
 		});
 			
@@ -316,7 +320,7 @@ public class DashBoard extends JFrame {
 			
 		});
 		
-		labelDonazioni.addMouseListener(new MouseAdapter() {
+		Donazioni.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				panel_donazioni.setBackground(new Color(187,187,187));
@@ -329,13 +333,6 @@ public class DashBoard extends JFrame {
 				panel_donazioni.setOpaque(false);
 			}
 			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				sfondo_1.removeAll();
-				sfondo_1.add(new PannelloDonazioni(controller));
-				sfondo_1.repaint();
-				sfondo_1.revalidate();
-			}
 		});
 		
 		logout.addMouseListener(new MouseAdapter() {
@@ -351,6 +348,22 @@ public class DashBoard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controller.GoToHome(sfondo_1);
+			}
+		});
+		
+		Home.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				HomeDashBoard panel_home=new HomeDashBoard(controller);
+				controller.SetPanelDashBoard(sfondo_1, panel_home);
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				panel_home.setBackground(new Color(187, 187, 187));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_home.setBackground(new Color(240,240,240));
 			}
 		});
 	}

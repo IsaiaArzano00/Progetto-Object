@@ -1,54 +1,62 @@
 package connection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Connessione {
-    private static Connection connection;
-    private static Connessione istanza;
-    private Statement statement = null;
-    private PreparedStatement prpdstmt;
+	
+	private static Connection connection;
+	private static Connessione istanza ;
+	private Statement statement ;
+	
+	
+	private  Connessione ()
+	{
+		statement = null;
+		
+		try {
 
-    private Connessione() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException var4) {
-            System.err.println(var4);
-        }
+			Class.forName("org.postgresql.Driver");
 
-        try {
-            String url = "jdbc:postgresql://localhost:5433/postgres";
-            connection = DriverManager.getConnection(url, "postgres", "1234");
-        } catch (SQLException var3) {
-            var3.printStackTrace();
-            System.out.println("Errore in fase di connessione");
-        }
+		} catch (ClassNotFoundException e) {
 
-        try {
-            this.statement = connection.createStatement();
-            System.out.println("Connessione OK!");
-        } catch (SQLException var2) {
-            var2.printStackTrace();
-        }
+			System.err.println(e);
+		}
+		
+		try {
 
-    }
+			String url = "jdbc:postgresql://localhost:5432/ProvaPG?currentSchema=progettobdd";
+			connection = DriverManager.getConnection(url, "postgres", "123");
 
-    public static Connessione getConnessione() {
-        if (istanza == null) {
-            istanza = new Connessione();
-        }
+		} catch (SQLException e) {
 
-        return istanza;
-    }
+			e.printStackTrace();
+			System.out.println("Tentativo di connessione fallito");
 
-    public Statement getStatement() {
-        return this.statement;
-    }
+		}
 
-    public Connection getConnection() {
-        return connection;
-    }
+		
+		try {
+
+			statement = connection.createStatement();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static Connessione getConnessione() {
+
+		if (istanza == null)
+			istanza = new Connessione();
+
+		return istanza;
+	}
+
+	public Statement getStatement() {
+
+		return statement;
+	}
+
 }

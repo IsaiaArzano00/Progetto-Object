@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
+import java.awt.Container;
 import Components.*;
 import DAO.*;
 import GUI.*;
@@ -34,7 +34,10 @@ public class Controllore {
 	private TartarugaDAO tartaruga;
 	private VascaDAO vasca;
 	private DonazioneDAO donazione;
-	
+	private LaboratorioDAO laboratorio;
+	private SedeDAO sede;
+	private Cartella_Medica_DegenzaDAO degenza;
+	private OccupareVascaDAO occupare;
 	
 
 	public static void main(String[] args) {
@@ -54,7 +57,10 @@ public class Controllore {
 		tartaruga=new TartarugaDAO();
 		donazione = new DonazioneDAO();
 		vasca=new VascaDAO();
-		
+		laboratorio=new LaboratorioDAO();
+		sede = new SedeDAO();
+		degenza = new Cartella_Medica_DegenzaDAO();
+		occupare=new OccupareVascaDAO();
 	}
 	
 
@@ -109,7 +115,8 @@ public class Controllore {
 	public void gotodashboard(JComponent panel, String utente)
 	{
 		panel.getTopLevelAncestor().setVisible(false);
-		DashBoard dashboard = new DashBoard(utente, this);
+		DashBoard dashboard = new DashBoard(this,utente);
+		dashboard.setUndecorated(true);
 		dashboard.setVisible(true);
 		
 		
@@ -184,6 +191,12 @@ public class Controllore {
 	{
 		ArrayList<String> donazioni = donazione.getIdDonazioni();
 		return donazioni;
+	}
+	
+	public ArrayList<String> getIDSede()
+	{
+		ArrayList<String> id_sede = sede.getIDSede();
+		return id_sede;
 	}
 	
 	public JTable FillRicercatoreTab(String centro)
@@ -380,6 +393,183 @@ public class Controllore {
 	
 	public Donazione recuperaDonazione(String idDonazione) {
 		return donazione.recuperaDonazione(idDonazione);
+	}
+	
+	public JTable SetTableTurtle(String centro)
+	{
+		String[] tblHead={"ID_TARTARUGA","Nome","Età","Data accoglienza","Sede" };
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		if(centro.equals("Tutti i Centri"))
+		{
+			for ( int i=0 ; i<tartaruga.ListaTartarugheAll().size();i++)
+			{
+				Object[] rowdata = new Object[5];
+				rowdata[0]=tartaruga.ListaTartarugheAll().get(i).getId_tartaruga();
+				rowdata[1]=tartaruga.ListaTartarugheAll().get(i).getNome();
+				rowdata[2]=tartaruga.ListaTartarugheAll().get(i).getEta();
+				rowdata[3]=tartaruga.ListaTartarugheAll().get(i).getData_accoglienza_centro();
+				rowdata[4]=tartaruga.ListaTartarugheAll().get(i).getID_Sede();
+
+				dtm.addRow(rowdata);
+			}
+		}
+		else
+		{
+			for ( int i=0 ; i<tartaruga.ListaTurtleCenter(centro).size();i++)
+			{
+				Object[] rowdata = new Object[5];
+				rowdata[0]=tartaruga.ListaTurtleCenter(centro).get(i).getId_tartaruga();
+				rowdata[1]=tartaruga.ListaTurtleCenter(centro).get(i).getNome();
+				rowdata[2]=tartaruga.ListaTurtleCenter(centro).get(i).getEta();
+				rowdata[3]=tartaruga.ListaTurtleCenter(centro).get(i).getData_accoglienza_centro();
+				rowdata[4]=tartaruga.ListaTurtleCenter(centro).get(i).getID_Sede();
+
+				dtm.addRow(rowdata);
+			}
+		}
+
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+		return tbl;
+	}
+
+	public void VisualizzaTurtle( String centro ,JPanel actual)
+	{
+		TableTartaruga PanelTable = new TableTartaruga(centro);
+		PanelTable.setBounds(0, 0, 796, 399);
+		actual.removeAll();
+		actual.add(PanelTable);
+		actual.repaint();
+		actual.revalidate();
+
+
+	}
+	
+	public boolean InserisciLaboratorio(String finalita , int numero_lab , String sede)
+	{
+		int rowinsert = laboratorio.InserisciLaboratorio(numero_lab, finalita, sede);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean InserisciVasca (double capacita , double temperatura , String centro)
+	{
+		int rowinsert=vasca.InsertVasca(capacita, temperatura, centro);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean InserisciVisita(String date , String farmaco , int peso , String condizioni , String id_turtle , String medico)
+	{
+		int rowinsert=degenza.InserisciVisita(date, farmaco, peso, condizioni, id_turtle, medico);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean checkMatricoloMedico(String matricola )
+	{
+		return medico.CheckMatricola(matricola);
+	}
+
+	public boolean checkID_Turtle(String id)
+	{
+		return tartaruga.checkid_turtle(id);
+	}
+
+	public ArrayList<String> IDTurtle()
+	{
+		ArrayList<String> lista_turtle = tartaruga.ListaTurtleID();
+		return lista_turtle;
+	}
+
+	public ArrayList<String> IDTurtleSede(String sede)
+	{
+		ArrayList<String> lista_turtle = tartaruga.ListaTurtleIDSede(sede);
+		return lista_turtle;
+	}
+	public JTable SetTableVisite(String turtle)
+	{
+		String[] tblHead={"Data Visita ","Farmaco ","Peso ","Condizioni generali "};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+
+		for ( int i=0 ; i<degenza.listavisiteturtle(turtle).size();i++)
+		{
+			Object[] rowdata = new Object[4];
+			rowdata[0]=degenza.listavisiteturtle(turtle).get(i).getData_controllo();
+			rowdata[1]=degenza.listavisiteturtle(turtle).get(i).getFarmaco_somministrato();
+			rowdata[2]=degenza.listavisiteturtle(turtle).get(i).getPeso();
+			rowdata[3]=degenza.listavisiteturtle(turtle).get(i).getValutazione_condizioni_generali();
+
+
+			dtm.addRow(rowdata);
+		}
+
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+
+		return tbl;
+	}
+	public void VisualizzaVisite( String turtle ,JPanel actual)
+	{
+		PanelViewVisite PanelTable = new PanelViewVisite(this,turtle);
+		PanelTable.setBounds(0, 0, 865, 460);
+		actual.removeAll();
+		actual.add(PanelTable);
+		actual.repaint();
+		actual.revalidate();
+
+	}
+
+	public boolean InserisciCibo(String matricola , String data , String codice_vasca , double cibo_inserito , double cibo_rimosso , String tipologia_cibo)
+	{
+		int rowinsert=occupare.InserisciCibo(matricola, data, codice_vasca, cibo_inserito, cibo_rimosso, tipologia_cibo);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean CheckMatricolaOperatore(String matricola)
+	{
+		return operatore.CheckMatricolaOperatore(matricola);
+	}
+
+	public boolean CheckCodiceVasca(String cod_vasca)
+	{
+		return vasca.CheckCodiceVasca(cod_vasca); 
+	}
+
+	public String NumeroCentri()
+	{
+		return String.valueOf(centro.qtaCentri());
+	}
+
+	public String NumeroTartarugheAccolte()
+	{
+		return String.valueOf(tartaruga.NumeroTartarugheAccolte());
+	}
+
+	public String NumeroVolontari()
+	{
+		int number = 0;
+		number = operatore.NumeroOperatori();
+		number=number + ricercatore.NumeroRicercatori();
+		number=number + medico.NumeroMedici();
+		number=number + tecnico.NumeroTecnici();
+
+		return String.valueOf(number);
 	}
 
 	
