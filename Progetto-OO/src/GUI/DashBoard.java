@@ -39,9 +39,6 @@ public class DashBoard extends JFrame {
 	private PanelTartarughe tartarughe;
 	
 
-	/**
-	 * Create the frame.
-	 */
 	public DashBoard(Controllore contr,String utente) {
 		setResizable(false);
 		
@@ -333,6 +330,13 @@ public class DashBoard extends JFrame {
 				panel_donazioni.setOpaque(false);
 			}
 			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				sfondo_1.removeAll();
+                sfondo_1.add(new PannelloDonazioni(DashBoard.this.controller));
+                sfondo_1.repaint();
+                sfondo_1.revalidate();
+			}
 		});
 		
 		logout.addMouseListener(new MouseAdapter() {
