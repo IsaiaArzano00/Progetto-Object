@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,31 +20,14 @@ import javax.swing.border.EmptyBorder;
 import Components.PanelCustomGrey;
 import Controller.Controllore;
 
-public class ViewTartarughe extends JFrame {
-
+public class ViewTartarughe extends JDialog {
+	private Controllore controller;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewTartarughe frame = new ViewTartarughe();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public ViewTartarughe() {
-		Controllore controller = new Controllore ();
+	public ViewTartarughe(Controllore contr) {
+		 controller = contr;
+		 
+		setModal(true); 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 810, 555);
 		contentPane = new JPanel();

@@ -104,7 +104,7 @@ public class Controllore {
 		panelImage.repaint();
 		panelImage.revalidate();
 		
-		PanelRegister Register = new PanelRegister();
+		PanelRegister Register = new PanelRegister(this);
 		Register.setBounds(0, 0, 450, 550);
 		PanelRegistrer.removeAll();
 		PanelRegistrer.add(Register);
@@ -438,7 +438,7 @@ public class Controllore {
 
 	public void VisualizzaTurtle( String centro ,JPanel actual)
 	{
-		TableTartaruga PanelTable = new TableTartaruga(centro);
+		TableTartaruga PanelTable = new TableTartaruga(this,centro);
 		PanelTable.setBounds(0, 0, 796, 399);
 		actual.removeAll();
 		actual.add(PanelTable);
