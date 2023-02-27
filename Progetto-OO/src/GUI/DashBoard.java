@@ -261,7 +261,7 @@ public class DashBoard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelLaboratorioVasca panelLab = new PanelLaboratorioVasca();
+				PanelLaboratorioVasca panelLab = new PanelLaboratorioVasca(controller);
 				controller.SetPanelDashBoard(sfondo_1, panelLab);
 			}
 		});
