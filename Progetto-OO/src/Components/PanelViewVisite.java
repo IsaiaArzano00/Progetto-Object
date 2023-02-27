@@ -16,7 +16,7 @@ public class PanelViewVisite extends JPanel {
 
 	private Controllore controller;
 	
-	public PanelViewVisite(Controllore contr) {
+	public PanelViewVisite(Controllore contr,String turtle) {
 	
 		controller = contr;
 		
