@@ -8,8 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import Controller.Controllore;
+import GUI.Home;
 import GUI.ViewPersonale;
 
 public class TableTartaruga extends JPanel {
@@ -39,6 +42,15 @@ public class TableTartaruga extends JPanel {
 		
 		JTable tbl=controller.SetTableTurtle(centro);
 		scrollPane.setViewportView(tbl);
+		
+		tbl.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				//Aggiungere metodo per visualizzare cartella medica turtle
+			}
+			
+		});
 		
 		
 		
