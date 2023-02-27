@@ -14,12 +14,11 @@ import GUI.ViewPersonale;
 
 public class PanelViewVisite extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
-	public PanelViewVisite(String turtle) {
-		Controllore controller = new Controllore();
-		
+	private Controllore controller;
+	
+	public PanelViewVisite(Controllore contr) {
+	
+		controller = contr;
 		
 		setLayout(null);
 		

@@ -14,11 +14,11 @@ import java.awt.Font;
 
 public class HomeDashBoard extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
-	public HomeDashBoard() {
-		Controllore controller = new Controllore ();
+	
+	private Controllore controller;
+	
+	public HomeDashBoard(Controllore contr) {
+		controller = contr;
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
