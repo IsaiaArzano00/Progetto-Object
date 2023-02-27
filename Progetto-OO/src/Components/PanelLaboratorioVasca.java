@@ -14,13 +14,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
 
+import Controller.Controllore;
+
 public class PanelLaboratorioVasca extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelLaboratorioVasca() {
-setLayout(null);
+	public PanelLaboratorioVasca(Controllore contr) {
+		Controllore controller = contr;
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 1346, 728);
@@ -122,7 +125,7 @@ setLayout(null);
 		inserisci_vasca.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoVasca insertvasca = new InserimentoVasca();
+				InserimentoVasca insertvasca = new InserimentoVasca(controller);
 				insertvasca.setVisible(true);
 			}
 		});
