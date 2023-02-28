@@ -579,5 +579,13 @@ public class Controllore {
 	public void RimozioneDonazionePage() {new RimozioneDonazione(this);}
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
 	public void ModificaDonazioniPage() {new ModificaDonazione(this);};
-	
+	public void InserimentoCartellaMedicaPt1Page() {
+		new InserimentoCartellaMedicapt1(this);
+	}
+	public void RimozioneCartellaMedicaPage() {
+		new RimozioneCartellaMedica(this);
+	}
+	public void VisualizzaCartellaMedicaPage() {
+		new VisualizzaCartellaMedica(this);
+	}
 }

@@ -1,28 +1,27 @@
 package GUI;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
 import com.toedter.calendar.JDateChooser;
 
 import Components.PanelWhite;
 import Controller.Controllore;
 
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-public class InserimentoCartellaMedicapt1 extends JDialog {
-
+public class VisualizzaCartellaMedica extends JDialog {
 	private JPanel contentPane;
 	private PanelWhite sfondo;
 	private JTextField textField;
@@ -31,7 +30,7 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 	private JTextField textField_3;
 	private Controllore controller;
 	
-	public InserimentoCartellaMedicapt1(Controllore contr) {
+	public VisualizzaCartellaMedica(Controllore contr) {
 		controller = contr;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 981, 600);
@@ -61,9 +60,9 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		lblNewLabel_1.setBounds(104, 10, 289, 37);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Inserire i dati della cartella medica.");
+		JLabel lblNewLabel_2 = new JLabel("Selezionare la tartaruga di cui si vuole visualizzare o modificare la cartella medica");
 		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(104, 37, 233, 24);
+		lblNewLabel_2.setBounds(104, 37, 481, 24);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Peso : ");

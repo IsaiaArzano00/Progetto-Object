@@ -1,27 +1,27 @@
 package GUI;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
 import com.toedter.calendar.JDateChooser;
 
 import Components.PanelWhite;
 import Controller.Controllore;
 
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-public class InserimentoCartellaMedicapt1 extends JDialog {
+public class RimozioneCartellaMedica extends JDialog {
 
 	private JPanel contentPane;
 	private PanelWhite sfondo;
@@ -30,8 +30,8 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private Controllore controller;
-	
-	public InserimentoCartellaMedicapt1(Controllore contr) {
+
+	public RimozioneCartellaMedica(Controllore contr) {
 		controller = contr;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 981, 600);
@@ -61,9 +61,9 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		lblNewLabel_1.setBounds(104, 10, 289, 37);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Inserire i dati della cartella medica.");
+		JLabel lblNewLabel_2 = new JLabel("Selezionare la tartaruga di cui si vuole cancellare la cartella medica.");
 		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(104, 37, 233, 24);
+		lblNewLabel_2.setBounds(104, 37, 444, 24);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Peso : ");
@@ -101,6 +101,7 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		sfondo.add(dateChooser);
 		
 		textField = new JTextField();
+		textField.setEditable(false);
 		textField.setBounds(178, 160, 147, 19);
 		sfondo.add(textField);
 		textField.setColumns(10);
@@ -112,6 +113,7 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		textField_1.setColumns(10);
 		textField_1.setBorder(null);
 		textField_1.setBounds(178, 211, 147, 19);
+		textField_1.setEditable(false);
 		sfondo.add(textField_1);
 		
 		textField_2 = new JTextField();
@@ -119,6 +121,7 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		textField_2.setColumns(10);
 		textField_2.setBorder(null);
 		textField_2.setBounds(178, 256, 147, 19);
+		textField_2.setEditable(false);
 		sfondo.add(textField_2);
 		
 		textField_3 = new JTextField();
@@ -126,6 +129,7 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		textField_3.setColumns(10);
 		textField_3.setBorder(null);
 		textField_3.setBounds(178, 360, 147, 19);
+		textField_3.setEditable(false);
 		sfondo.add(textField_3);
 		
 		JSeparator separator = new JSeparator();
@@ -145,6 +149,7 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		sfondo.add(separator_3);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setEnabled(false);
 		comboBox.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Tartaruga comune (Caretta caretta)", "Tartaruga verde (Chelonia mydas)", "Tartaruga liuto (Dermochelys coriacea)", "Tartaruga embricata (Eretmochelys imbricata)", "Tartaruga bastarda (Lepidochelys kempii)", "Tartaruga olivacea (Lepidochelys olivacea)", "Tartaruga piatta (Natator depressus)"}));
 		comboBox.setBounds(167, 307, 205, 21);
@@ -200,48 +205,56 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		sfondo.add(lblNewLabel_3_7_2);
 		
 		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setEnabled(false);
 		comboBox_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2.setBounds(582, 118, 171, 21);
 		sfondo.add(comboBox_2);
 		
 		JComboBox comboBox_2_1 = new JComboBox();
+		comboBox_2_1.setEnabled(false);
 		comboBox_2_1.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2_1.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2_1.setBounds(582, 166, 171, 21);
 		sfondo.add(comboBox_2_1);
 		
 		JComboBox comboBox_2_2 = new JComboBox();
+		comboBox_2_2.setEnabled(false);
 		comboBox_2_2.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2_2.setBounds(582, 210, 171, 21);
 		sfondo.add(comboBox_2_2);
 		
 		JComboBox comboBox_2_3 = new JComboBox();
+		comboBox_2_3.setEnabled(false);
 		comboBox_2_3.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2_3.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2_3.setBounds(582, 264, 171, 21);
 		sfondo.add(comboBox_2_3);
 		
 		JComboBox comboBox_2_3_1 = new JComboBox();
+		comboBox_2_3_1.setEnabled(false);
 		comboBox_2_3_1.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2_3_1.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2_3_1.setBounds(582, 317, 171, 21);
 		sfondo.add(comboBox_2_3_1);
 		
 		JComboBox comboBox_2_3_2 = new JComboBox();
+		comboBox_2_3_2.setEnabled(false);
 		comboBox_2_3_2.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2_3_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2_3_2.setBounds(582, 371, 171, 21);
 		sfondo.add(comboBox_2_3_2);
 		
 		JComboBox comboBox_2_3_3 = new JComboBox();
+		comboBox_2_3_3.setEnabled(false);
 		comboBox_2_3_3.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2_3_3.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2_3_3.setBounds(582, 414, 171, 21);
 		sfondo.add(comboBox_2_3_3);
 		
 		JComboBox comboBox_2_4 = new JComboBox();
+		comboBox_2_4.setEnabled(false);
 		comboBox_2_4.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBox_2_4.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		comboBox_2_4.setBounds(167, 488, 171, 21);
@@ -281,4 +294,5 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		setModal(true);
 		setVisible(true);
 	}
+
 }

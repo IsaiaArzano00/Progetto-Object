@@ -320,6 +320,11 @@ public class DashBoard extends JFrame {
 				panel_CartellaMedica.setBackground(new Color(240,240,240));
 			}
 			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelCartellaMedica pannelloCartella = new PanelCartellaMedica(controller);
+				controller.SetPanelDashBoard(sfondo_1, pannelloCartella);
+			}
 		});
 		
 		Donazioni.addMouseListener(new MouseAdapter() {

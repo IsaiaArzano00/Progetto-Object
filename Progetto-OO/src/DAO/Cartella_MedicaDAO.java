@@ -14,4 +14,6 @@ public class Cartella_MedicaDAO {
 		connection=Connessione.getConnessione();
 		statement =connection.getStatement();
 	}
+	
+	
 }
