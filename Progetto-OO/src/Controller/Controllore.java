@@ -38,6 +38,7 @@ public class Controllore {
 	private SedeDAO sede;
 	private Cartella_Medica_DegenzaDAO degenza;
 	private OccupareVascaDAO occupare;
+	private TarghettaDAO targhetta;
 	
 
 	public static void main(String[] args) {
@@ -61,6 +62,7 @@ public class Controllore {
 		sede = new SedeDAO();
 		degenza = new Cartella_Medica_DegenzaDAO();
 		occupare=new OccupareVascaDAO();
+		targhetta = new TarghettaDAO();
 	}
 	
 
@@ -338,27 +340,7 @@ public class Controllore {
 			return false;
 	}
 	
-	public JTable TableTurtleDashBoard()
-	{
-		String[] tblHead={"ID_TARTARUGA","Nome","Età","Data accoglienza","Sede" };
-		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
-		
-		JTable tbl=new JTable(dtm);
-		tbl.setEnabled(false);
-		for ( int i=0 ; i<tartaruga.LastTurtleAll().size();i++)
-		{
-			Object[] rowdata = new Object[5];
-			rowdata[0]=tartaruga.LastTurtleAll().get(i).getId_tartaruga();
-			rowdata[1]=tartaruga.LastTurtleAll().get(i).getNome();
-			rowdata[2]=tartaruga.LastTurtleAll().get(i).getEta();
-			rowdata[3]=tartaruga.LastTurtleAll().get(i).getData_accoglienza_centro();
-			rowdata[4]=tartaruga.LastTurtleAll().get(i).getID_Sede();
-			
-			dtm.addRow(rowdata);
-		}
-		
-		return tbl;
-	}
+	
 	
 	public ArrayList<String> getCodiceVasche()
 	{
@@ -372,15 +354,25 @@ public class Controllore {
 		return nomi;
 	}
 	
-	public boolean InsertTartaruga(String nome,int eta , String old_number_targhetta ,String data_accoglienza_centro,String sede)
+	public boolean InsertTartarugaRiammissione(String nome,int eta , String old_number_targhetta ,String data_accoglienza_centro,String sede)
 	{
 		int rowinsert=tartaruga.InserisciTartaruga(nome, eta, old_number_targhetta, data_accoglienza_centro, sede);
-		boolean check_insert = false ;
+		
 		if(rowinsert>0)
-			check_insert=true;
+			return true;
+		else
+			return false;
 		
-		return check_insert;
+	}
+	
+	public boolean InsertTartarugaPrimoIngresso(String nome,int eta  ,String data_accoglienza_centro,String sede)
+	{
+		int rowinsert=tartaruga.InserisciTartarugaPrimo(nome, eta,data_accoglienza_centro, sede);
 		
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
 	}
 	
 	public DonazioneDAO getDonazioneDAO() {
@@ -580,4 +572,19 @@ public class Controllore {
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
 	public void ModificaDonazioniPage() {new ModificaDonazione(this);};
 	
+	
+	public ArrayList<String> ListaTartarugheSenzaTarghetta()
+	{
+		return tartaruga.ListaTurtleSenzaTarghetta();
+	}
+	
+	public boolean InserisciTarghetta(String turtle,String matricola_ope, String date , String GPS)
+	{
+		int rowinsert = targhetta.InserisciTarghetta(turtle, matricola_ope, date, GPS);
+		if(rowinsert>0)
+			return true;
+		else
+			return false ;
+					
+	}
 }

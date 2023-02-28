@@ -96,7 +96,7 @@ public class InserimentoCibo extends JDialog {
 		
 		JLabel GoBack = new JLabel("");
 		
-		GoBack.setIcon(new ImageIcon(InserimentoTartaruga.class.getResource("/Media/undo_50px.png")));
+		GoBack.setIcon(new ImageIcon(InserimentoTartarugaRiammissione.class.getResource("/Media/undo_50px.png")));
 		GoBack.setBounds(29, 427, 53, 50);
 		sfondo.add(GoBack);
 		
@@ -104,7 +104,7 @@ public class InserimentoCibo extends JDialog {
 	
 		
 		
-		Inserisci.setIcon(new ImageIcon(InserimentoTartaruga.class.getResource("/Media/save_50px.png")));
+		Inserisci.setIcon(new ImageIcon(InserimentoTartarugaRiammissione.class.getResource("/Media/save_50px.png")));
 		Inserisci.setBounds(348, 427, 62, 50);
 		sfondo.add(Inserisci);
 		
