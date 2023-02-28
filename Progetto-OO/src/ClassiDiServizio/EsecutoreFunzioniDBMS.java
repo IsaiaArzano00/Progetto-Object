@@ -29,7 +29,7 @@ public class EsecutoreFunzioniDBMS {
     	 try {
 
              //Create a callable statement
-             cstmt = connection.prepareCall("{ ? = call number_turtle_accolte_all_year(?) }");
+             cstmt =( connection).prepareCall("{ ? = call number_turtle_accolte_all_year(?) }");
 
              //Register the OUT parameter
              cstmt.registerOutParameter(1, Types.INTEGER);
@@ -56,7 +56,7 @@ public class EsecutoreFunzioniDBMS {
     	int result = 0;
     	 try {
              //Create a callable statement
-             cstmt = connection.prepareCall("{ ? = call numero_tartarughe_rilasciate_all_year(?) }");
+             cstmt = ( connection).prepareCall("{ ? = call numero_tartarughe_rilasciate_all_year(?) }");
 
              //Register the OUT parameter
              cstmt.registerOutParameter(1, Types.INTEGER);
@@ -82,7 +82,7 @@ public class EsecutoreFunzioniDBMS {
     	int result = 0;
     	 try {
              //Create a callable statement
-             cstmt = connection.prepareCall("{ ? = call numero_tartarughe_morte_all_year(?) }");
+             cstmt = ( connection).prepareCall("{ ? = call numero_tartarughe_morte_all_year(?) }");
 
              //Register the OUT parameter
              cstmt.registerOutParameter(1, Types.INTEGER);

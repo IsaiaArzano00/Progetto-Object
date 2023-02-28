@@ -3,7 +3,7 @@ package Components;
 import javax.swing.JPanel;
 import Components.*;
 import Controller.Controllore;
-import GUI.InserimentoTartaruga;
+import GUI.InserimentoTartarugaRiammissione;
 import GUI.ViewTartarughe;
 
 import javax.swing.JLabel;
@@ -100,7 +100,7 @@ public class PanelTartarughe extends JPanel {
 		AggiungiTurtle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoTartaruga inserimentotartaruga = new InserimentoTartaruga(controller);
+				InserimentoTartarugaRiammissione inserimentotartaruga = new InserimentoTartarugaRiammissione(controller);
 				inserimentotartaruga.setVisible(true);
 			}
 		});

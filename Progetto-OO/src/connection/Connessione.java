@@ -7,6 +7,7 @@ public class Connessione {
 	private static Connection connection;
 	private static Connessione istanza ;
 	private Statement statement ;
+	private CallableStatement clbStmt;
 	
 	
 	private  Connessione ()
@@ -58,5 +59,14 @@ public class Connessione {
 
 		return statement;
 	}
-
+	
+	public CallableStatement prepareCall(String string) {
+		try {
+			clbStmt = connection.prepareCall(string);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clbStmt;
+	}
 }

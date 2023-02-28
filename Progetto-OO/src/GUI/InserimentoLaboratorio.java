@@ -103,12 +103,12 @@ public class InserimentoLaboratorio extends JDialog {
 		
 		JLabel GoBack = new JLabel("");
 		
-		GoBack.setIcon(new ImageIcon(InserimentoTartaruga.class.getResource("/Media/undo_50px.png")));
+		GoBack.setIcon(new ImageIcon(InserimentoTartarugaRiammissione.class.getResource("/Media/undo_50px.png")));
 		GoBack.setBounds(19, 349, 53, 50);
 		sfondo.add(GoBack);
 		
 		JLabel Inserisci = new JLabel("");
-		Inserisci.setIcon(new ImageIcon(InserimentoTartaruga.class.getResource("/Media/save_50px.png")));
+		Inserisci.setIcon(new ImageIcon(InserimentoTartarugaRiammissione.class.getResource("/Media/save_50px.png")));
 		Inserisci.setBounds(378, 349, 62, 50);
 		sfondo.add(Inserisci);
 		

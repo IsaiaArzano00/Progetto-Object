@@ -159,20 +159,6 @@ public class DashBoard extends JFrame {
 		logout.setBounds(10, 0, 255, 41);
 		panel_logout.add(logout);
 		
-		JLabel lblNewLabel_7 = new JLabel("Info Personale");
-		lblNewLabel_7.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				HomeDashBoard personale = new HomeDashBoard(controller);
-				controller.SetPanelDashBoard(sfondo_1, personale);			}
-		});
-		
-		
-		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_7.setBounds(10, 325, 265, 41);
-		pannelloMenu.add(lblNewLabel_7);
-		lblNewLabel_7.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/more_info_28px.png")));
-		
 		JPanel panel_CartellaMedica = new JPanel();
 		panel_CartellaMedica.setLayout(null);
 		panel_CartellaMedica.setBounds(0, 364, 275, 41);
@@ -220,6 +206,25 @@ public class DashBoard extends JFrame {
 		panel_donazioni.add(Donazioni);
 		Donazioni.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/bank_euro_28px.png")));
 		Donazioni.setFont(new Font("SansSerif", Font.BOLD, 12));
+		
+		JPanel panel_accogli = new JPanel();
+		panel_accogli.setOpaque(false);
+		panel_accogli.setBounds(0, 322, 275, 41);
+		pannelloMenu.add(panel_accogli);
+		panel_accogli.setLayout(null);
+		
+		JLabel Accogli = new JLabel("Accogli");
+		Accogli.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/stethoscope_28px.png")));
+		Accogli.setFont(new Font("SansSerif", Font.BOLD, 12));
+		Accogli.setBounds(10, 0, 255, 41);
+		panel_accogli.add(Accogli);
+		
+		JLabel lblNewLabel_7 = new JLabel("Accogli ");
+		
+		
+		
+		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblNewLabel_7.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/stethoscope_28px.png")));
 		
 	
 		//LISTENER 
@@ -372,6 +377,25 @@ public class DashBoard extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panel_home.setBackground(new Color(240,240,240));
+			}
+		});
+		
+		Accogli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				panel_accogli.setBackground(new Color(187,187,187));
+				panel_accogli.setOpaque(true);
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_accogli.setBackground(new Color(255,255,255));
+				panel_accogli.setOpaque(false);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelAccoglienza panel_acco = new PanelAccoglienza(controller);
+				controller.SetPanelDashBoard(sfondo_1, panel_acco);
 			}
 		});
 	}
