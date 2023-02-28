@@ -31,7 +31,7 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 	private JTextField textField_3;
 	private Controllore controller;
 	
-	public InserimentoCartellaMedicapt1(Controllore contr) {
+	public InserimentoCartellaMedicapt1(Controllore contr, String idTartaruga) {
 		controller = contr;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 981, 600);
@@ -185,9 +185,12 @@ public class InserimentoCartellaMedicapt1 extends JDialog {
 		lblNewLabel_3_12.setBounds(10, 119, 147, 16);
 		sfondo.add(lblNewLabel_3_12);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(167, 115, 182, 21);
-		sfondo.add(comboBox_1);
+		JTextField idTartaruga_in = new JTextField();
+		idTartaruga_in.setEditable(false);
+		idTartaruga_in.setEnabled(false);
+		idTartaruga_in.setText(idTartaruga);
+		idTartaruga_in.setBounds(167, 115, 182, 21);
+		sfondo.add(idTartaruga_in);
 		
 		JLabel lblNewLabel_3_7_1 = new JLabel("Condizioni Collo  :");
 		lblNewLabel_3_7_1.setFont(new Font("SansSerif", Font.BOLD, 12));

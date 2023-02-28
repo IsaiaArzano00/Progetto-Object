@@ -11,6 +11,7 @@ import Controller.Controllore;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
 
 public class PanelCartellaMedica extends JPanel {
 
@@ -46,7 +47,7 @@ public class PanelCartellaMedica extends JPanel {
 	        tasto_AggiungiCartella.addMouseListener(new MouseAdapter() {
 	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
-	        		controller.InserimentoCartellaMedicaPt1Page();
+	        		controller.VisualizzazioneTartarughePage(1);
 	        	}
 	        });
 	        tasto_AggiungiCartella.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/add_100px.png")));
@@ -68,7 +69,7 @@ public class PanelCartellaMedica extends JPanel {
 	        tasto_RimuoviCartella.addMouseListener(new MouseAdapter() {
 	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
-	        		controller.RimozioneCartellaMedicaPage();
+	        		controller.VisualizzazioneTartarughePage(3);
 	        	}
 	        });
 	        tasto_RimuoviCartella.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/remove_100px.png")));
@@ -90,12 +91,11 @@ public class PanelCartellaMedica extends JPanel {
 	        tasto_ModificaCartella.addMouseListener(new MouseAdapter() {
 	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
-	        		controller.VisualizzaCartellaMedicaPage();
+	        		controller.VisualizzazioneTartarughePage(2);
 	        	}
 	        });
 	        tasto_ModificaCartella.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/change_100px.png")));
 	        tasto_ModificaCartella.setBounds(133, 70, 117, 126);
 	        panel_modifica.add(tasto_ModificaCartella);
 	    }
-
 }

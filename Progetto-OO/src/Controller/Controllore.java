@@ -162,6 +162,9 @@ public class Controllore {
 		return donazione.getDonazioni();
 	}
 	
+	public ArrayList<Tartaruga> getAllTartarughe(){
+		return tartaruga.LastTurtleAll();
+	}
 	
 	public JTable setTable(String qualifica,String centro)
 	{
@@ -579,13 +582,7 @@ public class Controllore {
 	public void RimozioneDonazionePage() {new RimozioneDonazione(this);}
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
 	public void ModificaDonazioniPage() {new ModificaDonazione(this);};
-	public void InserimentoCartellaMedicaPt1Page() {
-		new InserimentoCartellaMedicapt1(this);
-	}
-	public void RimozioneCartellaMedicaPage() {
-		new RimozioneCartellaMedica(this);
-	}
-	public void VisualizzaCartellaMedicaPage() {
-		new VisualizzaCartellaMedica(this);
+	public void VisualizzazioneTartarughePage(int numeroOperazione) {
+		new VisualizzazioneTartarughe(this, numeroOperazione);
 	}
 }

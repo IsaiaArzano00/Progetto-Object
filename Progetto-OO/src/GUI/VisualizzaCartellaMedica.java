@@ -30,7 +30,7 @@ public class VisualizzaCartellaMedica extends JDialog {
 	private JTextField textField_3;
 	private Controllore controller;
 	
-	public VisualizzaCartellaMedica(Controllore contr) {
+	public VisualizzaCartellaMedica(Controllore contr, String idTartaruga) {
 		controller = contr;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 981, 600);
@@ -55,15 +55,10 @@ public class VisualizzaCartellaMedica extends JDialog {
 		panel.add(lblNewLabel);
 		lblNewLabel.setIcon(new ImageIcon(InserimentoCartellaMedicapt1.class.getResource("/Media/health_book_80px.png")));
 		
-		JLabel lblNewLabel_1 = new JLabel("CARTELLA MEDICA");
+		JLabel lblNewLabel_1 = new JLabel("MODIFICA CARTELLA MEDICA");
 		lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(104, 10, 289, 37);
+		lblNewLabel_1.setBounds(104, 29, 289, 37);
 		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Selezionare la tartaruga di cui si vuole visualizzare o modificare la cartella medica");
-		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(104, 37, 481, 24);
-		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Peso : ");
 		lblNewLabel_3.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -184,9 +179,11 @@ public class VisualizzaCartellaMedica extends JDialog {
 		lblNewLabel_3_12.setBounds(10, 119, 147, 16);
 		sfondo.add(lblNewLabel_3_12);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(167, 115, 182, 21);
-		sfondo.add(comboBox_1);
+		JTextField idTartaruga_in = new JTextField();
+		idTartaruga_in.setEditable(false);
+		idTartaruga_in.setBounds(167, 115, 182, 21);
+		idTartaruga_in.setText(idTartaruga);
+		sfondo.add(idTartaruga_in);
 		
 		JLabel lblNewLabel_3_7_1 = new JLabel("Condizioni Collo  :");
 		lblNewLabel_3_7_1.setFont(new Font("SansSerif", Font.BOLD, 12));
