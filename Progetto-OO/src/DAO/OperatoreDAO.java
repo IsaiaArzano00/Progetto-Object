@@ -144,5 +144,65 @@ public class OperatoreDAO {
 		}
 	}
 	
+	//LISTA MATRICOLA OPERATORE
+	public ArrayList<String> ListaMatricolaOperatore()
+	{
+		ArrayList<String> lista_matricola = new ArrayList<String>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT MATRICOLA_OPERATORE FROM OPERATORE ;");
+			while(rs.next())
+			{
+				String matricola = rs.getString("matricola_operatore");
+				lista_matricola.add(matricola);
+			}
+			return lista_matricola;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return lista_matricola;
+		}
+	}
+	//RECUPERA DATI OPERATORE 
+	public Operatore RecuperaOperatore(String matricola)
+	{
+		Operatore operatore = new Operatore();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM OPERATORE WHERE MATRICOLA_OPERATORE = '"+matricola+"' ;");
+			while(rs.next())
+			{
+				operatore.setMatricola_Ope(rs.getString("matricola_operatore"));
+				operatore.setNome(rs.getString("nome"));
+				operatore.setCognome(rs.getString("cognome"));
+				operatore.setResidenza(rs.getString("residenza"));
+				operatore.setCodice_Fiscale(rs.getString("codice_fiscale"));
+				operatore.setData_Inizio_Lavoro(rs.getDate("data_inizio_lavoro"));
+				operatore.setData_Fine_Lavoro(null);
+				operatore.setCompenso(rs.getInt("compenso"));
+				operatore.setSede(rs.getString("id_sede"));
+			}
+			
+			return operatore;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return operatore;
+			
+		}
+	}
+	
+	//DELETE OPERATORE
+	public int DeleteOperatore(String matricola)
+	{
+		int rowdelete=0;
+		try {
+			rowdelete=statement.executeUpdate("DELETE FROM OPERATORE WHERE MATRICOLA_OPERATORE = '"+matricola+"' ;");
+			return rowdelete;
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowdelete;
+		}
+	}
 	
 }

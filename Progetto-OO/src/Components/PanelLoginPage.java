@@ -92,6 +92,7 @@ public class PanelLoginPage extends JPanel {
         panel_1.add(lblNewLabel_1);
         
         JLabel lblNewLabel_2 = new JLabel("Password dimenticata ?");
+     
         lblNewLabel_2.setFont(new Font("SansSerif", 1, 12));
         lblNewLabel_2.setBounds(156, 300, 151, 28);
         panel_1.add(lblNewLabel_2);

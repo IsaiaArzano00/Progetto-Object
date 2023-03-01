@@ -22,6 +22,7 @@ import Controller.Controllore;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.text.SimpleDateFormat;
 
 public class InserimentoVisita extends JDialog {
@@ -29,25 +30,11 @@ public class InserimentoVisita extends JDialog {
 	private JTextField PesoTurtle;
 	private JTextField Id_turtleField;
 	private JTextField matricola_medicoField;
+	private Controllore controller;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			InserimentoVisita dialog = new InserimentoVisita();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public InserimentoVisita() {
-		Controllore controller = new Controllore();
+	
+	public InserimentoVisita(Controllore contr) {
+		controller =contr;
 		
 		getContentPane().setLayout(null);
 		setBounds(100,100,454,541);

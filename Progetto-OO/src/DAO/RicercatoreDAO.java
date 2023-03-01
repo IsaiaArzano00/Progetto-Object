@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 
-
+import DTO.Operatore;
 import DTO.Ricercatore;
 import connection.Connessione;
 
@@ -128,5 +128,66 @@ public class RicercatoreDAO {
 					return number; 
 				}
 			}
+			
+		//LISTA MATRICOLA OPERATORE
+		public ArrayList<String> ListaMatricolaRicercatore()
+		{
+			ArrayList<String> lista_matricola = new ArrayList<String>();
+			try {
+				ResultSet rs = statement.executeQuery("SELECT MATRICOLA_RICERCATORE FROM RICERCATORE ;");
+				while(rs.next())
+				{
+					String matricola = rs.getString("matricola_ricercatore");
+					lista_matricola.add(matricola);
+				}
+				return lista_matricola;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				return lista_matricola;
+			}
+		}
+		
+		//RECUPERA DATI RICERCATORE 
+		public Ricercatore RecuperaRicercatore(String matricola)
+		{
+			Ricercatore ricercatore = new Ricercatore();
+			try {
+				ResultSet rs = statement.executeQuery("SELECT * FROM RICERCATORE WHERE MATRICOLA_RICERCATORE = '"+matricola+"' ;");
+				while(rs.next())
+				{
+					ricercatore.setMatricola_Ricercatore(rs.getString("matricola_ricercatore"));
+					ricercatore.setNome(rs.getString("nome"));
+					ricercatore.setCognome(rs.getString("cognome"));
+					ricercatore.setResidenza(rs.getString("residenza"));
+					ricercatore.setCodice_Fiscale(rs.getString("codice_fiscale"));
+					ricercatore.setData_Inizio_Lavoro(rs.getDate("data_inizio_lavoro"));
+					ricercatore.setData_Fine_Lavoro(null);
+					ricercatore.setCompenso(rs.getInt("compenso"));
+					ricercatore.setSede(rs.getString("id_sede"));
+				}
+				
+				return ricercatore;
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+				return ricercatore;
+			}
+			}
+		
+		//DELETE RICERCATORE
+		public int DeleteRicercatore(String matricola)
+		{
+			int rowdelete=0;
+			try {
+				rowdelete=statement.executeUpdate("DELETE FROM RICERCATORE WHERE MATRICOLA_RICERCATORE = '"+matricola+"' ;");
+				return rowdelete;
+				
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+				return rowdelete;
+			}
+		}
 
 }

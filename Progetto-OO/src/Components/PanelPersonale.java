@@ -3,6 +3,7 @@
 package Components;
 
 import Controller.Controllore;
+import GUI.EliminaPersonale;
 import GUI.ViewPersonale;
 import java.awt.Color;
 import java.awt.Font;
@@ -77,6 +78,13 @@ public class PanelPersonale extends JPanel {
         panel_rimuovi.add(lblNewLabel_7);
         
         JLabel lblNewLabel_8 = new JLabel("");
+        lblNewLabel_8.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		EliminaPersonale deletepersonale = new EliminaPersonale(controller);
+        		deletepersonale.setVisible(true);
+        	}
+        });
         lblNewLabel_8.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/delete_80px.png")));
         lblNewLabel_8.setBounds(119, 86, 154, 107);
         panel_rimuovi.add(lblNewLabel_8);
