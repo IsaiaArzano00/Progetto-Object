@@ -40,55 +40,67 @@ public class Home extends JFrame {
     private JPanel PanelAccess;
 
     public Home(Controllore contr) {
-        this.controller = contr;
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(100, 100, 900, 550);
-        this.contentPane = new JPanel();
-        this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        this.setContentPane(this.contentPane);
-        this.contentPane.setLayout((LayoutManager)null);
-        final PanelCustomBlue panel = new PanelCustomBlue();
-        panel.setBounds(0, 0, 450, 550);
-        this.contentPane.add(panel);
-        panel.setLayout((LayoutManager)null);
+    	controller = contr;
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 900, 550);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(this.contentPane);
+       contentPane.setLayout(null);
+       
+        PanelCustomBlue panel_scelta = new PanelCustomBlue();
+        panel_scelta.setBounds(0, 0, 450, 550);
+        contentPane.add(panel_scelta);
+        panel_scelta.setLayout(null);
+        
         JTextArea txtrBenvenutoNelSoftware = new JTextArea();
         txtrBenvenutoNelSoftware.setEditable(false);
         txtrBenvenutoNelSoftware.setForeground(new Color(255, 255, 255));
         txtrBenvenutoNelSoftware.setFont(new Font("SansSerif", 1, 12));
         txtrBenvenutoNelSoftware.setText("Benvenuto nel Software per la gestione dei Centri di Recupero per\r\n Tartarughe Marine.\r\n\r\nSi prega di effettuare l'accesso oppure di registrarsi per \r\naccedere all'area personale.");
         txtrBenvenutoNelSoftware.setBounds(10, 82, 430, 122);
-        panel.add(txtrBenvenutoNelSoftware);
+        panel_scelta.add(txtrBenvenutoNelSoftware);
         txtrBenvenutoNelSoftware.setOpaque(false);
+        
         JLabel lblNewLabel = new JLabel("Centro di Recupero Tartarughe Marine");
         lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setFont(new Font("SansSerif", 1, 20));
         lblNewLabel.setBounds(36, 10, 378, 94);
-        panel.add(lblNewLabel);
-        final JPanel panel_1 = new JPanel();
-        panel_1.setBounds(450, 0, 450, 550);
-        this.contentPane.add(panel_1);
-        panel_1.setLayout((LayoutManager)null);
+        panel_scelta.add(lblNewLabel);
+        
+        JPanel panel_foto = new JPanel();
+        panel_foto.setBounds(450, 0, 450, 550);
+        contentPane.add(panel_foto);
+        panel_foto.setLayout(null);
+        
         PanelHome Home = new PanelHome();
         Home.setBounds(0, 0, 450, 550);
-        panel_1.add(Home);
-        this.setVisible(true);
-        JButton btnNewButton = new JButton("LOGIN");
-        btnNewButton.addMouseListener(new MouseAdapter() {
+        panel_foto.add(Home);
+        setVisible(true);
+        
+        JButton LOGIN = new JButton("LOGIN");
+        
+        LOGIN.setFont(new Font("SansSerif", 1, 24));
+        LOGIN.setBounds(74, 233, 291, 64);
+        panel_scelta.add(LOGIN);
+        JButton REGISTRATI = new JButton("REGISTRATI");
+      
+        REGISTRATI.setFont(new Font("SansSerif", 1, 24));
+        REGISTRATI.setBounds(74, 334, 291, 64);
+        panel_scelta.add(REGISTRATI);
+        
+        //LISTENER
+        LOGIN.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                Home.this.controller.SetLoginPage(panel, panel_1);
+                controller.SetLoginPage( panel_foto,panel_scelta);
             }
         });
-        btnNewButton.setFont(new Font("SansSerif", 1, 24));
-        btnNewButton.setBounds(74, 233, 291, 64);
-        panel.add(btnNewButton);
-        JButton btnNewButton_1 = new JButton("REGISTRATI");
-        btnNewButton_1.addMouseListener(new MouseAdapter() {
+        
+        REGISTRATI.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                Home.this.controller.SetRegistrerPage(panel, panel_1);
+                controller.SetRegistrerPage(panel_foto,panel_scelta);
             }
         });
-        btnNewButton_1.setFont(new Font("SansSerif", 1, 24));
-        btnNewButton_1.setBounds(74, 334, 291, 64);
-        panel.add(btnNewButton_1);
     }
 }

@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import Components.*;
 import Controller.Controllore;
 import GUI.InserimentoTartarugaRiammissione;
+import GUI.MorteTurtle;
+import GUI.RilascioTartaruga;
+import GUI.RimuoviTurtle;
 import GUI.ViewTartarughe;
 
 import javax.swing.JLabel;
@@ -32,22 +35,22 @@ public class PanelTartarughe extends JPanel {
 		panel.add(sfondo);
 		sfondo.setLayout(null);
 		
-		PanelCustomBlue panel_aggiungi = new PanelCustomBlue();
-		panel_aggiungi.setBounds(10, 25, 350, 250);
-		sfondo.add(panel_aggiungi);
-		panel_aggiungi.setLayout(null);
+		PanelCustomBlue panel_rimuovi = new PanelCustomBlue();
+		panel_rimuovi.setBounds(10, 25, 350, 250);
+		sfondo.add(panel_rimuovi);
+		panel_rimuovi.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("AGGIUNGI TARTARUGA\r\n");
+		JLabel lblNewLabel = new JLabel("RIMUOVI TARTARUGA");
 		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(52, 10, 222, 50);
-		panel_aggiungi.add(lblNewLabel);
+		panel_rimuovi.add(lblNewLabel);
 		
-		JLabel AggiungiTurtle = new JLabel("");
+		JLabel Delete_Turtle = new JLabel("");
 	
-		AggiungiTurtle.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/add_100px.png")));
-		AggiungiTurtle.setBounds(114, 70, 117, 126);
-		panel_aggiungi.add(AggiungiTurtle);
+		Delete_Turtle.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/delete_80px.png")));
+		Delete_Turtle.setBounds(114, 70, 117, 126);
+		panel_rimuovi.add(Delete_Turtle);
 		
 		PanelCustomBlue panel_lista = new PanelCustomBlue();
 		panel_lista.setLayout(null);
@@ -65,43 +68,45 @@ public class PanelTartarughe extends JPanel {
 		ListaTurtle.setBounds(105, 69, 117, 126);
 		panel_lista.add(ListaTurtle);
 		
-		PanelCustomBlue panel_rimuovi = new PanelCustomBlue();
-		panel_rimuovi.setLayout(null);
-		panel_rimuovi.setBounds(538, 25, 350, 250);
-		sfondo.add(panel_rimuovi);
+		PanelCustomBlue panel_rilascio = new PanelCustomBlue();
+		panel_rilascio.setLayout(null);
+		panel_rilascio.setBounds(538, 25, 350, 250);
+		sfondo.add(panel_rilascio);
 		
-		JLabel lblRimuoviTartaruga = new JLabel("RIMUOVI TARTARUGA\r\n");
+		JLabel lblRimuoviTartaruga = new JLabel("RILASCIO TARTARUGA\r\n");
 		lblRimuoviTartaruga.setForeground(Color.WHITE);
 		lblRimuoviTartaruga.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblRimuoviTartaruga.setBounds(78, 10, 222, 50);
-		panel_rimuovi.add(lblRimuoviTartaruga);
+		panel_rilascio.add(lblRimuoviTartaruga);
 		
-		JLabel RimuoviTurtle = new JLabel("");
-		RimuoviTurtle.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/remove_100px.png")));
-		RimuoviTurtle.setBounds(128, 70, 117, 126);
-		panel_rimuovi.add(RimuoviTurtle);
+		JLabel RilasciaTurtle = new JLabel("");
 		
-		PanelCustomBlue panel_modifica = new PanelCustomBlue();
-		panel_modifica.setLayout(null);
-		panel_modifica.setBounds(538, 339, 350, 250);
-		sfondo.add(panel_modifica);
+		RilasciaTurtle.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/wave_lines_100px.png")));
+		RilasciaTurtle.setBounds(128, 70, 117, 126);
+		panel_rilascio.add(RilasciaTurtle);
 		
-		JLabel lblModificaTartaruga = new JLabel("MODIFICA TARTARUGA\r\n");
+		PanelCustomBlue panel_morte = new PanelCustomBlue();
+		panel_morte.setLayout(null);
+		panel_morte.setBounds(538, 339, 350, 250);
+		sfondo.add(panel_morte);
+		
+		JLabel lblModificaTartaruga = new JLabel("MORTE TARTARUGA ");
 		lblModificaTartaruga.setForeground(Color.WHITE);
 		lblModificaTartaruga.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblModificaTartaruga.setBounds(86, 10, 222, 50);
-		panel_modifica.add(lblModificaTartaruga);
+		panel_morte.add(lblModificaTartaruga);
 		
-		JLabel ModificaTurtle = new JLabel("");
-		ModificaTurtle.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/change_100px.png")));
-		ModificaTurtle.setBounds(133, 70, 117, 126);
-		panel_modifica.add(ModificaTurtle);
+		JLabel Morte_Turtle = new JLabel("");
 		
-		AggiungiTurtle.addMouseListener(new MouseAdapter() {
+		Morte_Turtle.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/cemetery_100px.png")));
+		Morte_Turtle.setBounds(133, 70, 117, 126);
+		panel_morte.add(Morte_Turtle);
+		
+		Delete_Turtle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoTartarugaRiammissione inserimentotartaruga = new InserimentoTartarugaRiammissione(controller);
-				inserimentotartaruga.setVisible(true);
+				RimuoviTurtle deletetartaruga = new RimuoviTurtle(controller);
+				deletetartaruga.setVisible(true);
 			}
 		});
 		ListaTurtle.addMouseListener(new MouseAdapter() {
@@ -112,5 +117,21 @@ public class PanelTartarughe extends JPanel {
 			}
 		});	
 		
+		RilasciaTurtle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				RilascioTartaruga releaseturtle = new RilascioTartaruga(controller);
+				releaseturtle.setVisible(true);
+			}
+		});
+		
+		Morte_Turtle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MorteTurtle mortetartaruga = new MorteTurtle(controller);
+				mortetartaruga.setVisible(true);
+				
+			}
+		});
 	}
 }

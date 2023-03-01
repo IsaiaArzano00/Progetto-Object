@@ -235,6 +235,102 @@ public class TartarugaDAO {
 			return listaturtle;
 		}
 	}
+	
+	//LISTA DEGLI ID DELLE TARTARUGHE DA RILASCIARE
+		public ArrayList<String> ListaTurtleRilascio()
+		{
+			ArrayList<String> listaid = new ArrayList<String>();
+			try {
+				ResultSet rs = statement.executeQuery("SELECT ID_TARTARUGA FROM TARTARUGA WHERE EVENTUALE_RILASCIO IS FALSE AND EVENTUALE_MORTE IS FALSE ;");
+				while(rs.next())
+				{
+					String id = rs.getString("id_tartaruga");
+					listaid.add(id);
+				}
+			return listaid;
+				
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+				return listaid;
+			}
+		}
+		
+	
+	//RECUPERA DATI TARTARUGA
+	public Tartaruga RecoveryTurtle(String id)
+	{
+		Tartaruga turtle = new Tartaruga();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM TARTARUGA WHERE ID_TARTARUGA LIKE '"+id+"'  ;");
+			while(rs.next())
+			{
+				turtle.setId_tartaruga(rs.getString("id_tartaruga"));
+				turtle.setNome(rs.getString("nome"));
+				turtle.setEta(rs.getInt("eta"));
+				turtle.setOld_number_targhetta(rs.getString("old_number_targhetta"));
+				turtle.setData_accoglienza_centro(rs.getDate("data_accoglienza_centro"));
+				turtle.setEventuale_rilascio(rs.getBoolean("eventuale_rilascio"));
+				turtle.setEventuale_morte(rs.getBoolean("eventuale_morte"));
+				turtle.setEventuale_data_rilascio(rs.getDate("eventuale_data_rilascio"));
+				turtle.setEventuale_data_morte(rs.getDate("eventuale_data_morte"));
+				turtle.setID_Sede(rs.getString("id_sede"));
+				turtle.setID_CartellaMedica(rs.getString("id_cartellamedica"));
+				turtle.setCodice_vasca(rs.getString("codice_vasca"));
+				turtle.setNumero_targhetta(rs.getString("numero_targhetta"));
+			}
+			
+		return turtle;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return turtle;
+		}
+	}
+	
+	//UPDATE RILASCIO TARTARUGA
+	public int RilascioTurtle(String id,String date)
+	{
+		int rowupdate=0;
+		try {
+			rowupdate=statement.executeUpdate("UPDATE  TARTARUGA SET Eventuale_Rilascio = TRUE, Eventuale_Data_Rilascio ='"+date+"' WHERE ID_Tartaruga = '"+id+"' ;" );
+			
+			return rowupdate;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowupdate;
+		}
+	}
+	
+	//UPDATE MORTE TARTARUGA 
+	public int MorteTurtle(String id,String date)
+	{
+		int rowupdate=0;
+		try {
+			rowupdate=statement.executeUpdate("UPDATE  TARTARUGA SET Eventuale_Morte = TRUE, Eventuale_Data_Morte ='"+date+"' WHERE ID_Tartaruga = '"+id+"' ;" );
+			
+			return rowupdate;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowupdate;
+		}
+	}
+	
+	//DELETE TARTARUGA 
+	public int DeleteTurtle(String id_turtle)
+	{
+		int rowdelete=0;
+		try {
+			rowdelete=statement.executeUpdate("DELETE FROM TARTARUGA WHERE ID_TARTARUGA = '"+id_turtle+"' ;");
+			return rowdelete;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowdelete;
+		}
+	}
 }
 
 

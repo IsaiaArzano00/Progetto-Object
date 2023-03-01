@@ -97,6 +97,8 @@ public class Controllore {
 		
 	}
 	
+
+	
 	public void SetRegistrerPage (JPanel panelImage , JPanel PanelRegistrer)
 	{
 		PanelHome Home = new PanelHome();
@@ -587,4 +589,126 @@ public class Controllore {
 			return false ;
 					
 	}
+	
+	public ArrayList<String> ListaTartarugheDaRilasciare()
+	{
+		return tartaruga.ListaTurtleRilascio();
+	}
+	
+	public Tartaruga RecuperaTurtle(String id)
+	{
+		return tartaruga.RecoveryTurtle(id);
+	}
+	
+	public boolean RilasciaTurtle(String id, String date)
+	{
+		int rowupdate = tartaruga.RilascioTurtle(id, date);
+		if(rowupdate>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean MorteTurtle(String id, String date)
+	{
+		int rowupdate = tartaruga.MorteTurtle(id, date);
+		if(rowupdate>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public ArrayList<String> ListaMatricolaPersonale(String qualifica)
+	{
+		if(qualifica.equals("Operatore"))
+			return operatore.ListaMatricolaOperatore();
+		else if(qualifica.equals("Medico Veterinario"))
+			return medico.ListaMatricolaMedico();
+		else if(qualifica.equals("Ricercatore"))
+			return ricercatore.ListaMatricolaRicercatore();
+		else
+			return tecnico.ListaMatricolaTecnico();
+	}
+	
+	public Operatore RecuperaOperatore(String matricola)
+	{
+		return operatore.RecuperaOperatore(matricola);
+	}
+	
+	public Ricercatore RecuperaRicercatore(String matricola)
+	{
+		return ricercatore.RecuperaRicercatore(matricola);
+	}
+	public Tecnico_di_Laboratorio RecuperaTecnico(String matricola)
+	{
+		return tecnico.RecuperaTecnico(matricola);
+	}
+	
+	public Medico_Veterinario RecuperaMedico(String matricola)
+	{
+		return medico.RecuperaMedico(matricola);
+	}
+	
+	public boolean EliminaPersonale(String qualifica , String matricola)
+	{
+		int rowdelete = 0;
+		if(qualifica.equals("Operatore"))
+			rowdelete = operatore.DeleteOperatore(matricola);
+		else if(qualifica.equals("Medico Veterinario"))
+			rowdelete=medico.DeleteMedico(matricola);
+		else if(qualifica.equals("Ricercatore"))
+			rowdelete=ricercatore.DeleteRicercatore(matricola);
+		else
+			rowdelete=tecnico.DeleteTecnico(matricola);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+		
+	}
+	
+	public Vasca RecuperoVasca(String codicevasca)
+	{
+		return vasca.RecuperoVasca(codicevasca);
+	}
+	
+	public boolean EliminaVasca(String codicevasca)
+	{
+		int rowdelete = vasca.EliminaVasca(codicevasca);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public ArrayList<String> ListaIdLab()
+	{
+		return laboratorio.ListaIDLab();
+	}
+	
+	public Laboratorio RecuperoLaboratorio(String idLab)
+	{
+		return laboratorio.RecuperoLab(idLab);
+	}
+	
+	public boolean EliminaLab(String id)
+	{
+		int rowdelete=laboratorio.EliminaLaboratorio(id);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean EliminaTurtle(String id_turtle)
+	{
+		int rowdelete = tartaruga.DeleteTurtle(id_turtle);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
 }
+
+
+

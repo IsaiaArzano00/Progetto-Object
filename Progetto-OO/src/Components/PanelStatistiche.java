@@ -72,6 +72,8 @@ public class PanelStatistiche extends JPanel{
 				
 				panel_1.removeAll();
 				panel_1.add(chartPanel);
+				panel_1.revalidate();
+				panel_1.repaint();
 				panel_1.updateUI();
 			}
 		});

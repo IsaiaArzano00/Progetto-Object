@@ -170,16 +170,16 @@ public class DashBoard extends JFrame {
 		Cartella_Medica.setBounds(10, 0, 265, 41);
 		panel_CartellaMedica.add(Cartella_Medica);
 		
-		JPanel panel_laboratorio = new JPanel();
-		panel_laboratorio.setBounds(0, 163, 277, 41);
-		pannelloMenu.add(panel_laboratorio);
-		panel_laboratorio.setLayout(null);
-		panel_laboratorio.setOpaque(false);
+		JPanel panel_laboratorio_e_vasche = new JPanel();
+		panel_laboratorio_e_vasche.setBounds(0, 163, 277, 41);
+		pannelloMenu.add(panel_laboratorio_e_vasche);
+		panel_laboratorio_e_vasche.setLayout(null);
+		panel_laboratorio_e_vasche.setOpaque(false);
 		
 		JLabel Laboratorio = new JLabel("Laboratorio & Vasche");
 	
 		Laboratorio.setBounds(10, 0, 255, 41);
-		panel_laboratorio.add(Laboratorio);
+		panel_laboratorio_e_vasche.add(Laboratorio);
 		Laboratorio.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Laboratorio.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/laboratory_28px.png")));
 		
@@ -252,14 +252,14 @@ public class DashBoard extends JFrame {
 		Laboratorio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panel_laboratorio.setBackground(new Color(187,187,187));
-				panel_laboratorio.setOpaque(true);
+				panel_laboratorio_e_vasche.setBackground(new Color(187,187,187));
+				panel_laboratorio_e_vasche.setOpaque(true);
 				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_laboratorio.setBackground(new Color(255,255,255));
-				panel_laboratorio.setOpaque(false);
+				panel_laboratorio_e_vasche.setBackground(new Color(255,255,255));
+				panel_laboratorio_e_vasche.setOpaque(false);
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
