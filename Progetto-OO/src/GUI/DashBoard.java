@@ -232,11 +232,8 @@ public class DashBoard extends JFrame {
 		Personale.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sfondo_1.removeAll();
-				sfondo_1.add(new PanelPersonale(controller));
-				sfondo_1.repaint();
-				sfondo_1.revalidate();
-				
+				PanelPersonale panelPersonale = new PanelPersonale(controller);
+				controller.SetPanelDashBoard(sfondo_1, panelPersonale);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -325,6 +322,11 @@ public class DashBoard extends JFrame {
 				panel_CartellaMedica.setBackground(new Color(240,240,240));
 			}
 			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelCartellaMedica panelCartella = new PanelCartellaMedica(controller);
+				controller.SetPanelDashBoard(sfondo_1, panelCartella);
+			}
 		});
 		
 		Donazioni.addMouseListener(new MouseAdapter() {

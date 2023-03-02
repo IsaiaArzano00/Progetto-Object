@@ -331,6 +331,25 @@ public class TartarugaDAO {
 			return rowdelete;
 		}
 	}
+	
+	//RECUPERO ID TARTARUGA SENZA CARTELLA MEDICA
+	public ArrayList<String> ListaTurtleSenzaCartella()
+	{
+		ArrayList<String> listaturtle = new ArrayList<String>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT ID_TARTARUGA FROM TARTARUGA WHERE ID_CARTELLAMEDICA IS NULL ;");
+			while(rs.next())
+			{
+				String id = rs.getString("id_tartaruga");
+				listaturtle.add(id);
+			}
+			return listaturtle;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return listaturtle;
+		}
+	}
 }
 
 

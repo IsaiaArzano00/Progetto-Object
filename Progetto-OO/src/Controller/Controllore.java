@@ -39,6 +39,8 @@ public class Controllore {
 	private Cartella_Medica_DegenzaDAO degenza;
 	private OccupareVascaDAO occupare;
 	private TarghettaDAO targhetta;
+	private Cartella_MedicaDAO cartella;
+	
 	
 
 	public static void main(String[] args) {
@@ -63,6 +65,7 @@ public class Controllore {
 		degenza = new Cartella_Medica_DegenzaDAO();
 		occupare=new OccupareVascaDAO();
 		targhetta = new TarghettaDAO();
+		cartella = new Cartella_MedicaDAO();
 	}
 	
 
@@ -395,7 +398,6 @@ public class Controllore {
 		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
 
 		JTable tbl=new JTable(dtm);
-		tbl.setEnabled(false);
 		if(centro.equals("Tutti i Centri"))
 		{
 			for ( int i=0 ; i<tartaruga.ListaTartarugheAll().size();i++)
@@ -424,7 +426,7 @@ public class Controllore {
 				dtm.addRow(rowdata);
 			}
 		}
-
+		tbl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbl.setShowVerticalLines(false);
 		tbl.setRowHeight(50);
 		return tbl;
@@ -490,6 +492,18 @@ public class Controllore {
 		ArrayList<String> lista_turtle = tartaruga.ListaTurtleIDSede(sede);
 		return lista_turtle;
 	}
+	
+	public void VisualizzaVisite( String turtle ,JPanel sfondo)
+	{
+		PanelViewVisite PanelTableVisite = new PanelViewVisite(this,turtle);
+		PanelTableVisite.setBounds(0, 0, 865, 460);
+		sfondo.removeAll();
+		sfondo.add(PanelTableVisite);
+		sfondo.repaint();
+		sfondo.revalidate();
+		
+
+	}
 	public JTable SetTableVisite(String turtle)
 	{
 		String[] tblHead={"Data Visita ","Farmaco ","Peso ","Condizioni generali "};
@@ -500,7 +514,7 @@ public class Controllore {
 
 		for ( int i=0 ; i<degenza.listavisiteturtle(turtle).size();i++)
 		{
-			Object[] rowdata = new Object[4];
+			Object[] rowdata = new Object[5];
 			rowdata[0]=degenza.listavisiteturtle(turtle).get(i).getData_controllo();
 			rowdata[1]=degenza.listavisiteturtle(turtle).get(i).getFarmaco_somministrato();
 			rowdata[2]=degenza.listavisiteturtle(turtle).get(i).getPeso();
@@ -509,21 +523,11 @@ public class Controllore {
 
 			dtm.addRow(rowdata);
 		}
-
+		
 		tbl.setShowVerticalLines(false);
 		tbl.setRowHeight(50);
 
 		return tbl;
-	}
-	public void VisualizzaVisite( String turtle ,JPanel actual)
-	{
-		PanelViewVisite PanelTable = new PanelViewVisite(this,turtle);
-		PanelTable.setBounds(0, 0, 865, 460);
-		actual.removeAll();
-		actual.add(PanelTable);
-		actual.repaint();
-		actual.revalidate();
-
 	}
 
 	public boolean InserisciCibo(String matricola , String data , String codice_vasca , double cibo_inserito , double cibo_rimosso , String tipologia_cibo)
@@ -707,6 +711,51 @@ public class Controllore {
 			return true;
 		else
 			return false;
+	}
+	
+	public JTable SetTableVisiteInfoTartaruga(String turtle)
+	{
+		String[] tblHead={"Data Visita ","Farmaco ","Condizioni generali "};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+
+		for ( int i=0 ; i<degenza.listavisiteturtle(turtle).size();i++)
+		{
+			Object[] rowdata = new Object[5];
+			rowdata[0]=degenza.listavisiteturtle(turtle).get(i).getData_controllo();
+			rowdata[1]=degenza.listavisiteturtle(turtle).get(i).getFarmaco_somministrato();
+			rowdata[2]=degenza.listavisiteturtle(turtle).get(i).getValutazione_condizioni_generali();
+
+
+			dtm.addRow(rowdata);
+		}
+		
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+
+		return tbl;
+	}
+	
+	public ArrayList<String> Id_TartarugheSenzaCartellaMedica()
+	{
+		return tartaruga.ListaTurtleSenzaCartella();
+	}
+	
+	public ArrayList<String> MatricolaMedicoPerCartellaMedica(String turtle)
+	{
+		return medico.MatricolaMedicoCartellaMedica(turtle);
+	}
+	
+	public boolean InsertCartellaMedica(String id_turtle ,String medico, double peso , double lunghezza , double larghezza , String specie , String luogo , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	{
+		int rowinsert= cartella.InserisciCartellaMedica(id_turtle, medico, peso, lunghezza, larghezza, specie, luogo, data, condizioni_generali, condizioniCollo, condizioniTesta, condizioniOcchi, condizioniPinne, condizioniNaso, condizioniBecco, condizioniCoda);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	
 	}
 }
 
