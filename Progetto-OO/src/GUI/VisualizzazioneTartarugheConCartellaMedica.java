@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,15 +28,15 @@ import Controller.Controllore;
 import DTO.Donazione;
 import DTO.Tartaruga;
 
-public class VisualizzazioneTartarughe extends JDialog {
+public class VisualizzazioneTartarugheConCartellaMedica extends JDialog {
 
 	private Controllore controller;
 	private JPanel contentPane;
 	private JTable table;
 	private String idTartaruga;
 	
-	public VisualizzazioneTartarughe(Controllore contr) {
-		 this.controller = contr;
+	public VisualizzazioneTartarugheConCartellaMedica(Controllore contr, String operazione) {
+		 	this.controller = contr;
 	        this.setDefaultCloseOperation(2);
 	        this.setBounds(100, 100, 1266, 752);
 	        this.contentPane = new JPanel();
@@ -60,7 +61,14 @@ public class VisualizzazioneTartarughe extends JDialog {
 	        panel_1.setLayout(new BoxLayout(panel_1, 0));
 	        JScrollPane scrollPane_1 = new JScrollPane();
 	        panel_1.add(scrollPane_1);
-	        ArrayList<Tartaruga> Tartarughe = this.controller.getAllTartarughe();
+	        ArrayList<Tartaruga> Tartarughe = this.controller.getTartarugheConCartellaMedica();
+	        if (Tartarughe.isEmpty()) {
+	        	alertNessunaTartarugaConCartella();
+	        }
+	        else
+	        {
+	        
+	        
 	        Object[] columnNames = new Object[]{"id_tartaruga", "nome", "eta", "old_number_targhetta", "data_accoglienza_centro", "eventuale_rilascio", "eventuale_morte", "eventuale_data_rilascio", "eventuale_data_morte", "id_sede", "id_cartellamedica", "codice_vasca", "numero_targhetta"};
 	        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 	        Iterator var11 = Tartarughe.iterator();
@@ -83,9 +91,14 @@ public class VisualizzazioneTartarughe extends JDialog {
 	                if (row >= 0) {
 	                	idTartaruga = (String) table.getModel().getValueAt(row, 0);
 	                	isVisible(false);
+	                	if(operazione.equals("rimuovi")) {
 	                	new RimozioneCartellaMedica(controller, idTartaruga);
 	                	}
+	                	else if (operazione.equals("modifica")) {
+	                	new VisualizzaCartellaMedica(controller, idTartaruga);
+	                	}
 	                }
+	             }
 	        });
 	        
 	        
@@ -99,8 +112,14 @@ public class VisualizzazioneTartarughe extends JDialog {
 	        Spiegazione.setOpaque(false);
 	        this.setModal(true);
 	        this.setVisible(true);
+	        }
 	    }
 	
+	private void alertNessunaTartarugaConCartella() {
+		JOptionPane.showMessageDialog(this, "Non sono presenti tartarughe con cartella medica!");
+		
+	}
+
 	public void isVisible(boolean b) {
 		setVisible(b);
 	}

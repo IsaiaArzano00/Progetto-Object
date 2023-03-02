@@ -42,7 +42,6 @@ public class Controllore {
 
 	public static void main(String[] args) {
 		Controllore controller = new Controllore();
-		
 	}
 	public Controllore()
 	{
@@ -164,6 +163,14 @@ public class Controllore {
 	
 	public ArrayList<Tartaruga> getAllTartarughe(){
 		return tartaruga.LastTurtleAll();
+	}
+	
+	public ArrayList<Tartaruga> getTartarugheConCartellaMedica(){
+		return tartaruga.ListaTartarugheConCartellaMedica();
+	}
+	
+	public ArrayList<Tartaruga> getTartarugheSenzaCartellaMedica(){
+		return tartaruga.ListaTartarugheSenzaCartellaMedica();
 	}
 	
 	public JTable setTable(String qualifica,String centro)
@@ -582,7 +589,13 @@ public class Controllore {
 	public void RimozioneDonazionePage() {new RimozioneDonazione(this);}
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
 	public void ModificaDonazioniPage() {new ModificaDonazione(this);};
-	public void VisualizzazioneTartarughePage(int numeroOperazione) {
-		new VisualizzazioneTartarughe(this, numeroOperazione);
+	public void VisualizzazioneTartarughePage() {new VisualizzazioneTartarughe(this);}
+	
+	public void VisualizzazioneTartarugheConCartellaMedicaPage(String operazione) {
+		new VisualizzazioneTartarugheConCartellaMedica(this, operazione);
+	}
+	
+	public void VisualizzazioneTartarugheSenzaCartellaMedicaPage() {
+		new VisualizzazioneTartarugheSenzaCartellaMedica(this);
 	}
 }

@@ -47,7 +47,7 @@ public class PanelCartellaMedica extends JPanel {
 	        tasto_AggiungiCartella.addMouseListener(new MouseAdapter() {
 	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
-	        		controller.VisualizzazioneTartarughePage(1);
+	        		controller.VisualizzazioneTartarugheSenzaCartellaMedicaPage();
 	        	}
 	        });
 	        tasto_AggiungiCartella.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/add_100px.png")));
@@ -69,7 +69,7 @@ public class PanelCartellaMedica extends JPanel {
 	        tasto_RimuoviCartella.addMouseListener(new MouseAdapter() {
 	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
-	        		controller.VisualizzazioneTartarughePage(3);
+	        		controller.VisualizzazioneTartarugheConCartellaMedicaPage("rimuovi");
 	        	}
 	        });
 	        tasto_RimuoviCartella.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/remove_100px.png")));
@@ -91,7 +91,7 @@ public class PanelCartellaMedica extends JPanel {
 	        tasto_ModificaCartella.addMouseListener(new MouseAdapter() {
 	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
-	        		controller.VisualizzazioneTartarughePage(2);
+	        		controller.VisualizzazioneTartarugheConCartellaMedicaPage("modifica");
 	        	}
 	        });
 	        tasto_ModificaCartella.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/change_100px.png")));
