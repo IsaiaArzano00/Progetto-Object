@@ -10,9 +10,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
 
 import Controller.Controllore;
 import GUI.Home;
+import GUI.TurtleInfo;
 import GUI.ViewPersonale;
 
 public class TableTartaruga extends JPanel {
@@ -43,18 +45,16 @@ public class TableTartaruga extends JPanel {
 		
 		JTable tbl=controller.SetTableTurtle(centro);
 		scrollPane.setViewportView(tbl);
-		
-		tbl.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				//Aggiungere metodo per visualizzare cartella medica turtle
-			}
-			
-		});
-		
-		
-		
+		tbl.setEnabled(true);
+		tbl.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+            	int index = tbl.getSelectedRow();
+            	TableModel model =tbl.getModel();
+            	
+            	String turtle_id = model.getValueAt(index, 0).toString();
+            	TurtleInfo info = new TurtleInfo(controller,turtle_id);
+            	info.setVisible(true);
 	}
-
+		});
+}
 }

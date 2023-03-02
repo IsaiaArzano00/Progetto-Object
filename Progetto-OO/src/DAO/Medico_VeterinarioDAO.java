@@ -202,6 +202,33 @@ public class Medico_VeterinarioDAO {
 				return rowdelete;
 			}
 		}
+		
+	//RECUPERO MATRICOLA MEDICO PER INSERIMENTO CARTELLA MEDICA
+		public ArrayList<String> MatricolaMedicoCartellaMedica(String turtle)
+		{
+			ArrayList<String> lista_matricola = new ArrayList<String>();
+			try {
+				ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM TARTARUGA AS T JOIN SEDE AS S ON T.ID_SEDE=S.ID_SEDE WHERE T.ID_TARTARUGA = '"+turtle+"' ;");
+				String sede = new String();
+				while(rd.next()){
+					sede = rd.getString("id_sede");
+				}
+
+				ResultSet rs = statement.executeQuery("SELECT MATRICOLA_MEDICO FROM MEDICO_VETERINARIO WHERE ID_SEDE = '"+sede+"' ;");
+				while(rs.next())
+				{
+					String matricola = rs.getString("matricola_medico");
+					lista_matricola.add(matricola);
+				}
+				
+				return lista_matricola;
+				
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+				return lista_matricola;
+			}
+		}
 }
 
 
