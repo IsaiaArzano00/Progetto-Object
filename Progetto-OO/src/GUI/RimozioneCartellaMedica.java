@@ -20,17 +20,29 @@ import com.toedter.calendar.JDateChooser;
 
 import Components.PanelWhite;
 import Controller.Controllore;
+import DTO.Cartella_Medica;
 
 public class RimozioneCartellaMedica extends JDialog {
 
 	private JPanel contentPane;
 	private PanelWhite sfondo;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField peso_in;
+	private JTextField lunghezza_in;
+	private JTextField larghezza_in;
+	private JTextField luogo_in;
 	private Controllore controller;
-
+	private JComboBox comboBoxCondizioniGenerali;
+	private JComboBox comboBoxCondizioniCollo;
+	private JComboBox comboBoxCondizioniTesta;
+	private JComboBox comboBoxCondizioniOcchi;
+	private JComboBox comboBoxCondizioniPinne;
+	private JComboBox comboBoxCondizioniNaso;
+	private JComboBox comboBoxCondizioniBecco;
+	private JComboBox comboBoxCondizioniCoda;
+	private JComboBox comboBoxSpecie;
+	private Cartella_Medica cm;
+	
+	
 	public RimozioneCartellaMedica(Controllore contr, String idTartaruga) {
 		controller = contr;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -91,41 +103,41 @@ public class RimozioneCartellaMedica extends JDialog {
 		lblNewLabel_3_5.setBounds(11, 413, 157, 21);
 		sfondo.add(lblNewLabel_3_5);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(178, 415, 171, 19);
-		sfondo.add(dateChooser);
+		JDateChooser data_in = new JDateChooser();
+		data_in.setBounds(178, 415, 171, 19);
+		sfondo.add(data_in);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(178, 160, 147, 19);
-		sfondo.add(textField);
-		textField.setColumns(10);
-		textField.setBorder(null);
-		textField.setOpaque(false);
+		peso_in = new JTextField();
+		peso_in.setEditable(false);
+		peso_in.setBounds(178, 160, 147, 19);
+		sfondo.add(peso_in);
+		peso_in.setColumns(10);
+		peso_in.setBorder(null);
+		peso_in.setOpaque(false);
 		
-		textField_1 = new JTextField();
-		textField_1.setOpaque(false);
-		textField_1.setColumns(10);
-		textField_1.setBorder(null);
-		textField_1.setBounds(178, 211, 147, 19);
-		textField_1.setEditable(false);
-		sfondo.add(textField_1);
+		lunghezza_in = new JTextField();
+		lunghezza_in.setOpaque(false);
+		lunghezza_in.setColumns(10);
+		lunghezza_in.setBorder(null);
+		lunghezza_in.setBounds(178, 211, 147, 19);
+		lunghezza_in.setEditable(false);
+		sfondo.add(lunghezza_in);
 		
-		textField_2 = new JTextField();
-		textField_2.setOpaque(false);
-		textField_2.setColumns(10);
-		textField_2.setBorder(null);
-		textField_2.setBounds(178, 256, 147, 19);
-		textField_2.setEditable(false);
-		sfondo.add(textField_2);
+		larghezza_in = new JTextField();
+		larghezza_in.setOpaque(false);
+		larghezza_in.setColumns(10);
+		larghezza_in.setBorder(null);
+		larghezza_in.setBounds(178, 256, 147, 19);
+		larghezza_in.setEditable(false);
+		sfondo.add(larghezza_in);
 		
-		textField_3 = new JTextField();
-		textField_3.setOpaque(false);
-		textField_3.setColumns(10);
-		textField_3.setBorder(null);
-		textField_3.setBounds(178, 360, 147, 19);
-		textField_3.setEditable(false);
-		sfondo.add(textField_3);
+		luogo_in = new JTextField();
+		luogo_in.setOpaque(false);
+		luogo_in.setColumns(10);
+		luogo_in.setBorder(null);
+		luogo_in.setBounds(178, 360, 147, 19);
+		luogo_in.setEditable(false);
+		sfondo.add(luogo_in);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(167, 187, 171, 21);
@@ -143,12 +155,12 @@ public class RimozioneCartellaMedica extends JDialog {
 		separator_3.setBounds(178, 377, 171, 21);
 		sfondo.add(separator_3);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setEnabled(false);
-		comboBox.setFont(new Font("SansSerif", Font.PLAIN, 11));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Tartaruga comune (Caretta caretta)", "Tartaruga verde (Chelonia mydas)", "Tartaruga liuto (Dermochelys coriacea)", "Tartaruga embricata (Eretmochelys imbricata)", "Tartaruga bastarda (Lepidochelys kempii)", "Tartaruga olivacea (Lepidochelys olivacea)", "Tartaruga piatta (Natator depressus)"}));
-		comboBox.setBounds(167, 307, 205, 21);
-		sfondo.add(comboBox);
+		comboBoxSpecie = new JComboBox();
+		comboBoxSpecie.setEnabled(false);
+		comboBoxSpecie.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		comboBoxSpecie.setModel(new DefaultComboBoxModel(new String[] {"Tartaruga comune (Caretta caretta)", "Tartaruga verde (Chelonia mydas)", "Tartaruga liuto (Dermochelys coriacea)", "Tartaruga embricata (Eretmochelys imbricata)", "Tartaruga bastarda (Lepidochelys kempii)", "Tartaruga olivacea (Lepidochelys olivacea)", "Tartaruga piatta (Natator depressus)"}));
+		comboBoxSpecie.setBounds(167, 307, 205, 21);
+		sfondo.add(comboBoxSpecie);
 		
 		JLabel lblNewLabel_3_6 = new JLabel("Condizioni Generali : ");
 		lblNewLabel_3_6.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -201,91 +213,119 @@ public class RimozioneCartellaMedica extends JDialog {
 		lblNewLabel_3_7_2.setBounds(436, 418, 136, 16);
 		sfondo.add(lblNewLabel_3_7_2);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setEnabled(false);
-		comboBox_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2.setBounds(582, 118, 171, 21);
-		sfondo.add(comboBox_2);
+		comboBoxCondizioniCollo = new JComboBox();
+		comboBoxCondizioniCollo.setEnabled(false);
+		comboBoxCondizioniCollo.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniCollo.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniCollo.setBounds(582, 118, 171, 21);
+		sfondo.add(comboBoxCondizioniCollo);
 		
-		JComboBox comboBox_2_1 = new JComboBox();
-		comboBox_2_1.setEnabled(false);
-		comboBox_2_1.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2_1.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2_1.setBounds(582, 166, 171, 21);
-		sfondo.add(comboBox_2_1);
+		comboBoxCondizioniTesta = new JComboBox();
+		comboBoxCondizioniTesta.setEnabled(false);
+		comboBoxCondizioniTesta.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniTesta.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniTesta.setBounds(582, 166, 171, 21);
+		sfondo.add(comboBoxCondizioniTesta);
 		
-		JComboBox comboBox_2_2 = new JComboBox();
-		comboBox_2_2.setEnabled(false);
-		comboBox_2_2.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2_2.setBounds(582, 210, 171, 21);
-		sfondo.add(comboBox_2_2);
+		comboBoxCondizioniOcchi = new JComboBox();
+		comboBoxCondizioniOcchi.setEnabled(false);
+		comboBoxCondizioniOcchi.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniOcchi.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniOcchi.setBounds(582, 210, 171, 21);
+		sfondo.add(comboBoxCondizioniOcchi);
 		
-		JComboBox comboBox_2_3 = new JComboBox();
-		comboBox_2_3.setEnabled(false);
-		comboBox_2_3.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2_3.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2_3.setBounds(582, 264, 171, 21);
-		sfondo.add(comboBox_2_3);
+		comboBoxCondizioniPinne = new JComboBox();
+		comboBoxCondizioniPinne.setEnabled(false);
+		comboBoxCondizioniPinne.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniPinne.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniPinne.setBounds(582, 264, 171, 21);
+		sfondo.add(comboBoxCondizioniPinne);
 		
-		JComboBox comboBox_2_3_1 = new JComboBox();
-		comboBox_2_3_1.setEnabled(false);
-		comboBox_2_3_1.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2_3_1.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2_3_1.setBounds(582, 317, 171, 21);
-		sfondo.add(comboBox_2_3_1);
+		comboBoxCondizioniNaso = new JComboBox();
+		comboBoxCondizioniNaso.setEnabled(false);
+		comboBoxCondizioniNaso.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniNaso.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniNaso.setBounds(582, 317, 171, 21);
+		sfondo.add(comboBoxCondizioniNaso);
 		
-		JComboBox comboBox_2_3_2 = new JComboBox();
-		comboBox_2_3_2.setEnabled(false);
-		comboBox_2_3_2.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2_3_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2_3_2.setBounds(582, 371, 171, 21);
-		sfondo.add(comboBox_2_3_2);
+		comboBoxCondizioniBecco = new JComboBox();
+		comboBoxCondizioniBecco.setEnabled(false);
+		comboBoxCondizioniBecco.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniBecco.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniBecco.setBounds(582, 371, 171, 21);
+		sfondo.add(comboBoxCondizioniBecco);
 		
-		JComboBox comboBox_2_3_3 = new JComboBox();
-		comboBox_2_3_3.setEnabled(false);
-		comboBox_2_3_3.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2_3_3.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2_3_3.setBounds(582, 414, 171, 21);
-		sfondo.add(comboBox_2_3_3);
+		comboBoxCondizioniCoda = new JComboBox();
+		comboBoxCondizioniCoda.setEnabled(false);
+		comboBoxCondizioniCoda.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniCoda.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniCoda.setBounds(582, 414, 171, 21);
+		sfondo.add(comboBoxCondizioniCoda);
 		
-		JComboBox comboBox_2_4 = new JComboBox();
-		comboBox_2_4.setEnabled(false);
-		comboBox_2_4.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
-		comboBox_2_4.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		comboBox_2_4.setBounds(167, 488, 171, 21);
-		sfondo.add(comboBox_2_4);
+		comboBoxCondizioniGenerali = new JComboBox();
+		comboBoxCondizioniGenerali.setEnabled(false);
+		comboBoxCondizioniGenerali.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
+		comboBoxCondizioniGenerali.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		comboBoxCondizioniGenerali.setBounds(167, 488, 171, 21);
+		sfondo.add(comboBoxCondizioniGenerali);
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		JLabel tastoElimina = new JLabel("");
+		tastoElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				controller.rimuoviCartellaMedica(idTartaruga);
 			}
 		});
-		lblNewLabel_4.setIcon(new ImageIcon(InserimentoCartellaMedicapt1.class.getResource("/Media/save_50px.png")));
-		lblNewLabel_4.setBounds(826, 481, 56, 61);
-		sfondo.add(lblNewLabel_4);
+		tastoElimina.setIcon(new ImageIcon(InserimentoCartellaMedicapt1.class.getResource("/Media/save_50px.png")));
+		tastoElimina.setBounds(826, 481, 56, 61);
+		sfondo.add(tastoElimina);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+		JLabel tastoAnnulla = new JLabel("");
+		tastoAnnulla.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
 			}
 		});
-		lblNewLabel_5.setIcon(new ImageIcon(InserimentoCartellaMedicapt1.class.getResource("/Media/cross_mark_button_50px.png")));
-		lblNewLabel_5.setBounds(708, 481, 56, 61);
-		sfondo.add(lblNewLabel_5);
+		tastoAnnulla.setIcon(new ImageIcon(InserimentoCartellaMedicapt1.class.getResource("/Media/cross_mark_button_50px.png")));
+		tastoAnnulla.setBounds(708, 481, 56, 61);
+		sfondo.add(tastoAnnulla);
 		
-		JLabel lblNewLabel_6 = new JLabel("Cancella");
+		
+		cm = controller.recuperaCartellaMedica(idTartaruga);
+		
+		peso_in.setText(String.valueOf(cm.getPeso()));
+		lunghezza_in.setText(String.valueOf(cm.getLunghezza()));
+		larghezza_in.setText(String.valueOf(cm.getLarghezza()));
+		comboBoxSpecie.setSelectedItem(cm.getSpecie());
+		luogo_in.setText(cm.getLuogo_ritrovamento());
+		data_in.setDate(cm.getData_Apertura_Cartella());
+		comboBoxCondizioniGenerali.setSelectedItem(cm.getCondizioni_generali());
+		comboBoxCondizioniCollo.setSelectedItem(cm.getCondizioni_collo());
+		comboBoxCondizioniTesta.setSelectedItem(cm.getCondizioni_testa());
+		comboBoxCondizioniOcchi.setSelectedItem(cm.getCondizioni_occhi());
+		comboBoxCondizioniPinne.setSelectedItem(cm.getCondizioni_pinna());
+		comboBoxCondizioniNaso.setSelectedItem(cm.getCondizioni_naso());
+		comboBoxCondizioniBecco.setSelectedItem(cm.getCondizioni_becco());
+		comboBoxCondizioniCoda.setSelectedItem(cm.getCondizioni_coda());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		JLabel lblNewLabel_6 = new JLabel("Annulla");
 		lblNewLabel_6.setFont(new Font("SansSerif", Font.BOLD, 12));
 		lblNewLabel_6.setBounds(708, 524, 58, 32);
 		sfondo.add(lblNewLabel_6);
 		
-		JLabel lblNewLabel_7 = new JLabel("Salva");
+		JLabel lblNewLabel_7 = new JLabel("Conferma Eliminazione");
 		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_7.setBounds(836, 534, 45, 13);
+		lblNewLabel_7.setBounds(801, 534, 141, 13);
 		sfondo.add(lblNewLabel_7);
 		
 		setModal(true);

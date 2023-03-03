@@ -38,6 +38,7 @@ public class Controllore {
 	private SedeDAO sede;
 	private Cartella_Medica_DegenzaDAO degenza;
 	private OccupareVascaDAO occupare;
+	private Cartella_MedicaDAO cartellaMedica;
 	
 
 	public static void main(String[] args) {
@@ -60,6 +61,7 @@ public class Controllore {
 		sede = new SedeDAO();
 		degenza = new Cartella_Medica_DegenzaDAO();
 		occupare=new OccupareVascaDAO();
+		cartellaMedica = new Cartella_MedicaDAO();
 	}
 	
 
@@ -580,6 +582,14 @@ public class Controllore {
 		number=number + tecnico.NumeroTecnici();
 
 		return String.valueOf(number);
+	}
+	
+	public Cartella_Medica recuperaCartellaMedica(String idTartaruga) {
+		return cartellaMedica.recuperaCartellaMedica(idTartaruga);
+	}
+	
+	public void rimuoviCartellaMedica(String idTartaruga) {
+		cartellaMedica.rimuoviCartellaMedica(idTartaruga);
 	}
 
 	

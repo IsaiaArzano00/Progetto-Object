@@ -108,10 +108,11 @@ public class VisualizzazioneTartarugheSenzaCartellaMedica extends JDialog {
 	        }
 	    }
 	
-	        private void alertNessunaTartarugaConCartella() {
-	    		JOptionPane.showMessageDialog(this, "Non sono presenti tartarughe senza cartella medica!");
-	    		
-	    	}
+	
+    private void alertNessunaTartarugaConCartella() {
+		JOptionPane.showMessageDialog(this, "Non sono presenti tartarughe senza cartella medica!");
+		
+	}
 
 	public void isVisible(boolean b) {
 		setVisible(b);
