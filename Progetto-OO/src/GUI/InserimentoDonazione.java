@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package GUI;
 
 import Components.PanelWhite;
@@ -22,6 +17,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,6 +25,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
 
 public class InserimentoDonazione extends JDialog {
     private JPanel contentPane;
@@ -42,136 +39,164 @@ public class InserimentoDonazione extends JDialog {
     private JComboBox comboBoxMetodiPagamento;
 
     public InserimentoDonazione(Controllore contr) {
-        this.controller = contr;
-        this.setDefaultCloseOperation(2);
-        this.setBounds(100, 100, 481, 539);
-        this.contentPane = new JPanel();
-        this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        this.setContentPane(this.contentPane);
-        this.contentPane.setLayout((LayoutManager)null);
+        controller = contr;
+       
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 481, 539);
+       
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(this.contentPane);
+       contentPane.setLayout(null);
+       
         PanelWhite sfondo = new PanelWhite();
         sfondo.setBounds(0, 0, 467, 502);
-        this.contentPane.add(sfondo);
-        sfondo.setLayout((LayoutManager)null);
-        this.importo_in = new JTextField();
-        this.importo_in.setBounds(166, 115, 163, 19);
-        sfondo.add(this.importo_in);
-        this.importo_in.setColumns(10);
-        this.importo_in.setBorder((Border)null);
-        this.importo_in.setOpaque(false);
+        contentPane.add(sfondo);
+        sfondo.setLayout(null);
+        
+        importo_in = new JTextField();
+        importo_in.setFont(new Font("Tahoma", Font.BOLD, 12));
+        importo_in.setBounds(166, 115, 163, 19);
+        sfondo.add(importo_in);
+        importo_in.setColumns(10);
+        importo_in.setBorder((Border)null);
+        importo_in.setOpaque(false);
+        
         JPanel panel = new JPanel();
         panel.setBounds(0, 0, 467, 89);
         sfondo.add(panel);
-        panel.setLayout((LayoutManager)null);
+        panel.setLayout(null);
+        
         JLabel lblNewLabel = new JLabel("New label");
         lblNewLabel.setIcon(new ImageIcon(InserimentoDonazione.class.getResource("/Media/euro_money_80px.png")));
         lblNewLabel.setBounds(10, 10, 83, 79);
         panel.add(lblNewLabel);
+        
         JLabel lblNewLabel_1 = new JLabel("DONAZIONE");
         lblNewLabel_1.setFont(new Font("SansSerif", 1, 20));
         lblNewLabel_1.setBounds(103, 10, 177, 40);
         panel.add(lblNewLabel_1);
+        
         JLabel lblNewLabel_2 = new JLabel("Inserire la donazione ricevuta.");
         lblNewLabel_2.setFont(new Font("SansSerif", 0, 12));
         lblNewLabel_2.setBounds(103, 54, 177, 13);
         panel.add(lblNewLabel_2);
+        
         JLabel lblNewLabel_3 = new JLabel("Importo : ");
         lblNewLabel_3.setFont(new Font("SansSerif", 1, 12));
         lblNewLabel_3.setBounds(10, 112, 69, 22);
         sfondo.add(lblNewLabel_3);
+        
         JLabel lblNewLabel_3_1 = new JLabel("Data donazione : ");
         lblNewLabel_3_1.setFont(new Font("SansSerif", 1, 12));
         lblNewLabel_3_1.setBounds(10, 162, 98, 22);
         sfondo.add(lblNewLabel_3_1);
+        
         JLabel lblNewLabel_3_2 = new JLabel("email donatore : ");
         lblNewLabel_3_2.setFont(new Font("SansSerif", 1, 12));
         lblNewLabel_3_2.setBounds(10, 216, 98, 22);
         sfondo.add(lblNewLabel_3_2);
+        
         JLabel lblNewLabel_3_3 = new JLabel("Metodo di pagamento : ");
         lblNewLabel_3_3.setFont(new Font("SansSerif", 1, 12));
         lblNewLabel_3_3.setBounds(10, 271, 132, 22);
         sfondo.add(lblNewLabel_3_3);
+        
         JLabel lblNewLabel_3_4 = new JLabel("Centro : ");
         lblNewLabel_3_4.setFont(new Font("SansSerif", 1, 12));
         lblNewLabel_3_4.setBounds(10, 324, 69, 22);
         sfondo.add(lblNewLabel_3_4);
+        
         JLabel tasto_Salva = new JLabel("");
         tasto_Salva.setIcon(new ImageIcon(InserimentoDonazione.class.getResource("/Media/save_50px.png")));
         tasto_Salva.setBounds(371, 415, 56, 61);
         sfondo.add(tasto_Salva);
+        
         JLabel tasto_Esci = new JLabel("");
-        tasto_Esci.setIcon(new ImageIcon(InserimentoDonazione.class.getResource("/Media/cross_mark_button_50px.png")));
-        tasto_Esci.setBounds(305, 415, 56, 61);
+        tasto_Esci.setIcon(new ImageIcon(InserimentoDonazione.class.getResource("/Media/undo_50px.png")));
+        tasto_Esci.setBounds(10, 431, 56, 61);
         sfondo.add(tasto_Esci);
-        JLabel lblNewLabel_6 = new JLabel("Esci");
-        lblNewLabel_6.setFont(new Font("SansSerif", 1, 12));
-        lblNewLabel_6.setBounds(315, 465, 58, 32);
-        sfondo.add(lblNewLabel_6);
+        
         JLabel lblNewLabel_7 = new JLabel("Salva");
         lblNewLabel_7.setFont(new Font("SansSerif", 1, 12));
-        lblNewLabel_7.setBounds(373, 471, 54, 21);
+        lblNewLabel_7.setBounds(381, 471, 54, 21);
         sfondo.add(lblNewLabel_7);
-        this.emailDonatore_in = new JTextField();
-        this.emailDonatore_in.setBackground(new Color(255, 255, 255));
-        this.emailDonatore_in.setOpaque(false);
-        this.emailDonatore_in.setColumns(10);
-        this.emailDonatore_in.setBorder((Border)null);
-        this.emailDonatore_in.setBounds(166, 219, 177, 19);
-        sfondo.add(this.emailDonatore_in);
+        
+        emailDonatore_in = new JTextField();
+        emailDonatore_in.setFont(new Font("SansSerif", Font.BOLD, 12));
+        emailDonatore_in.setBackground(new Color(255, 255, 255));
+        emailDonatore_in.setOpaque(false);
+        emailDonatore_in.setColumns(10);
+        emailDonatore_in.setBorder((Border)null);
+        emailDonatore_in.setBounds(166, 219, 177, 19);
+        sfondo.add(emailDonatore_in);
+        
         JSeparator separator = new JSeparator();
         separator.setBounds(156, 139, 271, 21);
         sfondo.add(separator);
+        
         JSeparator separator_1 = new JSeparator();
         separator_1.setBounds(156, 241, 271, 21);
         sfondo.add(separator_1);
-        final JDateChooser dateChooser = new JDateChooser();
+        
+        JDateChooser dateChooser = new JDateChooser();
         dateChooser.setBounds(166, 162, 261, 19);
         Date date = new Date();
         dateChooser.setDate(date);
         sfondo.add(dateChooser);
-        this.comboBoxMetodiPagamento = new JComboBox();
-        this.comboBoxMetodiPagamento.setFont(new Font("SansSerif", 0, 12));
-        this.comboBoxMetodiPagamento.setModel(new DefaultComboBoxModel(new String[]{"PayPal", "MasterCard", "Visa", "Bonifico Bancario"}));
-        this.comboBoxMetodiPagamento.setBounds(166, 273, 261, 21);
-        sfondo.add(this.comboBoxMetodiPagamento);
-        this.comboBoxCentro = new JComboBox();
+        
+        comboBoxMetodiPagamento = new JComboBox();
+        comboBoxMetodiPagamento.setFont(new Font("SansSerif", Font.BOLD, 12));
+        comboBoxMetodiPagamento.setModel(new DefaultComboBoxModel(new String[] {"PayPal", "Mastercard", "Visa", "Bonifico_bancario"}));
+        comboBoxMetodiPagamento.setBounds(166, 273, 261, 21);
+        sfondo.add(comboBoxMetodiPagamento);
 
-        for(int i = 0; i < this.controller.getNomeCentri().size(); ++i) {
-            this.comboBoxCentro.addItem(((String)this.controller.getNomeCentri().get(i)).toString());
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(166, 331, 261, 32);
+        sfondo.add(scrollPane);
+        comboBoxCentro = new JComboBox();
+        scrollPane.setRowHeaderView(comboBoxCentro);
+
+        for(int i = 0; i < controller.getNomeCentri().size(); ++i) {
+            this.comboBoxCentro.addItem((controller.getNomeCentri().get(i)).toString());
         }
-
-        this.comboBoxCentro.setBounds(166, 327, 261, 18);
-        sfondo.add(this.comboBoxCentro);
+        
+        //LISTENER
         tasto_Salva.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int importo = 0;
 
                 try {
-                    importo = Integer.parseInt(InserimentoDonazione.this.importo_in.getText());
+                    importo = Integer.parseInt(importo_in.getText());
                     if (importo <= 0) {
-                        InserimentoDonazione.this.alertImportoNonInserito();
+                        alertImportoNonInserito();
                     }
                 } catch (Exception var10) {
-                    InserimentoDonazione.this.alertImportoNonValido();
+                    alertImportoNonValido();
                 }
 
-                String emailDonatore = InserimentoDonazione.this.emailDonatore_in.getText();
-                String metodoPagamento = (String)InserimentoDonazione.this.comboBoxMetodiPagamento.getSelectedItem();
+                String emailDonatore = emailDonatore_in.getText();
+                String metodoPagamento = (String)comboBoxMetodiPagamento.getSelectedItem();
+                
                 SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
                 String date = date_format.format(dateChooser.getDate());
-                String centro = (String)InserimentoDonazione.this.comboBoxCentro.getSelectedItem();
+                
+                String centro = (String)comboBoxCentro.getSelectedItem();
+                
                 LocalDate dataScelta = dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate currentDate = LocalDate.now();
-                if (dataScelta.isBefore(currentDate)) {
-                    InserimentoDonazione.this.alertDataNonValida();
+                
+                if (dataScelta.isAfter(currentDate)) {
+                    alertDataNonValida();
                 } else if (emailDonatore.isEmpty()) {
-                    InserimentoDonazione.this.alertEmailNonInserito();
-                } else if (InserimentoDonazione.this.controller.InsertDonazione(importo, emailDonatore, date, metodoPagamento, centro)) {
-                    InserimentoDonazione.this.alertInserimentoRiuscito();
-                    InserimentoDonazione.this.importo_in.setText((String)null);
-                    InserimentoDonazione.this.emailDonatore_in.setText((String)null);
+                    alertEmailNonInserito();
+                } else if (controller.InsertDonazione(importo, emailDonatore, date, metodoPagamento, centro)) {
+                    alertInserimentoRiuscito();
+                    importo_in.setText((String)null);
+                    emailDonatore_in.setText((String)null);
                 } else {
-                    InserimentoDonazione.this.alertInserimentoFallito();
+                    alertInserimentoFallito();
                 }
 
             }
@@ -181,10 +206,12 @@ public class InserimentoDonazione extends JDialog {
                 InserimentoDonazione.this.dispose();
             }
         });
-        this.setModal(true);
-        this.setVisible(true);
+        
+        setModal(true);
+        setVisible(true);
     }
 
+    //ALERT
     public void alertImportoNonInserito() {
         JOptionPane.showMessageDialog(this, "Importo della donazione non valido!", "<ATTENZIONE>", 2);
     }
