@@ -1,3 +1,6 @@
 *.class
 /Controller/
 /GUI/
+/DAO/
+/DTO/
+/Media/
