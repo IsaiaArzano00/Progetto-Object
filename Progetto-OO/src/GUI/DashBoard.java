@@ -184,16 +184,16 @@ public class DashBoard extends JFrame {
 		Cartella_Medica.setBounds(10, 0, 265, 41);
 		panel_CartellaMedica.add(Cartella_Medica);
 		
-		JPanel panel_laboratorio = new JPanel();
-		panel_laboratorio.setBounds(0, 163, 277, 41);
-		pannelloMenu.add(panel_laboratorio);
-		panel_laboratorio.setLayout(null);
-		panel_laboratorio.setOpaque(false);
+		JPanel panel_laboratorio_e_vasche = new JPanel();
+		panel_laboratorio_e_vasche.setBounds(0, 163, 277, 41);
+		pannelloMenu.add(panel_laboratorio_e_vasche);
+		panel_laboratorio_e_vasche.setLayout(null);
+		panel_laboratorio_e_vasche.setOpaque(false);
 		
 		JLabel Laboratorio = new JLabel("Laboratorio & Vasche");
 	
 		Laboratorio.setBounds(10, 0, 255, 41);
-		panel_laboratorio.add(Laboratorio);
+		panel_laboratorio_e_vasche.add(Laboratorio);
 		Laboratorio.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Laboratorio.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/laboratory_28px.png")));
 		
@@ -221,17 +221,33 @@ public class DashBoard extends JFrame {
 		Donazioni.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/bank_euro_28px.png")));
 		Donazioni.setFont(new Font("SansSerif", Font.BOLD, 12));
 		
+		JPanel panel_accogli = new JPanel();
+		panel_accogli.setOpaque(false);
+		panel_accogli.setBounds(0, 322, 275, 41);
+		pannelloMenu.add(panel_accogli);
+		panel_accogli.setLayout(null);
+		
+		JLabel Accogli = new JLabel("Accogli");
+		Accogli.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/stethoscope_28px.png")));
+		Accogli.setFont(new Font("SansSerif", Font.BOLD, 12));
+		Accogli.setBounds(10, 0, 255, 41);
+		panel_accogli.add(Accogli);
+		
+		JLabel lblNewLabel_7 = new JLabel("Accogli ");
+		
+		
+		
+		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblNewLabel_7.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/stethoscope_28px.png")));
+		
 	
 		//LISTENER 
 		
 		Personale.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sfondo_1.removeAll();
-				sfondo_1.add(new PanelPersonale(controller));
-				sfondo_1.repaint();
-				sfondo_1.revalidate();
-				
+				PanelPersonale panelPersonale = new PanelPersonale(controller);
+				controller.SetPanelDashBoard(sfondo_1, panelPersonale);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -247,14 +263,14 @@ public class DashBoard extends JFrame {
 		Laboratorio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				panel_laboratorio.setBackground(new Color(187,187,187));
-				panel_laboratorio.setOpaque(true);
+				panel_laboratorio_e_vasche.setBackground(new Color(187,187,187));
+				panel_laboratorio_e_vasche.setOpaque(true);
 				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				panel_laboratorio.setBackground(new Color(255,255,255));
-				panel_laboratorio.setOpaque(false);
+				panel_laboratorio_e_vasche.setBackground(new Color(255,255,255));
+				panel_laboratorio_e_vasche.setOpaque(false);
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -320,11 +336,6 @@ public class DashBoard extends JFrame {
 				panel_CartellaMedica.setBackground(new Color(240,240,240));
 			}
 			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PanelCartellaMedica pannelloCartella = new PanelCartellaMedica(controller);
-				controller.SetPanelDashBoard(sfondo_1, pannelloCartella);
-			}
 		});
 		
 		Donazioni.addMouseListener(new MouseAdapter() {
@@ -377,6 +388,25 @@ public class DashBoard extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				panel_home.setBackground(new Color(240,240,240));
+			}
+		});
+		
+		Accogli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				panel_accogli.setBackground(new Color(187,187,187));
+				panel_accogli.setOpaque(true);
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_accogli.setBackground(new Color(255,255,255));
+				panel_accogli.setOpaque(false);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelAccoglienza panel_acco = new PanelAccoglienza(controller);
+				controller.SetPanelDashBoard(sfondo_1, panel_acco);
 			}
 		});
 	}

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import connection.Connessione;
 import DTO.Cartella_Medica_Degenza;
+import Controller.Controllore;
 
 public class Cartella_Medica_DegenzaDAO {
 	private Connessione connection;

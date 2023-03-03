@@ -2,6 +2,7 @@ package DTO;
 
 public class Vasca {
 	private String codice_vasca;
+	private String nome_centro;
 	private double capacita_vasca;
 	private double temperatura_acqua;
 	
@@ -23,6 +24,12 @@ public class Vasca {
 	}
 	public void setTemperatura_acqua(double temperatura_acqua) {
 		this.temperatura_acqua = temperatura_acqua;
+	}
+	public String getNome_centro() {
+		return nome_centro;
+	}
+	public void setNome_centro(String nome_centro) {
+		this.nome_centro = nome_centro;
 	}
 	
 

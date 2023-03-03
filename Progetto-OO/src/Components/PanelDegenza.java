@@ -106,7 +106,7 @@ public class PanelDegenza extends JPanel {
 		NuovaVisita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoVisita newvisita = new InserimentoVisita();
+				InserimentoVisita newvisita = new InserimentoVisita(controller);
 				newvisita.setVisible(true);
 			}
 		});

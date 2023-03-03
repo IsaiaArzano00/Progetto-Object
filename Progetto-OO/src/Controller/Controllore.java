@@ -38,7 +38,9 @@ public class Controllore {
 	private SedeDAO sede;
 	private Cartella_Medica_DegenzaDAO degenza;
 	private OccupareVascaDAO occupare;
-	private Cartella_MedicaDAO cartellaMedica;
+	private TarghettaDAO targhetta;
+	private Cartella_MedicaDAO cartella;
+	
 	
 
 	public static void main(String[] args) {
@@ -61,7 +63,8 @@ public class Controllore {
 		sede = new SedeDAO();
 		degenza = new Cartella_Medica_DegenzaDAO();
 		occupare=new OccupareVascaDAO();
-		cartellaMedica = new Cartella_MedicaDAO();
+		targhetta = new TarghettaDAO();
+		cartella = new Cartella_MedicaDAO();
 	}
 	
 
@@ -95,6 +98,8 @@ public class Controllore {
 		
 		
 	}
+	
+
 	
 	public void SetRegistrerPage (JPanel panelImage , JPanel PanelRegistrer)
 	{
@@ -384,15 +389,25 @@ public class Controllore {
 		return nomi;
 	}
 	
-	public boolean InsertTartaruga(String nome,int eta , String old_number_targhetta ,String data_accoglienza_centro,String sede)
+	public boolean InsertTartarugaRiammissione(String nome,int eta , String old_number_targhetta ,String data_accoglienza_centro,String sede)
 	{
 		int rowinsert=tartaruga.InserisciTartaruga(nome, eta, old_number_targhetta, data_accoglienza_centro, sede);
-		boolean check_insert = false ;
+		
 		if(rowinsert>0)
-			check_insert=true;
+			return true;
+		else
+			return false;
 		
-		return check_insert;
+	}
+	
+	public boolean InsertTartarugaPrimoIngresso(String nome,int eta  ,String data_accoglienza_centro,String sede)
+	{
+		int rowinsert=tartaruga.InserisciTartarugaPrimo(nome, eta,data_accoglienza_centro, sede);
 		
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
 	}
 	
 	public DonazioneDAO getDonazioneDAO() {
@@ -442,7 +457,7 @@ public class Controllore {
 				dtm.addRow(rowdata);
 			}
 		}
-
+		tbl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbl.setShowVerticalLines(false);
 		tbl.setRowHeight(50);
 		return tbl;
@@ -508,6 +523,18 @@ public class Controllore {
 		ArrayList<String> lista_turtle = tartaruga.ListaTurtleIDSede(sede);
 		return lista_turtle;
 	}
+	
+	public void VisualizzaVisite( String turtle ,JPanel sfondo)
+	{
+		PanelViewVisite PanelTableVisite = new PanelViewVisite(this,turtle);
+		PanelTableVisite.setBounds(0, 0, 865, 460);
+		sfondo.removeAll();
+		sfondo.add(PanelTableVisite);
+		sfondo.repaint();
+		sfondo.revalidate();
+		
+
+	}
 	public JTable SetTableVisite(String turtle)
 	{
 		String[] tblHead={"Data Visita ","Farmaco ","Peso ","Condizioni generali "};
@@ -518,7 +545,7 @@ public class Controllore {
 
 		for ( int i=0 ; i<degenza.listavisiteturtle(turtle).size();i++)
 		{
-			Object[] rowdata = new Object[4];
+			Object[] rowdata = new Object[5];
 			rowdata[0]=degenza.listavisiteturtle(turtle).get(i).getData_controllo();
 			rowdata[1]=degenza.listavisiteturtle(turtle).get(i).getFarmaco_somministrato();
 			rowdata[2]=degenza.listavisiteturtle(turtle).get(i).getPeso();
@@ -527,7 +554,7 @@ public class Controllore {
 
 			dtm.addRow(rowdata);
 		}
-
+		
 		tbl.setShowVerticalLines(false);
 		tbl.setRowHeight(50);
 
@@ -600,12 +627,219 @@ public class Controllore {
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
 	public void ModificaDonazioniPage() {new ModificaDonazione(this);};
 	public void VisualizzazioneTartarughePage() {new VisualizzazioneTartarughe(this);}
-	
 	public void VisualizzazioneTartarugheConCartellaMedicaPage(String operazione) {
 		new VisualizzazioneTartarugheConCartellaMedica(this, operazione);
 	}
 	
 	public void VisualizzazioneTartarugheSenzaCartellaMedicaPage() {
 		new VisualizzazioneTartarugheSenzaCartellaMedica(this);
+}
+public ArrayList<String> ListaTartarugheSenzaTarghetta()
+	{
+		return tartaruga.ListaTurtleSenzaTarghetta();
+	}
+	
+	public boolean InserisciTarghetta(String turtle,String matricola_ope, String date , String GPS)
+	{
+		int rowinsert = targhetta.InserisciTarghetta(turtle, matricola_ope, date, GPS);
+		if(rowinsert>0)
+			return true;
+		else
+			return false ;
+					
+	}
+	
+	public ArrayList<String> ListaTartarugheDaRilasciare()
+	{
+		return tartaruga.ListaTurtleRilascio();
+	}
+	
+	public Tartaruga RecuperaTurtle(String id)
+	{
+		return tartaruga.RecoveryTurtle(id);
+	}
+	
+	public boolean RilasciaTurtle(String id, String date)
+	{
+		int rowupdate = tartaruga.RilascioTurtle(id, date);
+		if(rowupdate>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean MorteTurtle(String id, String date)
+	{
+		int rowupdate = tartaruga.MorteTurtle(id, date);
+		if(rowupdate>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public ArrayList<String> ListaMatricolaPersonale(String qualifica)
+	{
+		if(qualifica.equals("Operatore"))
+			return operatore.ListaMatricolaOperatore();
+		else if(qualifica.equals("Medico Veterinario"))
+			return medico.ListaMatricolaMedico();
+		else if(qualifica.equals("Ricercatore"))
+			return ricercatore.ListaMatricolaRicercatore();
+		else
+			return tecnico.ListaMatricolaTecnico();
+	}
+	
+	public Operatore RecuperaOperatore(String matricola)
+	{
+		return operatore.RecuperaOperatore(matricola);
+	}
+	
+	public Ricercatore RecuperaRicercatore(String matricola)
+	{
+		return ricercatore.RecuperaRicercatore(matricola);
+	}
+	public Tecnico_di_Laboratorio RecuperaTecnico(String matricola)
+	{
+		return tecnico.RecuperaTecnico(matricola);
+	}
+	
+	public Medico_Veterinario RecuperaMedico(String matricola)
+	{
+		return medico.RecuperaMedico(matricola);
+	}
+	
+	public boolean EliminaPersonale(String qualifica , String matricola)
+	{
+		int rowdelete = 0;
+		if(qualifica.equals("Operatore"))
+			rowdelete = operatore.DeleteOperatore(matricola);
+		else if(qualifica.equals("Medico Veterinario"))
+			rowdelete=medico.DeleteMedico(matricola);
+		else if(qualifica.equals("Ricercatore"))
+			rowdelete=ricercatore.DeleteRicercatore(matricola);
+		else
+			rowdelete=tecnico.DeleteTecnico(matricola);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+		
+	}
+	
+	public Vasca RecuperoVasca(String codicevasca)
+	{
+		return vasca.RecuperoVasca(codicevasca);
+	}
+	
+	public boolean EliminaVasca(String codicevasca)
+	{
+		int rowdelete = vasca.EliminaVasca(codicevasca);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public ArrayList<String> ListaIdLab()
+	{
+		return laboratorio.ListaIDLab();
+	}
+	
+	public Laboratorio RecuperoLaboratorio(String idLab)
+	{
+		return laboratorio.RecuperoLab(idLab);
+	}
+	
+	public boolean EliminaLab(String id)
+	{
+		int rowdelete=laboratorio.EliminaLaboratorio(id);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean EliminaTurtle(String id_turtle)
+	{
+		int rowdelete = tartaruga.DeleteTurtle(id_turtle);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public JTable SetTableVisiteInfoTartaruga(String turtle)
+	{
+		String[] tblHead={"Data Visita ","Farmaco ","Condizioni generali "};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+
+		for ( int i=0 ; i<degenza.listavisiteturtle(turtle).size();i++)
+		{
+			Object[] rowdata = new Object[5];
+			rowdata[0]=degenza.listavisiteturtle(turtle).get(i).getData_controllo();
+			rowdata[1]=degenza.listavisiteturtle(turtle).get(i).getFarmaco_somministrato();
+			rowdata[2]=degenza.listavisiteturtle(turtle).get(i).getValutazione_condizioni_generali();
+
+
+			dtm.addRow(rowdata);
+		}
+		
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+
+		return tbl;
+	}
+	
+	public ArrayList<String> Id_TartarugheSenzaCartellaMedica()
+	{
+		return tartaruga.ListaTurtleSenzaCartella();
+	}
+	
+	public ArrayList<String> MatricolaMedicoPerCartellaMedica(String turtle)
+	{
+		return medico.MatricolaMedicoCartellaMedica(turtle);
+	}
+	
+	public boolean InsertCartellaMedica(String id_turtle ,String medico, double peso , double lunghezza , double larghezza , String specie , String luogo , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	{
+		int rowinsert= cartella.InserisciCartellaMedica(id_turtle, medico, peso, lunghezza, larghezza, specie, luogo, data, condizioni_generali, condizioniCollo, condizioniTesta, condizioniOcchi, condizioniPinne, condizioniNaso, condizioniBecco, condizioniCoda);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	
+	}
+	
+	public ArrayList<String> ListaIDCartella()
+	{
+		return cartella.listaIDCartellaMedica();
+	}
+	
+	public Cartella_Medica RecuperaCartellaMedica(String id)
+	{
+		return cartella.recuperaCartellaMedica(id);
+	}
+	
+	public boolean UpdateCartellaMedica(String id, double peso , double lunghezza , double larghezza , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	{
+		int rowupdate = cartella.ModificaDatiCartellaMedica(id, peso, lunghezza, larghezza, data, condizioni_generali, condizioniCollo, condizioniTesta, condizioniOcchi, condizioniPinne, condizioniNaso, condizioniBecco, condizioniCoda);
+		if(rowupdate>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean RemoveCartellaMedica(String id)
+	{
+		int rowdelete=cartella.EliminaCartellaMedica(id);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+		
 	}
 }
+

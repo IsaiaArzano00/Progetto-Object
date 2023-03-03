@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package DAO;
 
 import DTO.Donazione;
@@ -18,7 +13,7 @@ public class DonazioneDAO {
     private ResultSet ResultSet;
 
     public DonazioneDAO() {
-        this.statement = this.connection.getStatement();
+       statement = connection.getStatement();
     }
 
     public int InserisciDonazione(int importo, String emailDonatore, String date, String metodoPagamento, String centro) {
@@ -58,7 +53,7 @@ public class DonazioneDAO {
 
     public boolean rimuoviDonazione(String idDonazione) {
         try {
-            if (this.statement.executeUpdate("DELETE FROM DONAZIONE AS D WHERE D.id_donazione LIKE '" + idDonazione + "';") > 0) {
+            if (statement.executeUpdate("DELETE FROM DONAZIONE AS D WHERE D.id_donazione LIKE '" + idDonazione + "';") > 0) {
             }
 
             return true;
@@ -70,7 +65,7 @@ public class DonazioneDAO {
 
     public String modificaDonazione(String idDonazione, int importo, String email, String data, String metodoPagamento) {
         try {
-            if (this.statement.executeUpdate("UPDATE DONAZIONE AS D SET importo_donazione = " + importo + ", email_donatore = '" + email + "' , data_donazione = '" + data + "' , metodo_pagamento = '" + metodoPagamento + "' WHERE D.id_donazione = '" + idDonazione + "';") > 0) {
+            if (statement.executeUpdate("UPDATE DONAZIONE AS D SET importo_donazione = " + importo + ", email_donatore = '" + email + "' , data_donazione = '" + data + "' , metodo_pagamento = '" + metodoPagamento + "' WHERE D.id_donazione = '" + idDonazione + "';") > 0) {
             }
 
             return "modifica riuscita";
@@ -84,11 +79,11 @@ public class DonazioneDAO {
         ArrayList<String> idDonazioni = new ArrayList();
 
         try {
-            ResultSet rs = this.statement.executeQuery("SELECT id_donazione FROM DONAZIONE;");
+            ResultSet rs = statement.executeQuery("SELECT id_donazione FROM DONAZIONE;");
 
             while(rs.next()) {
-                new String();
-                String id = rs.getString("id_donazione");
+            	String id =new String();
+                id = rs.getString("id_donazione");
                 idDonazioni.add(id);
             }
 
@@ -103,7 +98,7 @@ public class DonazioneDAO {
         ArrayList<Donazione> Donazioni = new ArrayList();
 
         try {
-            ResultSet rs = this.statement.executeQuery("SELECT * FROM DONAZIONE;");
+            ResultSet rs = statement.executeQuery("SELECT * FROM DONAZIONE;");
 
             while(rs.next()) {
                 Donazione don = new Donazione();

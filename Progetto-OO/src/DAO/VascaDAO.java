@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import DTO.Vasca;
 import connection.Connessione;
 
 public class VascaDAO {
@@ -86,6 +87,42 @@ public class VascaDAO {
 		{
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	//RECUPERO DATI VASCA 
+	public Vasca RecuperoVasca(String codicevasca)
+	{
+		Vasca vasca = new Vasca();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM VASCA WHERE CODICE_VASCA = '"+codicevasca+"' ;");
+			while(rs.next())
+			{
+				vasca.setCapacita_vasca(rs.getDouble("capacita_vasca"));
+				vasca.setTemperatura_acqua(rs.getDouble("temperatura_acqua"));
+				vasca.setNome_centro(rs.getString("nome_centro"));
+			}
+		return vasca;
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return vasca;
+		}
+	}
+	
+	//ELIMINA VASCA 
+	public int EliminaVasca(String codicevasca)
+	{
+		int rowdelete =0;
+		try {
+			rowdelete=statement.executeUpdate("DELETE FROM VASCA WHERE CODICE_VASCA = '"+codicevasca+"' ;");
+			return rowdelete;
+			
+		}catch(SQLException e )
+		{
+			e.printStackTrace();
+			return rowdelete;
 		}
 	}
 }

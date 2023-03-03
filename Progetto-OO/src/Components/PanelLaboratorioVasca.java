@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import GUI.EliminazioneLaboratorio;
+import GUI.EliminazioneVasca;
 import GUI.InserimentoLaboratorio;
 import GUI.InserimentoVasca;
 
@@ -76,6 +78,7 @@ public class PanelLaboratorioVasca extends JPanel {
 		sfondo.add(panel_1_3);
 		
 		JLabel elimina_vasca = new JLabel("");
+		
 		elimina_vasca.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/delete_80px.png")));
 		elimina_vasca.setBounds(119, 86, 154, 107);
 		panel_1_3.add(elimina_vasca);
@@ -129,6 +132,23 @@ public class PanelLaboratorioVasca extends JPanel {
 				insertvasca.setVisible(true);
 			}
 		});
+		
+		elimina_vasca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EliminazioneVasca deletevasca = new EliminazioneVasca(controller);
+				deletevasca.setVisible(true);
+			}
+		});
+		
+		elimina_lab.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EliminazioneLaboratorio deleteLab = new EliminazioneLaboratorio(controller);
+				deleteLab.setVisible(true);
+			}
+		});
+	
 		
 
 	}

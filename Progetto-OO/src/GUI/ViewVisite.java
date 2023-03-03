@@ -21,14 +21,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ViewVisite extends JDialog {
+public class ViewVisite extends JFrame {
 	private Controllore controller;
 
 
 	public ViewVisite(Controllore contr) {
 		 controller = contr;
 		
-		setModal(true);
+		//setModal(true);
 		setBounds(100, 100, 810, 685);
 		getContentPane().setLayout(null);
 		
@@ -60,21 +60,34 @@ public class ViewVisite extends JDialog {
 		panel_search.add(lblNewLabel_1);
 		
 		JComboBox comboBoxTurtle = new JComboBox();
-		comboBoxTurtle.setBounds(336, 137, 221, 30);
+		comboBoxTurtle.setBounds(334, 160, 221, 30);
 		panel_search.add(comboBoxTurtle);
 		
 		JLabel Search = new JLabel("");
 		
 		Search.setIcon(new ImageIcon(ViewVisite.class.getResource("/Media/search_28px.png")));
-		Search.setBounds(604, 137, 45, 36);
+		Search.setBounds(641, 160, 45, 36);
 		panel_search.add(Search);
 		
 		JComboBox comboBoxCentro = new JComboBox();
+		
 	
 	
 		
-		comboBoxCentro.setBounds(10, 137, 237, 30);
+		comboBoxCentro.setBounds(10, 160, 237, 30);
 		panel_search.add(comboBoxCentro);
+		
+		JLabel lblNewLabel_2 = new JLabel("Centro : ");
+		lblNewLabel_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lblNewLabel_2.setBounds(57, 137, 87, 13);
+		panel_search.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("ID Tartaruga : ");
+		lblNewLabel_3.setForeground(new Color(255, 255, 255));
+		lblNewLabel_3.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lblNewLabel_3.setBounds(389, 137, 114, 13);
+		panel_search.add(lblNewLabel_3);
 		
 		PanelCustomDashboard sfondo = new PanelCustomDashboard();
 		sfondo.setBounds(0, 200, 865, 460);
@@ -90,23 +103,24 @@ public class ViewVisite extends JDialog {
 		}
 		
 		//ACTION
-		
-		
-				//FILL COMBOBOX TURTLE
-				for(int i =0 ; i<controller.IDTurtle().size();i++)
+		comboBoxCentro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String sede = (String) comboBoxCentro.getSelectedItem();
+				comboBoxTurtle.removeAllItems();
+				for(int i =0 ; i<controller.IDTurtleSede(sede).size();i++)
 				{
-					comboBoxTurtle.addItem(controller.IDTurtle().get(i).toString());
+					comboBoxTurtle.addItem(controller.IDTurtleSede(sede).get(i).toString());
 				}
-				
-			
-		
+			}
+		});
+		//LISTENER 
 		
 		Search.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String turtle = (String) comboBoxTurtle.getSelectedItem();
-				controller.VisualizzaTurtle(turtle, sfondo);
-				System.out.println(turtle);
+				controller.VisualizzaVisite(turtle, sfondo);
+				
 			}
 		});
 		

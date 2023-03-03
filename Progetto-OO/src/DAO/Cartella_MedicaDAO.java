@@ -3,7 +3,9 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import DTO.Cartella_Medica;
 import connection.Connessione;
 import DTO.Cartella_Medica;
 
@@ -17,9 +19,7 @@ public class Cartella_MedicaDAO {
 		connection=Connessione.getConnessione();
 		statement =connection.getStatement();
 	}
-	
-	
-	public Cartella_Medica recuperaCartellaMedica(String idTartaruga) {
+public Cartella_Medica recuperaCartellaMedica(String idTartaruga) {
 		Cartella_Medica cm = new Cartella_Medica();
 		
 		  try {
@@ -49,8 +49,25 @@ public class Cartella_MedicaDAO {
 	            return cm;
 	        }
 	    }
-	
-	public void rimuoviCartellaMedica(String idTartaruga) {
+
+public int InserisciCartellaMedica(String id_turtle ,String medico, double peso , double lunghezza , double larghezza , String specie , String luogo , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	{
+		int rowinsert=0;
+		try {
+			rowinsert=statement.executeUpdate("INSERT INTO CARTELLA_MEDICA (ID_cartellamedica  ,  Specie , Peso  ,  Lunghezza ,  Larghezza  , Luogo_ritrovamento  ,  Data_Apertura_Cartella  ,  Data_Chiusura_Cartella  , Condizioni_Generali, Testa ,  Occhi "
+					+ ",  Pinne  , Naso ,  Becco ,  Collo ,  Coda ,  Matricola_Medico  ,  ID_Tartaruga)"
+					+ "VALUES(DEFAULT, '"+specie+"' , "+peso+" , "+lunghezza+" ,"+larghezza+" , '"+luogo+"' , '"+data+"' , NULL , '"+condizioni_generali+"' , '"+condizioniTesta+"' , '"+condizioniOcchi+"' , '"+condizioniPinne+"' , '"+condizioniNaso+"' , '"+condizioniBecco+"' , '"+condizioniCollo+"' , '"+condizioniCollo+"' , '"+medico+"' , '"+id_turtle+"' );");
+			
+			return rowinsert;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowinsert;
+		}
+	}
+
+
+public void rimuoviCartellaMedica(String idTartaruga) {
 		try {
 			statement.executeUpdate("DELETE FROM CARTELLA_MEDICA CM WHERE CM.id_tartaruga LIKE '" + idTartaruga + "' ;");
 		} catch (SQLException e) {
@@ -60,4 +77,66 @@ public class Cartella_MedicaDAO {
 	}
 	
 	
+}
+
+public int ModificaDatiCartellaMedica(String id, double peso , double lunghezza , double larghezza , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	{
+		int rowupdate =0;
+		try {
+			rowupdate=statement.executeUpdate("UPDATE CARTELLA_MEDICA SET PESO ="+peso+" , LUNGHEZZA="+lunghezza+" , LARGHEZZA="+larghezza+""
+					+ " , DATA_APERTURA_CARTELLA='"+data+"' , CONDIZIONI_GENERALI = '"+condizioni_generali+"' , collo='"+condizioniCollo+"' , TESTA='"+condizioniTesta+"'"
+					+ " , OCCHI='"+condizioniOcchi+"' , PINNE='"+condizioniPinne+"' , NASO='"+condizioniNaso+"' , BECCO ='"+condizioniBecco+"' , CODA='"+condizioniCoda+"' WHERE ID_CARTELLAMEDICA = '"+id+"' ;");
+			
+			return rowupdate;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowupdate;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public ArrayList<String> listaIDCartellaMedica()
+	{
+		ArrayList<String> lista_id = new ArrayList<String>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT ID_CARTELLAMEDICA FROM CARTELLA_MEDICA ;");
+			while(rs.next())
+			{
+				String id = rs.getString("id_cartellamedica");
+				lista_id.add(id);
+			}
+			
+			return lista_id;
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return lista_id;
+		}	
+	}
 }
