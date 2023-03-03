@@ -169,6 +169,28 @@ public class Controllore {
 		return donazione.getDonazioni();
 	}
 	
+	public JTable SetTableDonazioni()
+	{
+		String[] tblHead={"ID Donazione", "Importo Donazione", "email donatore", "data donazione", "metodo pagamento", "ID Centro"};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+		
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		for(int i=0 ; i<donazione.getDonazioni().size();i++)
+		{
+			Object [] rowdata = new Object[6];
+			rowdata[0]=donazione.getDonazioni().get(i).getIdDonazione();
+			rowdata[1]=donazione.getDonazioni().get(i).getimportoDonazione();
+			rowdata[2]=donazione.getDonazioni().get(i).getEmailDonatore();
+			rowdata[3]=donazione.getDonazioni().get(i).getDataDonazione();
+			rowdata[4]=donazione.getDonazioni().get(i).getMetodoPagamento();
+			rowdata[5]=donazione.getDonazioni().get(i).getIdCentro();
+			
+			dtm.addRow(rowdata);
+		}
+		tbl.setRowHeight(50);
+		return tbl;
+	}
 	
 	public JTable setTable(String qualifica,String centro)
 	{
@@ -786,6 +808,7 @@ public class Controllore {
 			return false;
 		
 	}
+	
 }
 
 

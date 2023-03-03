@@ -2,7 +2,7 @@ package GUI;
 
 import Components.PanelWhite;
 import Controller.Controllore;
-import DAO.CentroDAO;
+
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
@@ -33,7 +33,7 @@ public class InserimentoDonazione extends JDialog {
     private JTextField importo_in;
     private JTextField emailDonatore_in;
     private Controllore controller;
-    private CentroDAO centro;
+   
     private JDateChooser dateChooser;
     private JComboBox<String> comboBoxCentro;
     private JComboBox comboBoxMetodiPagamento;

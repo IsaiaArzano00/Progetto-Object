@@ -136,5 +136,6 @@ public class TurtleInfo extends JDialog {
 				scrollPane.setViewportView(tbl);
 			}
 		});
+		
 	}
 }

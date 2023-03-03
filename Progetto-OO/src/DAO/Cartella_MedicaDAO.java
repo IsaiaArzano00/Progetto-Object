@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import DTO.Cartella_Medica;
+import DTO.Cartella_Medica_Degenza;
 import connection.Connessione;
 
 public class Cartella_MedicaDAO {
@@ -123,4 +124,6 @@ public class Cartella_MedicaDAO {
 			return rowdelete;
 		}
 	}
+	
+
 }
