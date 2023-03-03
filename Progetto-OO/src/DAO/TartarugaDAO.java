@@ -113,7 +113,77 @@ public class TartarugaDAO {
 			{
 				Tartaruga tartaruga = new Tartaruga();
 				tartaruga.setId_tartaruga(rs.getString("id_tartaruga"));
-				tartaruga.setNome(rs.getString("nome"));
+				tartaruga.setNome(rs.getString("nome"));  
+				tartaruga.setEta(rs.getInt("eta"));
+				tartaruga.setOld_number_targhetta(rs.getString("old_number_targhetta"));
+				tartaruga.setData_accoglienza_centro(rs.getDate("data_accoglienza_centro"));
+				tartaruga.setEventuale_rilascio(rs.getBoolean("eventuale_rilascio"));
+				tartaruga.setEventuale_morte(rs.getBoolean("eventuale_morte"));
+				tartaruga.setEventuale_data_rilascio(rs.getDate("eventuale_data_rilascio"));
+				tartaruga.setEventuale_data_morte(rs.getDate("eventuale_data_morte"));
+				tartaruga.setID_Sede(rs.getString("id_sede"));
+				tartaruga.setID_CartellaMedica(rs.getString("id_cartellamedica"));
+				tartaruga.setCodice_vasca(rs.getString("codice_vasca"));
+				tartaruga.setNumero_targhetta(rs.getString("numero_targhetta"));
+				
+				tartarughe.add(tartaruga);
+			}
+			
+			return tartarughe;
+			
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return tartarughe;}
+		}
+	
+	
+	public ArrayList<Tartaruga> ListaTartarugheConCartellaMedica ()
+	{
+		ArrayList<Tartaruga> tartarughe = new ArrayList<Tartaruga>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM TARTARUGA T WHERE T.id_cartellamedica <> 'NULL';");
+			while (rs.next())
+			{
+				Tartaruga tartaruga = new Tartaruga();
+				tartaruga.setId_tartaruga(rs.getString("id_tartaruga"));
+				tartaruga.setNome(rs.getString("nome"));  
+				tartaruga.setEta(rs.getInt("eta"));
+				tartaruga.setOld_number_targhetta(rs.getString("old_number_targhetta"));
+				tartaruga.setData_accoglienza_centro(rs.getDate("data_accoglienza_centro"));
+				tartaruga.setEventuale_rilascio(rs.getBoolean("eventuale_rilascio"));
+				tartaruga.setEventuale_morte(rs.getBoolean("eventuale_morte"));
+				tartaruga.setEventuale_data_rilascio(rs.getDate("eventuale_data_rilascio"));
+				tartaruga.setEventuale_data_morte(rs.getDate("eventuale_data_morte"));
+				tartaruga.setID_Sede(rs.getString("id_sede"));
+				tartaruga.setID_CartellaMedica(rs.getString("id_cartellamedica"));
+				tartaruga.setCodice_vasca(rs.getString("codice_vasca"));
+				tartaruga.setNumero_targhetta(rs.getString("numero_targhetta"));
+				
+				tartarughe.add(tartaruga);
+			}
+			
+			return tartarughe;
+			
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return tartarughe;}
+		}
+	
+	
+	public ArrayList<Tartaruga> ListaTartarugheSenzaCartellaMedica()
+	{
+		ArrayList<Tartaruga> tartarughe = new ArrayList<Tartaruga>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM TARTARUGA T WHERE T.id_cartellamedica = 'NULL';");
+			while (rs.next())
+			{
+				Tartaruga tartaruga = new Tartaruga();
+				tartaruga.setId_tartaruga(rs.getString("id_tartaruga"));
+				tartaruga.setNome(rs.getString("nome"));  
 				tartaruga.setEta(rs.getInt("eta"));
 				tartaruga.setOld_number_targhetta(rs.getString("old_number_targhetta"));
 				tartaruga.setData_accoglienza_centro(rs.getDate("data_accoglienza_centro"));

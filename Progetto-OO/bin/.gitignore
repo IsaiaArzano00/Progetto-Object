@@ -1,5 +1,8 @@
-/DAO/
-/Components/
+*.class
 /Controller/
 /GUI/
+/DAO/
+/DTO/
+/Media/
+/Components/
 /connection/

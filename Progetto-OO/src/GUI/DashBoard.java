@@ -45,7 +45,7 @@ public class DashBoard extends JFrame {
 		controller = contr;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(50, 50, 1266, 750);
+		setBounds(50, 50, 1266, 752);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -324,8 +324,8 @@ public class DashBoard extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelCartellaMedica panelCartella = new PanelCartellaMedica(controller);
-				controller.SetPanelDashBoard(sfondo_1, panelCartella);
+				PanelCartellaMedica pannelloCartellaMedica = new PanelCartellaMedica(controller);
+				controller.SetPanelDashBoard(sfondo_1, pannelloCartellaMedica);
 			}
 		});
 		

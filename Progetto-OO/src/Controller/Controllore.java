@@ -45,7 +45,6 @@ public class Controllore {
 
 	public static void main(String[] args) {
 		Controllore controller = new Controllore();
-		
 	}
 	public Controllore()
 	{
@@ -123,7 +122,7 @@ public class Controllore {
 	{
 		panel.getTopLevelAncestor().setVisible(false);
 		DashBoard dashboard = new DashBoard(this,utente);
-		dashboard.setUndecorated(true);
+		dashboard.setUndecorated(false);
 		dashboard.setVisible(true);
 		
 		
@@ -169,6 +168,17 @@ public class Controllore {
 		return donazione.getDonazioni();
 	}
 	
+	public ArrayList<Tartaruga> getAllTartarughe(){
+		return tartaruga.ListaTartarugheAll();
+	}
+	
+	public ArrayList<Tartaruga> getTartarugheConCartellaMedica(){
+		return tartaruga.ListaTartarugheConCartellaMedica();
+	}
+	
+	public ArrayList<Tartaruga> getTartarugheSenzaCartellaMedica(){
+		return tartaruga.ListaTartarugheSenzaCartellaMedica();
+	}
 	
 	public JTable setTable(String qualifica,String centro)
 	{
@@ -398,6 +408,7 @@ public class Controllore {
 		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
 
 		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
 		if(centro.equals("Tutti i Centri"))
 		{
 			for ( int i=0 ; i<tartaruga.ListaTartarugheAll().size();i++)
@@ -529,6 +540,7 @@ public class Controllore {
 
 		return tbl;
 	}
+	
 
 	public boolean InserisciCibo(String matricola , String data , String codice_vasca , double cibo_inserito , double cibo_rimosso , String tipologia_cibo)
 	{
@@ -569,6 +581,14 @@ public class Controllore {
 
 		return String.valueOf(number);
 	}
+	
+	public Cartella_Medica recuperaCartellaMedica(String idTartaruga) {
+		return cartella.recuperaCartellaMedica(idTartaruga);
+	}
+	
+	public void rimuoviCartellaMedica(String idTartaruga) {
+		cartella.EliminaCartellaMedica(idTartaruga);
+	}
 
 	
 	
@@ -577,9 +597,15 @@ public class Controllore {
 	public void RimozioneDonazionePage() {new RimozioneDonazione(this);}
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
 	public void ModificaDonazioniPage() {new ModificaDonazione(this);};
+	public void VisualizzazioneTartarughePage() {new VisualizzazioneTartarughe(this);}
+	public void VisualizzazioneTartarugheConCartellaMedicaPage(String operazione) {
+		new VisualizzazioneTartarugheConCartellaMedica(this, operazione);
+	}
 	
-	
-	public ArrayList<String> ListaTartarugheSenzaTarghetta()
+	public void VisualizzazioneTartarugheSenzaCartellaMedicaPage() {
+		new VisualizzazioneTartarugheSenzaCartellaMedica(this);
+}
+public ArrayList<String> ListaTartarugheSenzaTarghetta()
 	{
 		return tartaruga.ListaTurtleSenzaTarghetta();
 	}
@@ -787,6 +813,4 @@ public class Controllore {
 		
 	}
 }
-
-
 

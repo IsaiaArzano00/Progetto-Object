@@ -19,7 +19,7 @@ public class UtenteDAO {
 	{
 		try {
 			ResultSet rs = statement.executeQuery("SELECT *  FROM UTENTE WHERE USERNAME='"
-													+username+"' AND password='"+password+"' ;");
+													+username+"' AND pass='"+password+"' ;");
 			
 				return rs.next();	
 			

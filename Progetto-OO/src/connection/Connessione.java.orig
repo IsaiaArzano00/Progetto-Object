@@ -3,6 +3,7 @@ package connection;
 import java.sql.*;
 
 public class Connessione {
+<<<<<<< HEAD
 
     private static Connection connection;
     private static Connessione istanza;
@@ -68,6 +69,19 @@ public class Connessione {
     }
     
     public CallableStatement prepareCall(String string) {
+=======
+	
+	private static Connection connection;
+	private static Connessione istanza ;
+	private Statement statement ;
+	private CallableStatement clbStmt;
+	
+	
+	private  Connessione ()
+	{
+		statement = null;
+		
+>>>>>>> branch 'master' of https://github.com/IsaiaArzano00/Progetto-Object.git
 		try {
 			clbStmt = connection.prepareCall(string);
 		} catch (SQLException e) {
@@ -76,5 +90,14 @@ public class Connessione {
 		}
 		return clbStmt;
 	}
-
+	
+	public CallableStatement prepareCall(String string) {
+		try {
+			clbStmt = connection.prepareCall(string);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clbStmt;
+	}
 }
