@@ -117,7 +117,7 @@ public class Controllore {
 	{
 		panel.getTopLevelAncestor().setVisible(false);
 		DashBoard dashboard = new DashBoard(this,utente);
-		dashboard.setUndecorated(true);
+		dashboard.setUndecorated(false);
 		dashboard.setVisible(true);
 		
 		
