@@ -67,17 +67,19 @@ public int InserisciCartellaMedica(String id_turtle ,String medico, double peso 
 	}
 
 
-public void rimuoviCartellaMedica(String idTartaruga) {
+public int EliminaCartellaMedica(String idTartaruga) {
+	int rowinsert = 0;
 		try {
-			statement.executeUpdate("DELETE FROM CARTELLA_MEDICA CM WHERE CM.id_tartaruga LIKE '" + idTartaruga + "' ;");
+		  rowinsert = statement.executeUpdate("DELETE FROM CARTELLA_MEDICA CM WHERE CM.id_tartaruga LIKE '" + idTartaruga + "' ;");
+		  return rowinsert;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	 	return rowinsert;
 	}
 	
 	
-}
 
 public int ModificaDatiCartellaMedica(String id, double peso , double lunghezza , double larghezza , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
 	{

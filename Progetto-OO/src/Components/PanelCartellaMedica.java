@@ -12,6 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import Controller.Controllore;
+import GUI.EliminaCartellaMedica;
+import GUI.InserimentoCartellaMedica;
+import GUI.ModificaCartellaMedica;
+
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

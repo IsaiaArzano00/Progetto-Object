@@ -169,7 +169,7 @@ public class Controllore {
 	}
 	
 	public ArrayList<Tartaruga> getAllTartarughe(){
-		return tartaruga.LastTurtleAll();
+		return tartaruga.ListaTartarugheAll();
 	}
 	
 	public ArrayList<Tartaruga> getTartarugheConCartellaMedica(){
@@ -355,27 +355,7 @@ public class Controllore {
 			return false;
 	}
 	
-	public JTable TableTurtleDashBoard()
-	{
-		String[] tblHead={"ID_TARTARUGA","Nome","Età","Data accoglienza","Sede" };
-		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
-		
-		JTable tbl=new JTable(dtm);
-		tbl.setEnabled(false);
-		for ( int i=0 ; i<tartaruga.LastTurtleAll().size();i++)
-		{
-			Object[] rowdata = new Object[5];
-			rowdata[0]=tartaruga.LastTurtleAll().get(i).getId_tartaruga();
-			rowdata[1]=tartaruga.LastTurtleAll().get(i).getNome();
-			rowdata[2]=tartaruga.LastTurtleAll().get(i).getEta();
-			rowdata[3]=tartaruga.LastTurtleAll().get(i).getData_accoglienza_centro();
-			rowdata[4]=tartaruga.LastTurtleAll().get(i).getID_Sede();
-			
-			dtm.addRow(rowdata);
-		}
-		
-		return tbl;
-	}
+	
 	
 	public ArrayList<String> getCodiceVasche()
 	{
@@ -560,16 +540,7 @@ public class Controllore {
 
 		return tbl;
 	}
-	public void VisualizzaVisite( String turtle ,JPanel actual)
-	{
-		PanelViewVisite PanelTable = new PanelViewVisite(this,turtle);
-		PanelTable.setBounds(0, 0, 865, 460);
-		actual.removeAll();
-		actual.add(PanelTable);
-		actual.repaint();
-		actual.revalidate();
-
-	}
+	
 
 	public boolean InserisciCibo(String matricola , String data , String codice_vasca , double cibo_inserito , double cibo_rimosso , String tipologia_cibo)
 	{
@@ -612,11 +583,11 @@ public class Controllore {
 	}
 	
 	public Cartella_Medica recuperaCartellaMedica(String idTartaruga) {
-		return cartellaMedica.recuperaCartellaMedica(idTartaruga);
+		return cartella.recuperaCartellaMedica(idTartaruga);
 	}
 	
 	public void rimuoviCartellaMedica(String idTartaruga) {
-		cartellaMedica.rimuoviCartellaMedica(idTartaruga);
+		cartella.EliminaCartellaMedica(idTartaruga);
 	}
 
 	

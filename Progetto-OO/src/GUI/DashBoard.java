@@ -159,20 +159,6 @@ public class DashBoard extends JFrame {
 		logout.setBounds(10, 0, 255, 41);
 		panel_logout.add(logout);
 		
-		JLabel lblNewLabel_7 = new JLabel("Info Personale");
-		lblNewLabel_7.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				HomeDashBoard personale = new HomeDashBoard(controller);
-				controller.SetPanelDashBoard(sfondo_1, personale);			}
-		});
-		
-		
-		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_7.setBounds(10, 325, 265, 41);
-		pannelloMenu.add(lblNewLabel_7);
-		lblNewLabel_7.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/more_info_28px.png")));
-		
 		JPanel panel_CartellaMedica = new JPanel();
 		panel_CartellaMedica.setLayout(null);
 		panel_CartellaMedica.setBounds(0, 364, 275, 41);
@@ -336,6 +322,11 @@ public class DashBoard extends JFrame {
 				panel_CartellaMedica.setBackground(new Color(240,240,240));
 			}
 			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelCartellaMedica pannelloCartellaMedica = new PanelCartellaMedica(controller);
+				controller.SetPanelDashBoard(sfondo_1, pannelloCartellaMedica);
+			}
 		});
 		
 		Donazioni.addMouseListener(new MouseAdapter() {
