@@ -62,7 +62,7 @@ public class Cartella_MedicaDAO {
 	{
 		Cartella_Medica cartella = new Cartella_Medica();
 		try {
-			ResultSet rs = statement.executeQuery("SELECT * FROM CARTELLA_MEDICA WHERE ID_CARTELLAMEDICA = '"+id+"' ;");
+			ResultSet rs = statement.executeQuery("SELECT * FROM CARTELLA_MEDICA WHERE ID_TARTARUGA = '"+id+"' ;");
 			while(rs.next())
 			{
 				cartella.setId_cartella_medica(rs.getString("id_cartellamedica"));
@@ -123,6 +123,25 @@ public class Cartella_MedicaDAO {
 			e.printStackTrace();
 			return rowdelete;
 		}
+	}
+	//RECUPERA ID CARTELLA MEDICA DA TARTARUGA
+	public String ID_CartellaMedica(String id)
+	{
+		String id_med=new String();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT ID_CARTELLAMEDICA FROM CARTELLA_MEDICA WHERE ID_TARTARUGA = '"+id+"' ;");
+			while(rs.next())
+			{
+				id_med=rs.getString("id_cartellamedica");
+			}
+			
+			return id_med;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return id_med;
+		}
+		
 	}
 	
 

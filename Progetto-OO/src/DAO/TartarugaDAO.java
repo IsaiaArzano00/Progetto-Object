@@ -420,6 +420,38 @@ public class TartarugaDAO {
 			return listaturtle;
 		}
 	}
+	
+	//RECUPERO TARTARUGHE CON CARTELLA MEDICA
+	public ArrayList<Tartaruga> ListaTartarugaConCartella()
+	{
+		ArrayList<Tartaruga> listaturtle = new ArrayList<Tartaruga>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM TARTARUGA WHERE ID_CARTELLAMEDICA IS NOT NULL ;");
+			while(rs.next())
+			{
+				Tartaruga turtle = new Tartaruga();
+				turtle.setId_tartaruga(rs.getString("id_tartaruga"));
+				turtle.setNome(rs.getString("nome"));
+				turtle.setEta(rs.getInt("eta"));
+				turtle.setOld_number_targhetta(rs.getString("old_number_targhetta"));
+				turtle.setData_accoglienza_centro(rs.getDate("data_accoglienza_centro"));
+				turtle.setEventuale_rilascio(rs.getBoolean("eventuale_rilascio"));
+				turtle.setEventuale_morte(rs.getBoolean("eventuale_morte"));
+				turtle.setEventuale_data_rilascio(rs.getDate("eventuale_data_rilascio"));
+				turtle.setEventuale_data_morte(rs.getDate("eventuale_data_morte"));
+				turtle.setID_Sede(rs.getString("id_sede"));
+				turtle.setID_CartellaMedica(rs.getString("id_cartellamedica"));
+				turtle.setCodice_vasca(rs.getString("codice_vasca"));
+				turtle.setNumero_targhetta(rs.getString("numero_targhetta"));
+				listaturtle.add(turtle);
+			}
+			return listaturtle;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return listaturtle;
+		}
+	}
 }
 
 

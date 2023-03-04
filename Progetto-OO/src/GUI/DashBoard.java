@@ -324,7 +324,7 @@ public class DashBoard extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelCartellaMedica pannelloCartellaMedica = new PanelCartellaMedica(controller);
+				PanelCartellaMedica pannelloCartellaMedica = new PanelCartellaMedica(controller,sfondo_1);
 				controller.SetPanelDashBoard(sfondo_1, pannelloCartellaMedica);
 			}
 		});

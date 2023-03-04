@@ -46,10 +46,11 @@ public class EliminaCartellaMedica extends JDialog {
 	private JTextField Tartaruga;
 	private JTextField Specie;
 	private JTextField Data;
+	private JTextField CartellaMedica;
 	/**
 	 * Create the panel.
 	 */
-	public EliminaCartellaMedica(Controllore contr) {
+	public EliminaCartellaMedica(Controllore contr,String id_turtle) {
 		controller=contr;
 		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -76,21 +77,28 @@ public class EliminaCartellaMedica extends JDialog {
 		panel.add(lblNewLabel);
 		lblNewLabel.setIcon(new ImageIcon(InserimentoCartellaMedica.class.getResource("/Media/health_book_80px.png")));
 		
-		JLabel lblNewLabel_1 = new JLabel("MODIFICA CARTELLA MEDICA ");
+		JLabel lblNewLabel_1 = new JLabel("ELIMINA CARTELLA MEDICA ");
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 30));
 		lblNewLabel_1.setBounds(104, 10, 519, 45);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Selezionare la cartella medica da modificare : ");
+		JLabel lblNewLabel_2 = new JLabel("La cartella medica da eliminare  : ");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 12));
 		lblNewLabel_2.setBounds(114, 57, 276, 24);
 		panel.add(lblNewLabel_2);
 		
-		JComboBox comboBoxCartellaMedica = new JComboBox();
-		comboBoxCartellaMedica.setBounds(394, 60, 183, 21);
-		panel.add(comboBoxCartellaMedica);
+		CartellaMedica = new JTextField();
+		CartellaMedica.setEditable(false);
+		CartellaMedica.setForeground(new Color(255, 255, 255));
+		CartellaMedica.setBorder(null);
+		CartellaMedica.setOpaque(false);
+		CartellaMedica.setFont(new Font("SansSerif", Font.BOLD, 12));
+		CartellaMedica.setBounds(312, 61, 181, 19);
+		CartellaMedica.setText(controller.ID_CM_from_turtle(id_turtle));
+		panel.add(CartellaMedica);
+		CartellaMedica.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Peso : ");
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
@@ -429,35 +437,24 @@ public class EliminaCartellaMedica extends JDialog {
 		separator_7_1.setBounds(167, 436, 171, 16);
 		sfondo.add(separator_7_1);
 		
-		for(int i=0;i<controller.ListaIDCartella().size();i++)
-		{
-			comboBoxCartellaMedica.addItem(controller.ListaIDCartella().get(i).toString());
-		}
 		
+		Tartaruga.setText(id_turtle);
+		Peso.setText(String.valueOf((controller.RecuperaCartellaMedica(id_turtle).getPeso())));
+		Larghezza.setText(String.valueOf((controller.RecuperaCartellaMedica(id_turtle).getLarghezza())));
+		Lunghezza.setText(String.valueOf(controller.RecuperaCartellaMedica(id_turtle).getLunghezza()));
+		LuogoRitrovamento.setText(controller.RecuperaCartellaMedica(id_turtle).getLuogo_ritrovamento());
+		Medico.setText(controller.RecuperaCartellaMedica(id_turtle).getMatricola_medico());
+		Specie.setText(controller.RecuperaCartellaMedica(id_turtle).getSpecie());
+		Data.setText(String.valueOf(controller.RecuperaCartellaMedica(id_turtle).getData_Apertura_Cartella()));
+		CondizioniGenerali.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_generali());
+		CondizioniCollo.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_collo().toString());
+		CondizioniTesta.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_testa());
+		CondizioniOcchi.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_occhi());
+		CondizioniPinne.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_pinna());
+		CondizioniNaso.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_naso());
+		CondizioniBecco.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_becco());
+		CondizioniCoda.setText(controller.RecuperaCartellaMedica(id_turtle).getCondizioni_coda());
 		
-		comboBoxCartellaMedica.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String id = comboBoxCartellaMedica.getSelectedItem().toString();
-				
-				Tartaruga.setText(controller.RecuperaCartellaMedica(id).getId_tartaruga());
-				Peso.setText(String.valueOf((controller.RecuperaCartellaMedica(id).getPeso())));
-				Larghezza.setText(String.valueOf((controller.RecuperaCartellaMedica(id).getLarghezza())));
-				Lunghezza.setText(String.valueOf(controller.RecuperaCartellaMedica(id).getLunghezza()));
-				LuogoRitrovamento.setText(controller.RecuperaCartellaMedica(id).getLuogo_ritrovamento());
-				Medico.setText(controller.RecuperaCartellaMedica(id).getMatricola_medico());
-				Specie.setText(controller.RecuperaCartellaMedica(id).getSpecie());
-				Data.setText(String.valueOf(controller.RecuperaCartellaMedica(id).getData_Apertura_Cartella()));
-				CondizioniGenerali.setText(controller.RecuperaCartellaMedica(id).getCondizioni_generali());
-				CondizioniCollo.setText(controller.RecuperaCartellaMedica(id).getCondizioni_collo().toString());
-				CondizioniTesta.setText(controller.RecuperaCartellaMedica(id).getCondizioni_testa());
-				CondizioniOcchi.setText(controller.RecuperaCartellaMedica(id).getCondizioni_occhi());
-				CondizioniPinne.setText(controller.RecuperaCartellaMedica(id).getCondizioni_pinna());
-				CondizioniNaso.setText(controller.RecuperaCartellaMedica(id).getCondizioni_naso());
-				CondizioniBecco.setText(controller.RecuperaCartellaMedica(id).getCondizioni_becco());
-				CondizioniCoda.setText(controller.RecuperaCartellaMedica(id).getCondizioni_coda());
-			}
-		
-		});
 		//LISTENER
 		GoBack.addMouseListener(new MouseAdapter() {
 			@Override
@@ -468,7 +465,7 @@ public class EliminaCartellaMedica extends JDialog {
 		Inserisci.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String id=comboBoxCartellaMedica.getSelectedItem().toString();
+				String id=controller.RecuperaCartellaMedica(id_turtle).getId_cartella_medica();
 				boolean flag=controller.RemoveCartellaMedica(id);
 				if(flag)
 				{
@@ -488,7 +485,6 @@ public class EliminaCartellaMedica extends JDialog {
 	public void alertDeleteRiuscito(String id) {
 		JOptionPane.showMessageDialog(this, "Eliminazione della cartella medica :  "+id+"  riuscita!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
 	}
-		
 }	
 	
 

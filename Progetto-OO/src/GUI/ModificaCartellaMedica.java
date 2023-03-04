@@ -40,7 +40,7 @@ public class ModificaCartellaMedica extends JDialog {
 	private JTextField Tartaruga;
 	private JTextField Specie;
 	
-	public ModificaCartellaMedica(Controllore contr) {
+	public ModificaCartellaMedica(Controllore contr,String Id_Turtle) {
 		controller=contr;
 		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -324,6 +324,7 @@ public class ModificaCartellaMedica extends JDialog {
 		Tartaruga.setBorder(null);
 		Tartaruga.setOpaque(false);
 		Tartaruga.setBounds(178, 119, 147, 19);
+		Tartaruga.setText(Id_Turtle);
 		sfondo.add(Tartaruga);
 		Tartaruga.setColumns(10);
 		
@@ -350,27 +351,28 @@ public class ModificaCartellaMedica extends JDialog {
 			comboBoxCartellaMedica.addItem(controller.ListaIDCartella().get(i).toString());
 		}
 		
+		Peso.setText(String.valueOf((controller.RecuperaCartellaMedica(Id_Turtle).getPeso())));
+		Larghezza.setText(String.valueOf((controller.RecuperaCartellaMedica(Id_Turtle).getLarghezza())));
+		Lunghezza.setText(String.valueOf(controller.RecuperaCartellaMedica(Id_Turtle).getLunghezza()));
+		LuogoRitrovamento.setText(controller.RecuperaCartellaMedica(Id_Turtle).getLuogo_ritrovamento());
+		Medico.setText(controller.RecuperaCartellaMedica(Id_Turtle).getMatricola_medico());
+		Specie.setText(controller.RecuperaCartellaMedica(Id_Turtle).getSpecie());
+		dateChooser.setDate(controller.RecuperaCartellaMedica(Id_Turtle).getData_Apertura_Cartella());
+		comboBoxCondizioniGenerali.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_generali());
+		comboBoxCondizioniCollo.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_collo().toString());
+		comboBoxCondizioniTesta.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_testa());
+		comboBoxCondizioniOcchi.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_occhi());
+		comboBoxCondizioniPinne.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_pinna());
+		comboBoxCondizioniNaso.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_naso());
+		comboBoxCondizioniBecco.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_becco());
+		comboBoxCondizioniCoda.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_coda());
 		
 		comboBoxCartellaMedica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String id = comboBoxCartellaMedica.getSelectedItem().toString();
 				
-				Tartaruga.setText(controller.RecuperaCartellaMedica(id).getId_tartaruga());
-				Peso.setText(String.valueOf((controller.RecuperaCartellaMedica(id).getPeso())));
-				Larghezza.setText(String.valueOf((controller.RecuperaCartellaMedica(id).getLarghezza())));
-				Lunghezza.setText(String.valueOf(controller.RecuperaCartellaMedica(id).getLunghezza()));
-				LuogoRitrovamento.setText(controller.RecuperaCartellaMedica(id).getLuogo_ritrovamento());
-				Medico.setText(controller.RecuperaCartellaMedica(id).getMatricola_medico());
-				Specie.setText(controller.RecuperaCartellaMedica(id).getSpecie());
-				dateChooser.setDate(controller.RecuperaCartellaMedica(id).getData_Apertura_Cartella());
-				comboBoxCondizioniGenerali.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_generali());
-				comboBoxCondizioniCollo.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_collo().toString());
-				comboBoxCondizioniTesta.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_testa());
-				comboBoxCondizioniOcchi.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_occhi());
-				comboBoxCondizioniPinne.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_pinna());
-				comboBoxCondizioniNaso.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_naso());
-				comboBoxCondizioniBecco.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_becco());
-				comboBoxCondizioniCoda.setSelectedItem(controller.RecuperaCartellaMedica(id).getCondizioni_coda());
+				//Tartaruga.setText(controller.RecuperaCartellaMedica(id).getId_tartaruga());
+				
 			}
 		});
 		

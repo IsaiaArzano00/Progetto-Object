@@ -21,7 +21,7 @@ public class PanelCartellaMedica extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelCartellaMedica(Controllore contr) {
+	public PanelCartellaMedica(Controllore contr,JPanel sfondoDashBoard) {
 controller = contr;
         
         setLayout(null);
@@ -48,11 +48,11 @@ controller = contr;
         lblNewLabel_5.setBounds(32, 10, 330, 50);
         panel_visualizza.add(lblNewLabel_5);
         
-        JLabel VisualizzaPersonale = new JLabel("");
+        JLabel ModificaCartellaMedica = new JLabel("");
        
-        VisualizzaPersonale.setIcon(new ImageIcon(PanelCartellaMedica.class.getResource("/Media/Medical History_100px.png")));
-        VisualizzaPersonale.setBounds(104, 63, 246, 144);
-        panel_visualizza.add(VisualizzaPersonale);
+        ModificaCartellaMedica.setIcon(new ImageIcon(PanelCartellaMedica.class.getResource("/Media/Medical History_100px.png")));
+        ModificaCartellaMedica.setBounds(104, 63, 246, 144);
+        panel_visualizza.add(ModificaCartellaMedica);
         
         PanelCustomBlue panel_inserisci = new PanelCustomBlue();
         panel_inserisci.setLayout((LayoutManager)null);
@@ -111,20 +111,21 @@ controller = contr;
         	public void mouseClicked(MouseEvent e) {
         		InserimentoCartellaMedica insertcartella = new InserimentoCartellaMedica(controller);
         		insertcartella.setVisible(true);
+        		
         	}
         });
-        VisualizzaPersonale.addMouseListener(new MouseAdapter() {
+        ModificaCartellaMedica.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		ModificaCartellaMedica modifyCartella = new ModificaCartellaMedica(controller);
-        		modifyCartella.setVisible(true);
+        		PanelPreModificaCartellaMedica preinsert=new PanelPreModificaCartellaMedica(controller,sfondoDashBoard);
+        		controller.SetPanelDashBoard(sfondoDashBoard, preinsert);
         	}
         });
         Elimina_CartellaMedica.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		EliminaCartellaMedica deletecartella = new EliminaCartellaMedica(controller);
-        		deletecartella.setVisible(true);
+        		PanelPreCancellaCartella deletecartella = new PanelPreCancellaCartella(controller,sfondoDashBoard);
+        		controller.SetPanelDashBoard(sfondoDashBoard, deletecartella);
         	}
         });
 

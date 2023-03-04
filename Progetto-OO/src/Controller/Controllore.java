@@ -809,6 +809,39 @@ public class Controllore {
 		
 	}
 	
+	public JTable SetTableTurtleWithCartellaMedica()
+	{
+		String[] tblHead={"ID Tartaruga","ID Sede","Nome","Età","Numero Targhetta","Data Accoglienza"};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+
+		for ( int i=0 ; i<tartaruga.ListaTartarugaConCartella().size();i++)
+		{
+			Object[] rowdata = new Object[6];
+			rowdata[0]=tartaruga.ListaTartarugaConCartella().get(i).getId_tartaruga();
+			rowdata[1]=tartaruga.ListaTartarugaConCartella().get(i).getID_Sede();
+			rowdata[2]=tartaruga.ListaTartarugaConCartella().get(i).getNome();
+			rowdata[3]=tartaruga.ListaTartarugaConCartella().get(i).getEta();
+			rowdata[4]=tartaruga.ListaTartarugaConCartella().get(i).getNumero_targhetta();
+			rowdata[5]=tartaruga.ListaTartarugaConCartella().get(i).getData_accoglienza_centro();
+
+
+			dtm.addRow(rowdata);
+		}
+		
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+
+		return tbl;
+	}
+	
+	public String ID_CM_from_turtle(String id_turtle)
+	{
+		return cartella.ID_CartellaMedica(id_turtle);
+	}
+	
 }
 
 
