@@ -12,9 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import Controller.Controllore;
-import GUI.EliminaCartellaMedica;
+import GUI.EliminaPersonale;
 import GUI.InserimentoCartellaMedica;
-import GUI.ModificaCartellaMedica;
 
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
@@ -54,8 +53,7 @@ controller = contr;
         panel_visualizza.add(lblNewLabel_5);
         
         JLabel VisualizzaPersonale = new JLabel("");
-       
-        VisualizzaPersonale.setIcon(new ImageIcon(PanelCartellaMedica.class.getResource("/Media/Medical History_100px.png")));
+        VisualizzaPersonale.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/find_user_male_80px.png")));
         VisualizzaPersonale.setBounds(104, 63, 246, 144);
         panel_visualizza.add(VisualizzaPersonale);
         
@@ -73,7 +71,7 @@ controller = contr;
         
         JLabel InserisciCartellaMedica = new JLabel("");
         
-        InserisciCartellaMedica.setIcon(new ImageIcon(PanelCartellaMedica.class.getResource("/Media/Medical History_100px.png")));
+        InserisciCartellaMedica.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/add_user_male_80px.png")));
         InserisciCartellaMedica.setBounds(137, 71, 169, 132);
         panel_inserisci.add(InserisciCartellaMedica);
         
@@ -88,11 +86,17 @@ controller = contr;
         lblNewLabel_7.setBounds(55, 10, 330, 51);
         panel_rimuovi.add(lblNewLabel_7);
         
-        JLabel Elimina_CartellaMedica = new JLabel("");
-       
-        Elimina_CartellaMedica.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/delete_80px.png")));
-        Elimina_CartellaMedica.setBounds(119, 86, 154, 107);
-        panel_rimuovi.add(Elimina_CartellaMedica);
+        JLabel lblNewLabel_8 = new JLabel("");
+        lblNewLabel_8.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		EliminaPersonale deletepersonale = new EliminaPersonale(controller);
+        		deletepersonale.setVisible(true);
+        	}
+        });
+        lblNewLabel_8.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/delete_80px.png")));
+        lblNewLabel_8.setBounds(119, 86, 154, 107);
+        panel_rimuovi.add(lblNewLabel_8);
         
         JLabel lblNewLabel = new JLabel("GESTIONE DELLE CARTELLE MEDICHE");
         lblNewLabel.setForeground(new Color(0, 0, 0));
@@ -116,20 +120,6 @@ controller = contr;
         	public void mouseClicked(MouseEvent e) {
         		InserimentoCartellaMedica insertcartella = new InserimentoCartellaMedica(controller);
         		insertcartella.setVisible(true);
-        	}
-        });
-        VisualizzaPersonale.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		ModificaCartellaMedica modifyCartella = new ModificaCartellaMedica(controller);
-        		modifyCartella.setVisible(true);
-        	}
-        });
-        Elimina_CartellaMedica.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		EliminaCartellaMedica deletecartella = new EliminaCartellaMedica(controller);
-        		deletecartella.setVisible(true);
         	}
         });
 

@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package GUI;
 
 import Components.PanelWhite;
@@ -23,7 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class RimozioneDonazione extends JDialog {
-    private JPanel contentPanel = new JPanel();
+    private final JPanel contentPanel = new JPanel();
     private Controllore controller;
     private String idDonazione;
     private JComboBox<String> comboBoxDonazioni;
@@ -39,17 +44,17 @@ public class RimozioneDonazione extends JDialog {
     private DonazioneDAO donazioneDAO;
 
     public RimozioneDonazione(Controllore contr) {
-        setResizable(false);
-        controller = contr;
+        this.setResizable(false);
+        this.controller = contr;
         this.donazioneDAO = this.controller.getDonazioneDAO();
-        setDefaultCloseOperation(2);
-        setBounds(100, 100, 486, 605);
-        getContentPane().setLayout(new BorderLayout());
-        contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        getContentPane().add(this.contentPanel, "Center");
-        contentPanel.setLayout(new BorderLayout(0, 0));
+        this.setDefaultCloseOperation(2);
+        this.setBounds(100, 100, 486, 605);
+        this.getContentPane().setLayout(new BorderLayout());
+        this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.getContentPane().add(this.contentPanel, "Center");
+        this.contentPanel.setLayout(new BorderLayout(0, 0));
         JPanel panel = new JPanel();
-        contentPanel.add(panel, "Center");
+        this.contentPanel.add(panel, "Center");
         panel.setLayout((LayoutManager)null);
         PanelWhite sfondo = new PanelWhite();
         sfondo.setLayout((LayoutManager)null);
@@ -75,20 +80,20 @@ public class RimozioneDonazione extends JDialog {
         lblNewLabel_3.setFont(new Font("SansSerif", 1, 12));
         lblNewLabel_3.setBounds(49, 128, 139, 19);
         sfondo.add(lblNewLabel_3);
-       importoDonazione_in = new JTextField();
-        importoDonazione_in.setEditable(false);
-        importoDonazione_in.setFont(new Font("SansSerif", 0, 14));
-       importoDonazione_in.setBounds(198, 163, 200, 27);
-        sfondo.add(importoDonazione_in);
-        importoDonazione_in.setColumns(10);
-        comboBoxDonazioni = new JComboBox();
-        comboBoxDonazioni.setFont(new Font("SansSerif", 0, 14));
+        this.importoDonazione_in = new JTextField();
+        this.importoDonazione_in.setEditable(false);
+        this.importoDonazione_in.setFont(new Font("SansSerif", 0, 14));
+        this.importoDonazione_in.setBounds(198, 163, 200, 27);
+        sfondo.add(this.importoDonazione_in);
+        this.importoDonazione_in.setColumns(10);
+        this.comboBoxDonazioni = new JComboBox();
+        this.comboBoxDonazioni.setFont(new Font("SansSerif", 0, 14));
 
         for(int i = 0; i < this.controller.getIdDonazioni().size(); ++i) {
-            comboBoxDonazioni.addItem(((String)controller.getIdDonazioni().get(i)).toString());
+            this.comboBoxDonazioni.addItem(((String)this.controller.getIdDonazioni().get(i)).toString());
         }
 
-        comboBoxDonazioni.setBounds(198, 121, 200, 32);
+        this.comboBoxDonazioni.setBounds(198, 121, 200, 32);
         sfondo.add(this.comboBoxDonazioni);
         JButton tasto_Rimuovi_1 = new JButton("");
         tasto_Rimuovi_1.setBounds(368, 470, 56, 61);
@@ -98,12 +103,12 @@ public class RimozioneDonazione extends JDialog {
         tasto_Esci_1.setBounds(294, 470, 56, 61);
         sfondo.add(tasto_Esci_1);
         tasto_Esci_1.setIcon(new ImageIcon(InserimentoDonazione.class.getResource("/Media/cross_mark_button_50px.png")));
-        emailDonatore_in = new JTextField();
-        emailDonatore_in.setEditable(false);
-        emailDonatore_in.setFont(new Font("SansSerif", 0, 14));
-        emailDonatore_in.setColumns(10);
-        emailDonatore_in.setBounds(198, 200, 200, 27);
-        sfondo.add(emailDonatore_in);
+        this.emailDonatore_in = new JTextField();
+        this.emailDonatore_in.setEditable(false);
+        this.emailDonatore_in.setFont(new Font("SansSerif", 0, 14));
+        this.emailDonatore_in.setColumns(10);
+        this.emailDonatore_in.setBounds(198, 200, 200, 27);
+        sfondo.add(this.emailDonatore_in);
         JLabel lblNewLabel_3_1_1_1 = new JLabel("EMAIL DONATORE:");
         lblNewLabel_3_1_1_1.setHorizontalAlignment(4);
         lblNewLabel_3_1_1_1.setFont(new Font("SansSerif", 1, 12));

@@ -2,10 +2,6 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -13,7 +9,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -41,11 +36,9 @@ public class EliminaCartellaMedica extends JDialog {
 	private JTextField CondizioniPinne;
 	private JTextField CondizioniNaso;
 	private JTextField CondizioniBecco;
-	private JTextField CondizioniCoda;
+	private JTextField CondizioniBecco_1;
 	private JTextField CondizioniGenerali;
 	private JTextField Tartaruga;
-	private JTextField Specie;
-	private JTextField Data;
 	/**
 	 * Create the panel.
 	 */
@@ -61,7 +54,7 @@ public class EliminaCartellaMedica extends JDialog {
 		contentPane.setLayout(null);
 		
 		PanelCustomBlue sfondo = new PanelCustomBlue();
-		sfondo.setBounds(0, 0, 841, 646);
+		sfondo.setBounds(10, 0, 841, 621);
 		contentPane.add(sfondo);
 		sfondo.setLayout(null);
 		
@@ -128,8 +121,11 @@ public class EliminaCartellaMedica extends JDialog {
 		lblNewLabel_3_5.setBounds(11, 413, 157, 21);
 		sfondo.add(lblNewLabel_3_5);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(178, 415, 171, 19);
+		sfondo.add(dateChooser);
+		
 		Peso = new JTextField();
-		Peso.setForeground(new Color(255, 255, 255));
 		Peso.setEditable(false);
 		Peso.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Peso.setBounds(178, 167, 147, 19);
@@ -139,7 +135,6 @@ public class EliminaCartellaMedica extends JDialog {
 		Peso.setOpaque(false);
 		
 		Lunghezza = new JTextField();
-		Lunghezza.setForeground(new Color(255, 255, 255));
 		Lunghezza.setEditable(false);
 		Lunghezza.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Lunghezza.setOpaque(false);
@@ -149,7 +144,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(Lunghezza);
 		
 		Larghezza = new JTextField();
-		Larghezza.setForeground(new Color(255, 255, 255));
 		Larghezza.setEditable(false);
 		Larghezza.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Larghezza.setOpaque(false);
@@ -159,7 +153,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(Larghezza);
 		
 		LuogoRitrovamento = new JTextField();
-		LuogoRitrovamento.setForeground(new Color(255, 255, 255));
 		LuogoRitrovamento.setEditable(false);
 		LuogoRitrovamento.setFont(new Font("SansSerif", Font.BOLD, 12));
 		LuogoRitrovamento.setOpaque(false);
@@ -183,6 +176,12 @@ public class EliminaCartellaMedica extends JDialog {
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(178, 377, 171, 21);
 		sfondo.add(separator_3);
+		
+		JComboBox comboBoxSpecie = new JComboBox();
+		comboBoxSpecie.setFont(new Font("SansSerif", Font.BOLD, 11));
+		comboBoxSpecie.setModel(new DefaultComboBoxModel(new String[] {"Tartaruga comune (Caretta caretta)", "Tartaruga verde (Chelonia mydas)", "Tartaruga liuto (Dermochelys coriacea)", "Tartaruga embricata (Eretmochelys imbricata)", "Tartaruga bastarda (Lepidochelys kempii)", "Tartaruga olivacea (Lepidochelys olivacea)", "Tartaruga piatta (Natator depressus)"}));
+		comboBoxSpecie.setBounds(167, 307, 205, 21);
+		sfondo.add(comboBoxSpecie);
 		
 		JLabel lblNewLabel_3_6 = new JLabel("Condizioni Generali : ");
 		lblNewLabel_3_6.setForeground(new Color(255, 255, 255));
@@ -240,19 +239,19 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(lblNewLabel_3_7_2);
 		
 		JLabel Inserisci = new JLabel("");
-		Inserisci.setIcon(new ImageIcon(EliminaCartellaMedica.class.getResource("/Media/cross_mark_button_50px.png")));
-		Inserisci.setBounds(690, 538, 56, 61);
+		Inserisci.setIcon(new ImageIcon(InserimentoCartellaMedica.class.getResource("/Media/save_50px.png")));
+		Inserisci.setBounds(637, 533, 56, 61);
 		sfondo.add(Inserisci);
 		
 		JLabel GoBack = new JLabel("");
 		GoBack.setIcon(new ImageIcon(InserimentoCartellaMedica.class.getResource("/Media/undo_50px.png")));
-		GoBack.setBounds(10, 565, 56, 50);
+		GoBack.setBounds(10, 544, 56, 50);
 		sfondo.add(GoBack);
 		
-		JLabel lblNewLabel_7 = new JLabel("Elimina");
+		JLabel lblNewLabel_7 = new JLabel("Modifica");
 		lblNewLabel_7.setForeground(new Color(255, 255, 255));
 		lblNewLabel_7.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblNewLabel_7.setBounds(690, 594, 56, 21);
+		lblNewLabel_7.setBounds(637, 590, 56, 21);
 		sfondo.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_3_5_1 = new JLabel("Matricola Medico : ");
@@ -262,7 +261,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(lblNewLabel_3_5_1);
 		
 		Medico = new JTextField();
-		Medico.setForeground(new Color(255, 255, 255));
 		Medico.setOpaque(false);
 		Medico.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Medico.setEditable(false);
@@ -276,7 +274,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(separator_4);
 		
 		CondizioniCollo = new JTextField();
-		CondizioniCollo.setForeground(new Color(255, 255, 255));
 		CondizioniCollo.setOpaque(false);
 		CondizioniCollo.setFont(new Font("SansSerif", Font.BOLD, 12));
 		CondizioniCollo.setEditable(false);
@@ -286,7 +283,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(CondizioniCollo);
 		
 		CondizioniTesta = new JTextField();
-		CondizioniTesta.setForeground(new Color(255, 255, 255));
 		CondizioniTesta.setOpaque(false);
 		CondizioniTesta.setFont(new Font("SansSerif", Font.BOLD, 12));
 		CondizioniTesta.setEditable(false);
@@ -296,7 +292,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(CondizioniTesta);
 		
 		CondizioniOcchi = new JTextField();
-		CondizioniOcchi.setForeground(new Color(255, 255, 255));
 		CondizioniOcchi.setOpaque(false);
 		CondizioniOcchi.setFont(new Font("SansSerif", Font.BOLD, 12));
 		CondizioniOcchi.setEditable(false);
@@ -306,7 +301,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(CondizioniOcchi);
 		
 		CondizioniPinne = new JTextField();
-		CondizioniPinne.setForeground(new Color(255, 255, 255));
 		CondizioniPinne.setOpaque(false);
 		CondizioniPinne.setFont(new Font("SansSerif", Font.BOLD, 12));
 		CondizioniPinne.setEditable(false);
@@ -316,7 +310,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(CondizioniPinne);
 		
 		CondizioniNaso = new JTextField();
-		CondizioniNaso.setForeground(new Color(255, 255, 255));
 		CondizioniNaso.setOpaque(false);
 		CondizioniNaso.setFont(new Font("SansSerif", Font.BOLD, 12));
 		CondizioniNaso.setEditable(false);
@@ -326,7 +319,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(CondizioniNaso);
 		
 		CondizioniBecco = new JTextField();
-		CondizioniBecco.setForeground(new Color(255, 255, 255));
 		CondizioniBecco.setOpaque(false);
 		CondizioniBecco.setFont(new Font("SansSerif", Font.BOLD, 12));
 		CondizioniBecco.setEditable(false);
@@ -335,18 +327,16 @@ public class EliminaCartellaMedica extends JDialog {
 		CondizioniBecco.setBounds(573, 371, 147, 19);
 		sfondo.add(CondizioniBecco);
 		
-		CondizioniCoda = new JTextField();
-		CondizioniCoda.setForeground(new Color(255, 255, 255));
-		CondizioniCoda.setOpaque(false);
-		CondizioniCoda.setFont(new Font("SansSerif", Font.BOLD, 12));
-		CondizioniCoda.setEditable(false);
-		CondizioniCoda.setColumns(10);
-		CondizioniCoda.setBorder(null);
-		CondizioniCoda.setBounds(573, 415, 147, 19);
-		sfondo.add(CondizioniCoda);
+		CondizioniBecco_1 = new JTextField();
+		CondizioniBecco_1.setOpaque(false);
+		CondizioniBecco_1.setFont(new Font("SansSerif", Font.BOLD, 12));
+		CondizioniBecco_1.setEditable(false);
+		CondizioniBecco_1.setColumns(10);
+		CondizioniBecco_1.setBorder(null);
+		CondizioniBecco_1.setBounds(573, 415, 147, 19);
+		sfondo.add(CondizioniBecco_1);
 		
 		CondizioniGenerali = new JTextField();
-		CondizioniGenerali.setForeground(new Color(255, 255, 255));
 		CondizioniGenerali.setOpaque(false);
 		CondizioniGenerali.setFont(new Font("SansSerif", Font.BOLD, 12));
 		CondizioniGenerali.setEditable(false);
@@ -388,9 +378,6 @@ public class EliminaCartellaMedica extends JDialog {
 		sfondo.add(separator_5_7);
 		
 		Tartaruga = new JTextField();
-		Tartaruga.setForeground(new Color(255, 255, 255));
-		Tartaruga.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Tartaruga.setEditable(false);
 		Tartaruga.setBorder(null);
 		Tartaruga.setOpaque(false);
 		Tartaruga.setBounds(178, 119, 147, 19);
@@ -401,95 +388,7 @@ public class EliminaCartellaMedica extends JDialog {
 		separator_6.setBounds(167, 136, 171, 21);
 		sfondo.add(separator_6);
 		
-		Specie = new JTextField();
-		Specie.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Specie.setForeground(new Color(255, 255, 255));
-		Specie.setOpaque(false);
-		Specie.setBorder(null);
-		Specie.setEditable(false);
-		Specie.setBounds(191, 309, 134, 19);
-		sfondo.add(Specie);
-		Specie.setColumns(10);
 		
-		Data = new JTextField();
-		Data.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Data.setForeground(new Color(255, 255, 255));
-		Data.setEditable(false);
-		Data.setBorder(null);
-		Data.setOpaque(false);
-		Data.setBounds(188, 415, 137, 19);
-		sfondo.add(Data);
-		Data.setColumns(10);
-		
-		JSeparator separator_7 = new JSeparator();
-		separator_7.setBounds(178, 328, 171, 16);
-		sfondo.add(separator_7);
-		
-		JSeparator separator_7_1 = new JSeparator();
-		separator_7_1.setBounds(167, 436, 171, 16);
-		sfondo.add(separator_7_1);
-		
-		for(int i=0;i<controller.ListaIDCartella().size();i++)
-		{
-			comboBoxCartellaMedica.addItem(controller.ListaIDCartella().get(i).toString());
-		}
-		
-		
-		comboBoxCartellaMedica.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String id = comboBoxCartellaMedica.getSelectedItem().toString();
-				
-				Tartaruga.setText(controller.RecuperaCartellaMedica(id).getId_tartaruga());
-				Peso.setText(String.valueOf((controller.RecuperaCartellaMedica(id).getPeso())));
-				Larghezza.setText(String.valueOf((controller.RecuperaCartellaMedica(id).getLarghezza())));
-				Lunghezza.setText(String.valueOf(controller.RecuperaCartellaMedica(id).getLunghezza()));
-				LuogoRitrovamento.setText(controller.RecuperaCartellaMedica(id).getLuogo_ritrovamento());
-				Medico.setText(controller.RecuperaCartellaMedica(id).getMatricola_medico());
-				Specie.setText(controller.RecuperaCartellaMedica(id).getSpecie());
-				Data.setText(String.valueOf(controller.RecuperaCartellaMedica(id).getData_Apertura_Cartella()));
-				CondizioniGenerali.setText(controller.RecuperaCartellaMedica(id).getCondizioni_generali());
-				CondizioniCollo.setText(controller.RecuperaCartellaMedica(id).getCondizioni_collo().toString());
-				CondizioniTesta.setText(controller.RecuperaCartellaMedica(id).getCondizioni_testa());
-				CondizioniOcchi.setText(controller.RecuperaCartellaMedica(id).getCondizioni_occhi());
-				CondizioniPinne.setText(controller.RecuperaCartellaMedica(id).getCondizioni_pinna());
-				CondizioniNaso.setText(controller.RecuperaCartellaMedica(id).getCondizioni_naso());
-				CondizioniBecco.setText(controller.RecuperaCartellaMedica(id).getCondizioni_becco());
-				CondizioniCoda.setText(controller.RecuperaCartellaMedica(id).getCondizioni_coda());
-			}
-		
-		});
-		//LISTENER
-		GoBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				sfondo.getTopLevelAncestor().setVisible(false);
-			}
-		});
-		Inserisci.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String id=comboBoxCartellaMedica.getSelectedItem().toString();
-				boolean flag=controller.RemoveCartellaMedica(id);
-				if(flag)
-				{
-					alertDeleteRiuscito(id);
-					sfondo.getTopLevelAncestor().setVisible(false);
-				}
-				else
-					alertDeleteFallito(id);
-			}
-		});
 	}
-	
-	//ALERT
-	public void alertDeleteFallito(String id) {
-		JOptionPane.showMessageDialog(this, "Eliminazione  della cartella medica :  "+id+"  non riuscita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
-	}
-	public void alertDeleteRiuscito(String id) {
-		JOptionPane.showMessageDialog(this, "Eliminazione della cartella medica :  "+id+"  riuscita!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
-	}
-		
-}	
-	
-
+}
 	

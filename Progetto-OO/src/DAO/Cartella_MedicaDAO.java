@@ -3,9 +3,7 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
-import DTO.Cartella_Medica;
 import connection.Connessione;
 import DTO.Cartella_Medica;
 
@@ -65,6 +63,7 @@ public int InserisciCartellaMedica(String id_turtle ,String medico, double peso 
 			return rowinsert;
 		}
 	}
+<<<<<<< BranchIsaia
 
 
 public int EliminaCartellaMedica(String idTartaruga) {
@@ -141,4 +140,6 @@ public ArrayList<String> listaIDCartellaMedica()
 			return lista_id;
 		}	
 	}
+=======
+>>>>>>> d078258 Modifiche varie
 }

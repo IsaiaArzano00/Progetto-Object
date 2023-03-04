@@ -783,34 +783,5 @@ public ArrayList<String> ListaTartarugheSenzaTarghetta()
 			return false;
 	
 	}
-	
-	public ArrayList<String> ListaIDCartella()
-	{
-		return cartella.listaIDCartellaMedica();
-	}
-	
-	public Cartella_Medica RecuperaCartellaMedica(String id)
-	{
-		return cartella.recuperaCartellaMedica(id);
-	}
-	
-	public boolean UpdateCartellaMedica(String id, double peso , double lunghezza , double larghezza , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
-	{
-		int rowupdate = cartella.ModificaDatiCartellaMedica(id, peso, lunghezza, larghezza, data, condizioni_generali, condizioniCollo, condizioniTesta, condizioniOcchi, condizioniPinne, condizioniNaso, condizioniBecco, condizioniCoda);
-		if(rowupdate>0)
-			return true;
-		else
-			return false;
-	}
-	
-	public boolean RemoveCartellaMedica(String id)
-	{
-		int rowdelete=cartella.EliminaCartellaMedica(id);
-		if(rowdelete>0)
-			return true;
-		else
-			return false;
-		
-	}
 }
 
