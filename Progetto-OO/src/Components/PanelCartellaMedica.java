@@ -14,11 +14,14 @@ import javax.swing.JTextArea;
 import Controller.Controllore;
 import GUI.EliminaPersonale;
 import GUI.InserimentoCartellaMedica;
+<<<<<<< BranchIsaia
 
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+=======
+>>>>>>> d078258 Modifiche varie
 
 public class PanelCartellaMedica extends JPanel {
 	private Controllore controller;

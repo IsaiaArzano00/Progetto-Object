@@ -64,6 +64,7 @@ public int InserisciCartellaMedica(String id_turtle ,String medico, double peso 
 		}
 	}
 <<<<<<< BranchIsaia
+<<<<<<< BranchIsaia
 
 
 public int EliminaCartellaMedica(String idTartaruga) {
@@ -140,6 +141,8 @@ public ArrayList<String> listaIDCartellaMedica()
 			return lista_id;
 		}	
 	}
+=======
+>>>>>>> d078258 Modifiche varie
 =======
 >>>>>>> d078258 Modifiche varie
 }
