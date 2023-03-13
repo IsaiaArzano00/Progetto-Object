@@ -1,9 +1,7 @@
-*.class
+/Components/
 /Controller/
-/GUI/
 /DAO/
 /DTO/
-/Media/
-/Components/
+/GUI/
 /connection/
-/ClassiDiServizio/
+/Media/

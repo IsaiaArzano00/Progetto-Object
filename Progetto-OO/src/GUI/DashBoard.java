@@ -45,7 +45,7 @@ public class DashBoard extends JFrame {
 		controller = contr;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(50, 50, 1266, 752);
+		setBounds(50, 50, 1266, 736);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -88,7 +88,7 @@ public class DashBoard extends JFrame {
 		txtInserireUsernameDellutente.setBorder(null);
 		
 		PanelCustomDashboard pannelloMenu = new PanelCustomDashboard();
-		pannelloMenu.setLocation(0, 59);
+		pannelloMenu.setLocation(0, 60);
 		pannelloMenu.setSize(275, 674);
 		
 		pannelloMenu.setLayout(null);

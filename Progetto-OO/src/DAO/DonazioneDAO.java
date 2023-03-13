@@ -56,15 +56,15 @@ public class DonazioneDAO {
         }
     }
 
-    public boolean rimuoviDonazione(String idDonazione) {
+    public int rimuoviDonazione(String idDonazione) {
+    	int rowdelete=0;
         try {
-            if (this.statement.executeUpdate("DELETE FROM DONAZIONE AS D WHERE D.id_donazione LIKE '" + idDonazione + "';") > 0) {
+            rowdelete=statement.executeUpdate("DELETE FROM DONAZIONE AS D WHERE D.id_donazione LIKE '" + idDonazione + "';"); 
+            return rowdelete;
             }
-
-            return true;
-        } catch (SQLException var3) {
+         catch (SQLException var3) {
             var3.printStackTrace();
-            return false;
+            return rowdelete;
         }
     }
 

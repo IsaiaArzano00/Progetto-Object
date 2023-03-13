@@ -27,7 +27,7 @@ public class PanelLoginPage extends JPanel {
     private JPasswordField passwordField;
     private Controllore controller;
 
-    public PanelLoginPage(Controllore contr) {
+    public PanelLoginPage(Controllore contr,JPanel panelscelta) {
         controller = contr;
         setLayout((LayoutManager)null);
         JPanel panel = new JPanel();
@@ -45,6 +45,7 @@ public class PanelLoginPage extends JPanel {
                 txtUsername.setText("");
             }
         });
+        panel_1.setLayout(null);
         txtUsername.setForeground(Color.WHITE);
         txtUsername.setBorder((Border)null);
         txtUsername.setBackground(SystemColor.controlShadow);
@@ -91,11 +92,12 @@ public class PanelLoginPage extends JPanel {
         lblNewLabel_1.setBounds(101, 248, 45, 43);
         panel_1.add(lblNewLabel_1);
         
-        JLabel lblNewLabel_2 = new JLabel("Password dimenticata ?");
+        JLabel RecoveryPassword = new JLabel("Password dimenticata ?");
+      
      
-        lblNewLabel_2.setFont(new Font("SansSerif", 1, 12));
-        lblNewLabel_2.setBounds(156, 300, 151, 28);
-        panel_1.add(lblNewLabel_2);
+        RecoveryPassword.setFont(new Font("SansSerif", 1, 12));
+        RecoveryPassword.setBounds(156, 300, 151, 28);
+        panel_1.add(RecoveryPassword);
         
         JPanel panel_login = new JPanel();
         
@@ -131,6 +133,12 @@ public class PanelLoginPage extends JPanel {
         GoHome.setBounds(10, 443, 45, 48);
         panel_1.add(GoHome);
         
+        JLabel ShowPassword = new JLabel("");
+        ShowPassword.setIcon(new ImageIcon(PanelLoginPage.class.getResource("/Media/eye_20px.png")));
+        
+        ShowPassword.setBounds(333, 255, 61, 13);
+        panel_1.add(ShowPassword);
+        
         //LISTENER 
         LoginLabel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -150,9 +158,42 @@ public class PanelLoginPage extends JPanel {
         });
         GoHome.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                controller.GoToHome(PanelLoginPage.this);
+            	PanelSceltaHome goback = new PanelSceltaHome(controller);
+				goback.setBounds(0,0,450,550);
+				controller.GoBackHome(panel, goback);
             }
         });
+        
+        RecoveryPassword.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		PanelRecuperoPass panelrecovery = new PanelRecuperoPass(controller,panelscelta);
+        		panelrecovery.setBounds(0,0,450,550);
+        		controller.SetHomePage(panelscelta, panelrecovery);
+        	}
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		RecoveryPassword.setForeground(new Color (255,255,255));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		RecoveryPassword.setForeground(new Color (0,0,0));
+        	}
+        });
+        ShowPassword.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+        		passwordField.setFont((new Font("SansSerif", 1, 12)));
+        		passwordField.setForeground(new Color(255,255,255));
+        		passwordField.setEchoChar((char) 0);
+        	}
+        	public void mouseReleased(MouseEvent e) {
+        		passwordField.setFont((new Font("Tahoma",0, 10)));
+        		passwordField.setForeground(new Color(0,0,0));
+        		passwordField.setEchoChar('●');
+        	}
+        });
+        
     }
 
     public void alertLogInFallito() {

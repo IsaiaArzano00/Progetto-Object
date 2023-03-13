@@ -4,6 +4,7 @@ package Components;
 
 import Controller.Controllore;
 import GUI.EliminaPersonale;
+import GUI.InserimentoPersonale;
 import GUI.ViewPersonale;
 import java.awt.Color;
 import java.awt.Font;
@@ -77,17 +78,11 @@ public class PanelPersonale extends JPanel {
         lblNewLabel_7.setBounds(55, 10, 330, 51);
         panel_rimuovi.add(lblNewLabel_7);
         
-        JLabel lblNewLabel_8 = new JLabel("");
-        lblNewLabel_8.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		EliminaPersonale deletepersonale = new EliminaPersonale(controller);
-        		deletepersonale.setVisible(true);
-        	}
-        });
-        lblNewLabel_8.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/delete_80px.png")));
-        lblNewLabel_8.setBounds(119, 86, 154, 107);
-        panel_rimuovi.add(lblNewLabel_8);
+        JLabel EliminaPersonale = new JLabel("");
+       
+        EliminaPersonale.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/delete_80px.png")));
+        EliminaPersonale.setBounds(119, 86, 154, 107);
+        panel_rimuovi.add(EliminaPersonale);
         
         JLabel lblNewLabel = new JLabel("GESTIONE DEL PERSONALE DEL CENTRO ");
         lblNewLabel.setForeground(new Color(0, 0, 0));
@@ -108,7 +103,9 @@ public class PanelPersonale extends JPanel {
         //LISTENER
         InserisciPersonale.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                controller.InserimentoPersonale();
+            	InserimentoPersonale insertPersonale = new InserimentoPersonale (controller);
+            	insertPersonale.setVisible(true);
+                
             }
         });
         VisualizzaPersonale.addMouseListener(new MouseAdapter() {
@@ -116,6 +113,13 @@ public class PanelPersonale extends JPanel {
                 ViewPersonale viewpersonale = new ViewPersonale(controller);
                 viewpersonale.setVisible(true);
             }
+        });
+        EliminaPersonale.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		EliminaPersonale deletepersonale = new EliminaPersonale(controller);
+        		deletepersonale.setVisible(true);
+        	}
         });
     }
 }

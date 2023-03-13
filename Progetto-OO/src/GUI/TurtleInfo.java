@@ -78,6 +78,7 @@ public class TurtleInfo extends JDialog {
 		panel_3.setLayout(null);
 		
 		JLabel lblIngressi = new JLabel("INGRESSI");
+		
 		lblIngressi.setForeground(new Color(255, 255, 255));
 		lblIngressi.setFont(new Font("SansSerif", Font.BOLD, 18));
 		lblIngressi.setBounds(33, 0, 158, 42);
@@ -100,23 +101,17 @@ public class TurtleInfo extends JDialog {
 		contentPane.add(sfondo);
 		sfondo.setLayout(null);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(0, 1, 758, 394);
-		panel_4.setBackground(new Color(0,0,0,90));
-		sfondo.add(panel_4);
-		panel_4.setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 738, 291);
-		panel_4.add(scrollPane);
-		scrollPane.setOpaque(false);
-		scrollPane.getViewport().setOpaque(false);
-		
 		
 		JLabel GoBack = new JLabel("");
-		GoBack.setBounds(27, 324, 69, 36);
-		panel_4.add(GoBack);
+		GoBack.setBounds(10, 327, 69, 36);
+		sfondo.add(GoBack);
 		GoBack.setIcon(new ImageIcon(TurtleInfo.class.getResource("/Media/undo_50px.png")));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 738, 287);
+		sfondo.add(scrollPane);
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
 		
 		//LISTENER
 		GoBack.addMouseListener(new MouseAdapter() {
@@ -132,7 +127,18 @@ public class TurtleInfo extends JDialog {
 				tbl.setOpaque(false);
 				((JComponent) tbl.getDefaultRenderer(Object.class)).setOpaque(false);
 				tbl.setFont(new Font("Arial", Font.BOLD, 12));
-				tbl.setForeground(new Color(255,255,255));
+				tbl.setForeground(new Color(0,0,0));
+				scrollPane.setViewportView(tbl);
+			}
+		});
+		lblIngressi.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JTable tbl = controller.SetTableIngressiInfoTartaruga(turtle);
+				tbl.setOpaque(false);
+				((JComponent) tbl.getDefaultRenderer(Object.class)).setOpaque(false);
+				tbl.setFont(new Font("Arial", Font.BOLD, 12));
+				tbl.setForeground(new Color(0,0,0));
 				scrollPane.setViewportView(tbl);
 			}
 		});

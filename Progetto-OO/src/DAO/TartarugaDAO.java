@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -450,6 +451,27 @@ public class TartarugaDAO {
 		{
 			e.printStackTrace();
 			return listaturtle;
+		}
+	}
+	
+	//ELENCO INGRESSI TARTARUGHE IN UN CENTRO
+	public ArrayList ingressiTurtle(String id_turtle)
+	{
+		ArrayList date_ingr = new ArrayList<>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM ingresso_turtle_c('"+id_turtle+"' ) order by ingresso_turtle_c ;");
+			while(rs.next())
+			{
+				Date data = rs.getDate(1);
+				date_ingr.add(data);
+			}
+			
+			return date_ingr;
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return date_ingr;
 		}
 	}
 }

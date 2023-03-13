@@ -1,5 +1,6 @@
 package DTO;
 
+
 public class Centro {
 	
 	private String ID_Centro;

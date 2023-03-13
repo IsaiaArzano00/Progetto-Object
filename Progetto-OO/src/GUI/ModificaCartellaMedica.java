@@ -39,6 +39,7 @@ public class ModificaCartellaMedica extends JDialog {
 	
 	private JTextField Tartaruga;
 	private JTextField Specie;
+	private JTextField CartellaMedica;
 	
 	public ModificaCartellaMedica(Controllore contr,String Id_Turtle) {
 		controller=contr;
@@ -73,16 +74,22 @@ public class ModificaCartellaMedica extends JDialog {
 		lblNewLabel_1.setBounds(104, 10, 519, 45);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Selezionare la cartella medica da modificare : ");
+		JLabel lblNewLabel_2 = new JLabel("La cartella medica da modificare  è :  ");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 12));
 		lblNewLabel_2.setBounds(114, 57, 276, 24);
 		panel.add(lblNewLabel_2);
 		
-		JComboBox comboBoxCartellaMedica = new JComboBox();
-		
-		comboBoxCartellaMedica.setBounds(394, 60, 183, 21);
-		panel.add(comboBoxCartellaMedica);
+		CartellaMedica = new JTextField();
+		CartellaMedica.setForeground(new Color(255, 255, 255));
+		CartellaMedica.setBorder(null);
+		CartellaMedica.setOpaque(false);
+		CartellaMedica.setEditable(false);
+		CartellaMedica.setFont(new Font("SansSerif", Font.BOLD, 12));
+		CartellaMedica.setBounds(337, 61, 185, 19);
+		CartellaMedica.setText(controller.ID_CM_from_turtle(Id_Turtle));
+		panel.add(CartellaMedica);
+		CartellaMedica.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Peso : ");
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
@@ -346,10 +353,6 @@ public class ModificaCartellaMedica extends JDialog {
 		separator_5.setBounds(167, 328, 182, 18);
 		sfondo.add(separator_5);
 		
-		for(int i=0;i<controller.ListaIDCartella().size();i++)
-		{
-			comboBoxCartellaMedica.addItem(controller.ListaIDCartella().get(i).toString());
-		}
 		
 		Peso.setText(String.valueOf((controller.RecuperaCartellaMedica(Id_Turtle).getPeso())));
 		Larghezza.setText(String.valueOf((controller.RecuperaCartellaMedica(Id_Turtle).getLarghezza())));
@@ -366,15 +369,6 @@ public class ModificaCartellaMedica extends JDialog {
 		comboBoxCondizioniNaso.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_naso());
 		comboBoxCondizioniBecco.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_becco());
 		comboBoxCondizioniCoda.setSelectedItem(controller.RecuperaCartellaMedica(Id_Turtle).getCondizioni_coda());
-		
-		comboBoxCartellaMedica.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String id = comboBoxCartellaMedica.getSelectedItem().toString();
-				
-				//Tartaruga.setText(controller.RecuperaCartellaMedica(id).getId_tartaruga());
-				
-			}
-		});
 		
 		//LISTENER
 		GoBack.addMouseListener(new MouseAdapter() {
@@ -411,7 +405,7 @@ public class ModificaCartellaMedica extends JDialog {
 		             String condizioni_collo= comboBoxCondizioniCollo.getSelectedItem().toString();
 		   
 		             String luogo= LuogoRitrovamento.getText();
-		             String id_cartella = comboBoxCartellaMedica.getSelectedItem().toString();
+		             String id_cartella = controller.RecuperaCartellaMedica(Id_Turtle).getId_cartella_medica();
 		             boolean flag = controller.UpdateCartellaMedica(id_cartella, peso, lunghezza, larghezza, date, condizioni_generali, condizioni_collo, condizioni_testa, condizioni_occhi, condizioni_pinne, condizioni_naso, condizioni_becco, condizioni_coda);
 		             if(flag) {
 		            	 	alertUpdateRiuscito();

@@ -2,6 +2,7 @@ package DTO;
 
 import java.sql.Date;
 
+
 public class Cartella_Medica_Degenza {
 	private String id_cartella_degeza;
 	private Date data_controllo;

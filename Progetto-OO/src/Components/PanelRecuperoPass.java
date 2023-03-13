@@ -22,6 +22,7 @@ import Controller.Controllore;
 import GUI.Home;
 
 public class PanelRecuperoPass extends JPanel {
+	private Controllore controller;
 	private JTextField UserField;
 	private JTextField e_mailField;
 	private JPasswordField passwordField;
@@ -29,8 +30,8 @@ public class PanelRecuperoPass extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelRecuperoPass() {
-Controllore controller = new Controllore();
+	public PanelRecuperoPass(Controllore contr,JPanel panelhome) {
+		controller = contr;
 		
 		setLayout(null);
 		
@@ -71,10 +72,10 @@ Controllore controller = new Controllore();
 		e_mail.setBounds(95, 182, 39, 25);
 		panel.add(e_mail);
 		
-		JLabel Password = new JLabel("Password : ");
+		JLabel Password = new JLabel("Nuova Password : ");
 		Password.setForeground(Color.WHITE);
 		Password.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Password.setBounds(52, 248, 82, 25);
+		Password.setBounds(22, 248, 112, 25);
 		panel.add(Password);
 		
 		JLabel RipPassword = new JLabel("Ripeti Password : ");
@@ -189,7 +190,18 @@ Controllore controller = new Controllore();
 					{alertPasswordDiverse();}
 				else
 				{
-				//FAre cambio pass
+					String userna=UserField.getText();
+					String password=passwordField.getText();
+					boolean flag=controller.CambioPassword(userna, password);
+					if(flag)
+					{
+						alertUpdataRiuscito( user);
+						PanelSceltaHome goback = new PanelSceltaHome(controller);
+						goback.setBounds(0,0,450,550);
+						controller.GoBackHome(panel,goback);
+					}
+					else
+						alertUpdateFallito();
 				}
 				
 			}
@@ -198,7 +210,9 @@ Controllore controller = new Controllore();
 		GoHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				controller.GoToHome(PanelRecuperoPass.this);
+				PanelSceltaHome goback = new PanelSceltaHome(controller);
+				goback.setBounds(0,0,450,550);
+				controller.GoBackHome(panel, goback);
 			}
 		});
 
@@ -216,6 +230,12 @@ Controllore controller = new Controllore();
 		}
 		public void alertPasswordDiverse() {
 			JOptionPane.showMessageDialog(this, "Le due password inserite non coincidono! ","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+		}
+		public void alertUpdataRiuscito(String user) {
+			JOptionPane.showMessageDialog(this, "Cambio della password dell'utente : "+user+"  riuscito ! ","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
+		}
+		public void alertUpdateFallito() {
+			JOptionPane.showMessageDialog(this, "Cambio della password non riuscito ! ","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
 		}
 		
 

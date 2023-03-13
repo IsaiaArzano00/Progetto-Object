@@ -44,6 +44,7 @@ public class UtenteDAO {
 			return rowinsert;
 		}
 	}
+	
 	public boolean CheckUtente(String username , String e_mail)
 	{
 		try {
@@ -53,6 +54,20 @@ public class UtenteDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	//CAMBIO PASSWORD 
+	public int ChangePass(String username,String password)
+	{
+		int rowupdate=0;
+		try {
+			rowupdate=statement.executeUpdate("UPDATE UTENTE SET PASSWORD ='"+password+"' WHERE USERNAME ='"+username+"' ;");
+			return rowupdate;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return rowupdate;
 		}
 	}
 	

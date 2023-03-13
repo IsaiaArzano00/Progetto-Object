@@ -40,6 +40,7 @@ public class Controllore {
 	private OccupareVascaDAO occupare;
 	private TarghettaDAO targhetta;
 	private Cartella_MedicaDAO cartella;
+	private IngressiTurtleDAO ingresso;
 	
 	
 
@@ -66,6 +67,7 @@ public class Controllore {
 		occupare=new OccupareVascaDAO();
 		targhetta = new TarghettaDAO();
 		cartella = new Cartella_MedicaDAO();
+		ingresso = new IngressiTurtleDAO();
 	}
 	
 
@@ -78,45 +80,19 @@ public class Controllore {
 		actualPanel.revalidate();
 	}
 	
-	public void SetLoginPage (JPanel panelImage, JPanel panelLogin )
+	public void SetHomePage (JPanel actualPanel , JPanel selectedPanel)
 	{
-		
-		PanelHome Home = new PanelHome();
-		Home.setBounds(0, 0, 450,550);
-		panelImage.removeAll();
-		panelImage.add(Home);
-		panelImage.repaint();
-		panelImage.revalidate();
-		
-
-		PanelLoginPage Login = new PanelLoginPage(this);
-		Login.setBounds(0, 0, 450, 550);
-		panelLogin.removeAll();
-		panelLogin.add(Login);
-		panelLogin.repaint();
-		panelLogin.revalidate();
-		
-		
-		
+		actualPanel.removeAll();
+		actualPanel.add(selectedPanel);
+		actualPanel.repaint();
+		actualPanel.revalidate();
 	}
-	
-
-	
-	public void SetRegistrerPage (JPanel panelImage , JPanel PanelRegistrer)
+	public void GoBackHome(JPanel actualPanel , JPanel selectedPanel)
 	{
-		PanelHome Home = new PanelHome();
-		Home.setBounds(0, 0, 450,550);
-		panelImage.removeAll();
-		panelImage.add(Home);
-		panelImage.repaint();
-		panelImage.revalidate();
-		
-		PanelRegister Register = new PanelRegister(this);
-		Register.setBounds(0, 0, 450, 550);
-		PanelRegistrer.removeAll();
-		PanelRegistrer.add(Register);
-		PanelRegistrer.repaint();
-		PanelRegistrer.revalidate();
+		actualPanel.removeAll();
+		actualPanel.add(selectedPanel);
+		actualPanel.repaint();
+		actualPanel.revalidate();
 	}
 	
 	public void gotodashboard(JComponent panel, String utente)
@@ -142,9 +118,13 @@ public class Controllore {
 		return flag;
 	}
 	
-	public void RegistraUtente (String user , String password , String e_mail)
+	public boolean RegistraUtente (String user , String password , String e_mail)
 	{
-		utente.RegisterUser(user, password, e_mail);
+		int rowinsert=utente.RegisterUser(user, password, e_mail);
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
 	}
 	
 	public boolean CheckUtenteRegistrato(String user , String e_mail)
@@ -594,7 +574,7 @@ public class Controllore {
 
 	
 	
-	public void InserimentoPersonale() { new InserimentoPersonale(this); }
+	
 	public void InserimentoDonazionePage() { new InserimentoDonazione(this); }
 	public void RimozioneDonazionePage() {new RimozioneDonazione(this);}
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
@@ -842,6 +822,75 @@ public class Controllore {
 		return cartella.ID_CartellaMedica(id_turtle);
 	}
 	
+	public boolean CambioPassword(String username,String password)
+	{
+		int rowupdate = utente.ChangePass(username, password);
+		if(rowupdate>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean RimuoviDonazione(String id_donazione)
+	{
+		int rowdelete=donazione.rimuoviDonazione(id_donazione);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public JTable SetTableIngressiInfoTartaruga(String turtle)
+	{
+		String[] tblHead={"Tipo ingresso ","Data","Condizioni"};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		
+		Object[] rowdata1 = new Object[5];
+		rowdata1[0]="PRIMO INGRESSO ";
+		rowdata1[1]=ingresso.ingressiTurtle(turtle).get(0).getData().toString();
+		rowdata1[2]=ingresso.ingressiTurtle(turtle).get(0).getCondizioni().toString();
+		dtm.addRow(rowdata1);
+		
+		for ( int i=1 ; i<tartaruga.ingressiTurtle(turtle).size();i++)
+		{
+			Object[] rowdata = new Object[5];
+			rowdata[0]="RIAMMISSIONE";
+			rowdata[1]=ingresso.ingressiTurtle(turtle).get(i).getData().toString();
+			rowdata[2]=ingresso.ingressiTurtle(turtle).get(i).getCondizioni().toString();
+			dtm.addRow(rowdata);
+		}
+		tbl.setShowVerticalLines(false);
+		tbl.setRowHeight(50);
+
+		return tbl;
+	}
+	
+	public boolean ControlloPasswordRegister(String password)
+	{
+		boolean flag = false;
+		if(password.length()>8)
+			flag=true;
+		
+		return flag;
+	}
+	public boolean ControlloNomeUtente(String user)
+	{
+		boolean flag = false;
+		if(user.length()>4 )
+			flag = true;
+		return flag;
+	}
+	public boolean ControlloEMailRegister(String email)
+	{
+		boolean flag = false ;
+		if(email.contains("@") && email.length()>2)
+			flag =true;
+		
+		return flag;
+	}
 }
 
 
