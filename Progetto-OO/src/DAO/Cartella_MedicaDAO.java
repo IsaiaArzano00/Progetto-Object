@@ -20,13 +20,13 @@ public class Cartella_MedicaDAO {
 	}
 	
 	//INSERT CARTELLA MEDICA 
-	public int InserisciCartellaMedica(String id_turtle ,String medico, double peso , double lunghezza , double larghezza , String specie , String luogo , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	public int InserisciCartellaMedica(Cartella_Medica cartella)
 	{
 		int rowinsert=0;
 		try {
 			rowinsert=statement.executeUpdate("INSERT INTO CARTELLA_MEDICA (ID_cartellamedica  ,  Specie , Peso  ,  Lunghezza ,  Larghezza  , Luogo_ritrovamento  ,  Data_Apertura_Cartella  ,  Data_Chiusura_Cartella  , Condizioni_Generali, Testa ,  Occhi "
 					+ ",  Pinne  , Naso ,  Becco ,  Collo ,  Coda ,  Matricola_Medico  ,  ID_Tartaruga)"
-					+ "VALUES(DEFAULT, '"+specie+"' , "+peso+" , "+lunghezza+" ,"+larghezza+" , '"+luogo+"' , '"+data+"' , NULL , '"+condizioni_generali+"' , '"+condizioniTesta+"' , '"+condizioniOcchi+"' , '"+condizioniPinne+"' , '"+condizioniNaso+"' , '"+condizioniBecco+"' , '"+condizioniCollo+"' , '"+condizioniCollo+"' , '"+medico+"' , '"+id_turtle+"' );");
+					+ "VALUES(DEFAULT, '"+cartella.getSpecie()+"' , "+cartella.getPeso()+" , "+cartella.getLunghezza()+" ,"+cartella.getLarghezza()+" , '"+cartella.getLuogo_ritrovamento()+"' , '"+cartella.getData_Apertura_Cartella()+"' , NULL , '"+cartella.getCondizioni_generali()+"' , '"+cartella.getCondizioni_testa()+"' , '"+cartella.getCondizioni_occhi()+"' , '"+cartella.getCondizioni_pinna()+"' , '"+cartella.getCondizioni_naso()+"' , '"+cartella.getCondizioni_becco()+"' , '"+cartella.getCondizioni_collo()+"' , '"+cartella.getCondizioni_coda()+"' , '"+cartella.getMatricola_medico()+"' , '"+cartella.getId_tartaruga()+"' );");
 			
 			return rowinsert;
 		}catch(SQLException e)
@@ -95,13 +95,13 @@ public class Cartella_MedicaDAO {
 	}
 	
 	//UPDATE DATI CARTELLA MEDICA 
-	public int ModificaDatiCartellaMedica(String id, double peso , double lunghezza , double larghezza , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	public int ModificaDatiCartellaMedica(Cartella_Medica cartella)
 	{
 		int rowupdate =0;
 		try {
-			rowupdate=statement.executeUpdate("UPDATE CARTELLA_MEDICA SET PESO ="+peso+" , LUNGHEZZA="+lunghezza+" , LARGHEZZA="+larghezza+""
-					+ " , DATA_APERTURA_CARTELLA='"+data+"' , CONDIZIONI_GENERALI = '"+condizioni_generali+"' , collo='"+condizioniCollo+"' , TESTA='"+condizioniTesta+"'"
-					+ " , OCCHI='"+condizioniOcchi+"' , PINNE='"+condizioniPinne+"' , NASO='"+condizioniNaso+"' , BECCO ='"+condizioniBecco+"' , CODA='"+condizioniCoda+"' WHERE ID_CARTELLAMEDICA = '"+id+"' ;");
+			rowupdate=statement.executeUpdate("UPDATE CARTELLA_MEDICA SET PESO ="+cartella.getPeso()+" , LUNGHEZZA="+cartella.getLunghezza()+" , LARGHEZZA="+cartella.getLarghezza()+""
+					+ " , DATA_APERTURA_CARTELLA='"+cartella.getData_Apertura_Cartella()+"' , CONDIZIONI_GENERALI = '"+cartella.getCondizioni_generali()+"' , collo='"+cartella.getCondizioni_collo()+"' , TESTA='"+cartella.getCondizioni_testa()+"'"
+					+ " , OCCHI='"+cartella.getCondizioni_occhi()+"' , PINNE='"+cartella.getCondizioni_pinna()+"' , NASO='"+cartella.getCondizioni_naso()+"' , BECCO ='"+cartella.getCondizioni_becco()+"' , CODA='"+cartella.getCondizioni_coda()+"' WHERE ID_CARTELLAMEDICA = '"+cartella.getId_cartella_medica()+"' ;");
 			
 			return rowupdate;
 		}catch(SQLException e)

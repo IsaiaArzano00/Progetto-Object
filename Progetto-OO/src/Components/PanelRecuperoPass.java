@@ -66,7 +66,7 @@ public class PanelRecuperoPass extends JPanel {
 		panel.add(USER);
 		
 		JLabel e_mail = new JLabel("");
-		e_mail.setIcon(new ImageIcon(PanelRecuperoPass.class.getResource("/Media/secured_letter_25px.png")));
+		e_mail.setIcon(new ImageIcon(PanelRecuperoPass.class.getResource("/Media/secured_letter_28px.png")));
 		e_mail.setForeground(Color.WHITE);
 		e_mail.setFont(new Font("SansSerif", Font.BOLD, 12));
 		e_mail.setBounds(95, 182, 39, 25);
@@ -142,10 +142,14 @@ public class PanelRecuperoPass extends JPanel {
 		});
 		
 		passwordField = new JPasswordField();
+		passwordField.setOpaque(false);
+		passwordField.setBorder(null);
 		passwordField.setBounds(160, 251, 180, 21);
 		panel.add(passwordField);
 		
 		repeatPasswordField = new JPasswordField();
+		repeatPasswordField.setOpaque(false);
+		repeatPasswordField.setBorder(null);
 		repeatPasswordField.setBounds(160, 323, 180, 21);
 		panel.add(repeatPasswordField);
 		
@@ -159,16 +163,61 @@ public class PanelRecuperoPass extends JPanel {
 		
 		JLabel GoHome = new JLabel("");
 	
-		GoHome.setIcon(new ImageIcon(PanelRegister.class.getResource("/Media/home_50px.png")));
-		GoHome.setBounds(10, 443, 45, 48);
+		GoHome.setIcon(new ImageIcon(PanelRecuperoPass.class.getResource("/Media/home_c_50px.png")));
+		GoHome.setBounds(10, 443, 60, 48);
 		panel.add(GoHome);
 		
-		JButton ButtonCambio = new JButton("CAMBIA PASS\r\n");
+		JButton ButtonCambio = new JButton("AGGIORNA PASSWORD\r\n");
 		ButtonCambio.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		ButtonCambio.setBounds(176, 443, 223, 48);
 		panel.add(ButtonCambio);
 		
-		// ACTION 
+		JSeparator separator_3_1 = new JSeparator();
+		separator_3_1.setBounds(160, 272, 180, 16);
+		panel.add(separator_3_1);
+		
+		JSeparator separator_3_2 = new JSeparator();
+		separator_3_2.setBounds(160, 344, 180, 16);
+		panel.add(separator_3_2);
+		
+		JLabel ShowPassword = new JLabel("");
+		ShowPassword.setIcon(new ImageIcon(PanelRecuperoPass.class.getResource("/Media/eye_20px.png")));
+		ShowPassword.setBounds(343, 255, 45, 13);
+		panel.add(ShowPassword);
+		
+		JLabel ShowRepeatPassword = new JLabel("");
+		ShowRepeatPassword.setIcon(new ImageIcon(PanelRecuperoPass.class.getResource("/Media/eye_20px.png")));
+		ShowRepeatPassword.setBounds(343, 327, 45, 13);
+		panel.add(ShowRepeatPassword);
+		
+		// LISTENER
+		 ShowPassword.addMouseListener(new MouseAdapter() {
+	        	@Override
+	        	public void mousePressed(MouseEvent e) {
+	        		passwordField.setFont((new Font("SansSerif", 1, 12)));
+	        		passwordField.setForeground(new Color(255,255,255));
+	        		passwordField.setEchoChar((char) 0);
+	        	}
+	        	public void mouseReleased(MouseEvent e) {
+	        		passwordField.setFont((new Font("Tahoma",0, 10)));
+	        		passwordField.setForeground(new Color(0,0,0));
+	        		passwordField.setEchoChar('●');
+	        	}
+	        });
+		 
+		 ShowRepeatPassword.addMouseListener(new MouseAdapter() {
+	        	@Override
+	        	public void mousePressed(MouseEvent e) {
+	        		repeatPasswordField.setFont((new Font("SansSerif", 1, 12)));
+	        		repeatPasswordField.setForeground(new Color(255,255,255));
+	        		repeatPasswordField.setEchoChar((char) 0);
+	        	}
+	        	public void mouseReleased(MouseEvent e) {
+	        		repeatPasswordField.setFont((new Font("Tahoma",0, 10)));
+	        		repeatPasswordField.setForeground(new Color(0,0,0));
+	        		repeatPasswordField.setEchoChar('●');
+	        	}
+	        });
 		ButtonCambio.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -237,8 +286,4 @@ public class PanelRecuperoPass extends JPanel {
 		public void alertUpdateFallito() {
 			JOptionPane.showMessageDialog(this, "Cambio della password non riuscito ! ","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
 		}
-		
-
-		
-		
 }

@@ -27,7 +27,7 @@ import Components.PanelCustomBlue;
 import Components.PanelWhite;
 import Controller.Controllore;
 
-public class ModificaCartellaMedica extends JDialog {
+public class ModificaCartellaMedica extends JFrame {
 	private JPanel contentPane;
 	private PanelWhite sfondo;
 	private JTextField Peso;
@@ -36,14 +36,27 @@ public class ModificaCartellaMedica extends JDialog {
 	private JTextField LuogoRitrovamento;
 	private Controllore controller;
 	private JTextField Medico;
-	
+	private JComboBox<String> comboBoxMedico;
+	private JComboBox<String> comboBoxCondizioniGenerali;
+	private JComboBox<String> comboBoxCondizioniTesta;
+	private JComboBox<String> comboBoxCondizioniOcchi;
+	private JComboBox<String> comboBoxCondizioniPinne;
+	private JComboBox<String> comboBoxCondizioniBecco;
+	private JComboBox<String> comboBoxCondizioniNaso;
+	private JComboBox<String> comboBoxCondizioniCoda;
+	private JComboBox<String> comboBoxCondizioniCollo;
+	private JComboBox<String> comboBoxTurtle;
+	private JComboBox<String> comboBoxSpecie;
+	private JDateChooser dateChooser;
 	private JTextField Tartaruga;
 	private JTextField Specie;
 	private JTextField CartellaMedica;
+	private String Id_turtle;
 	
 	public ModificaCartellaMedica(Controllore contr,String Id_Turtle) {
 		controller=contr;
-		setModal(true);
+		Id_turtle=Id_Turtle;
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 849, 667);
 		contentPane = new JPanel();
@@ -274,49 +287,49 @@ public class ModificaCartellaMedica extends JDialog {
 		separator_4.setBounds(178, 480, 171, 21);
 		sfondo.add(separator_4);
 		
-		JComboBox comboBoxCondizioniCollo = new JComboBox();
+		 comboBoxCondizioniCollo = new JComboBox();
 		comboBoxCondizioniCollo.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniCollo.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniCollo.setBounds(582, 118, 171, 21);
 		sfondo.add(comboBoxCondizioniCollo);
 		
-		JComboBox comboBoxCondizioniTesta = new JComboBox();
+		 comboBoxCondizioniTesta = new JComboBox();
 		comboBoxCondizioniTesta.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniTesta.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniTesta.setBounds(582, 166, 171, 21);
 		sfondo.add(comboBoxCondizioniTesta);
 		
-		JComboBox comboBoxCondizioniOcchi = new JComboBox();
+		 comboBoxCondizioniOcchi = new JComboBox();
 		comboBoxCondizioniOcchi.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniOcchi.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniOcchi.setBounds(582, 210, 171, 21);
 		sfondo.add(comboBoxCondizioniOcchi);
 		
-		JComboBox comboBoxCondizioniPinne = new JComboBox();
+		 comboBoxCondizioniPinne = new JComboBox();
 		comboBoxCondizioniPinne.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniPinne.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniPinne.setBounds(582, 264, 171, 21);
 		sfondo.add(comboBoxCondizioniPinne);
 		
-		JComboBox comboBoxCondizioniNaso = new JComboBox();
+		 comboBoxCondizioniNaso = new JComboBox();
 		comboBoxCondizioniNaso.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniNaso.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniNaso.setBounds(582, 317, 171, 21);
 		sfondo.add(comboBoxCondizioniNaso);
 		
-		JComboBox comboBoxCondizioniBecco = new JComboBox();
+		 comboBoxCondizioniBecco = new JComboBox();
 		comboBoxCondizioniBecco.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniBecco.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniBecco.setBounds(582, 371, 171, 21);
 		sfondo.add(comboBoxCondizioniBecco);
 		
-		JComboBox comboBoxCondizioniCoda = new JComboBox();
+		 comboBoxCondizioniCoda = new JComboBox();
 		comboBoxCondizioniCoda.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniCoda.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniCoda.setBounds(582, 414, 171, 21);
 		sfondo.add(comboBoxCondizioniCoda);
 		
-		JComboBox comboBoxCondizioniGenerali = new JComboBox();
+		 comboBoxCondizioniGenerali = new JComboBox();
 		comboBoxCondizioniGenerali.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniGenerali.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniGenerali.setBounds(582, 460, 171, 21);
@@ -388,29 +401,12 @@ public class ModificaCartellaMedica extends JDialog {
 					alertLarghezzaNonInserita();
 				else
 				{
-					 SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-		             String date = date_format.format(dateChooser.getDate());
-		             
-		             double peso=Double.parseDouble(Peso.getText().toString());
-		             double lunghezza=Double.parseDouble(Lunghezza.getText().toString());
-		             double larghezza=Double.parseDouble(Larghezza.getText().toString());
-		             
-		             String condizioni_generali= comboBoxCondizioniGenerali.getSelectedItem().toString();
-		             String condizioni_testa= comboBoxCondizioniTesta.getSelectedItem().toString();
-		             String condizioni_occhi= comboBoxCondizioniOcchi.getSelectedItem().toString();
-		             String condizioni_pinne= comboBoxCondizioniPinne.getSelectedItem().toString();
-		             String condizioni_becco= comboBoxCondizioniBecco.getSelectedItem().toString();
-		             String condizioni_naso= comboBoxCondizioniNaso.getSelectedItem().toString();
-		             String condizioni_coda= comboBoxCondizioniCoda.getSelectedItem().toString();
-		             String condizioni_collo= comboBoxCondizioniCollo.getSelectedItem().toString();
-		   
-		             String luogo= LuogoRitrovamento.getText();
-		             String id_cartella = controller.RecuperaCartellaMedica(Id_Turtle).getId_cartella_medica();
-		             boolean flag = controller.UpdateCartellaMedica(id_cartella, peso, lunghezza, larghezza, date, condizioni_generali, condizioni_collo, condizioni_testa, condizioni_occhi, condizioni_pinne, condizioni_naso, condizioni_becco, condizioni_coda);
-		             if(flag) {
+		             boolean flag = controller.UpdateCartellaMedica();
+		            if(flag)
+		            {
 		            	 	alertUpdateRiuscito();
-							sfondo.getTopLevelAncestor().setVisible(false);
-						}
+							ModificaCartellaMedica.this.setVisible(false);
+					}
 						else
 							alertUpdateFallito();
 					}
@@ -418,6 +414,93 @@ public class ModificaCartellaMedica extends JDialog {
 		
 	});
 }
+	//FUNCTION
+	public String getMedico()
+	{
+		String medico=comboBoxMedico.getSelectedItem().toString();
+		return medico;
+	}
+	public String getTurtle()
+	{
+		String turtle=comboBoxTurtle.getSelectedItem().toString();
+		return turtle;
+	}
+	public String getSpecie()
+	{
+		return comboBoxSpecie.getSelectedItem().toString();
+		
+	}
+	public String getLuogo()
+	{
+		return LuogoRitrovamento.getText();
+	}
+	public double getPeso()
+	{
+		double peso=Double.parseDouble(Peso.getText().toString());
+		return peso;
+	}
+	public double getLarghezza()
+	{
+		double larghezza=Double.parseDouble(Larghezza.getText().toString());
+		return larghezza;
+	}
+	public double getLunghezza()
+	{
+		double lunghezza=Double.parseDouble(Lunghezza.getText().toString());
+		return lunghezza;
+	}
+	 public java.sql.Date getDateDonate()
+	 {
+	    	java.util.Date utilDate =  dateChooser.getDate();
+	    	java.sql.Date  sqlDate = new java.sql.Date(utilDate.getTime());
+	    	return sqlDate;
+	  }
+	 
+	 public String getCondizioniGenerali()
+	 {
+		 String condizioni_generali= comboBoxCondizioniGenerali.getSelectedItem().toString();
+		 return condizioni_generali;
+	 }
+	 public String getCondizioniCollo()
+	 {
+		 String condizioni_collo= comboBoxCondizioniCollo.getSelectedItem().toString();
+		 return condizioni_collo;
+	 }
+	 public String getCondizioniTesta()
+	 {
+		 String condizioni_testa= comboBoxCondizioniTesta.getSelectedItem().toString();
+		 return condizioni_testa;
+	 }
+	 public String getCondizioniNaso()
+	 {
+		 String condizioni_naso= comboBoxCondizioniNaso.getSelectedItem().toString();
+		 return condizioni_naso;
+	 }
+	 public String getCondizioniBecco()
+	 {
+		 String condizioni_becco= comboBoxCondizioniBecco.getSelectedItem().toString();
+		 return condizioni_becco;
+	 }
+	 public String getCondizioniPinne()
+	 {
+		 String condizioni_pinne= comboBoxCondizioniPinne.getSelectedItem().toString();
+		 return condizioni_pinne;
+	 }
+	 public String getCondizioniCoda()
+	 {
+		 String condizioni_coda= comboBoxCondizioniCoda.getSelectedItem().toString();
+		 return condizioni_coda;
+	 }
+	 public String getCondizioniOcchi()
+	 {
+		 String condizioni_occhi= comboBoxCondizioniOcchi.getSelectedItem().toString();
+		 return condizioni_occhi;
+	 }
+	public String getIdCartella()
+	{
+		String id_cartella = controller.RecuperaCartellaMedica(Id_turtle).getId_cartella_medica();
+		return id_cartella;
+	}
 	//ALERT
 	public void alertUpdateFallito() {
 		JOptionPane.showMessageDialog(this, "Modifica della cartella medica  non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);

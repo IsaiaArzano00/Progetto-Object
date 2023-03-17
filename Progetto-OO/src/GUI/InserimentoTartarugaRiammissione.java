@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import com.toedter.calendar.JDateChooser;
@@ -33,7 +34,7 @@ import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 
-public class InserimentoTartarugaRiammissione extends JDialog {
+public class InserimentoTartarugaRiammissione extends JFrame {
 
 	private JPanel contentPane;
 	private PanelCustomBlue sfondo;
@@ -41,12 +42,15 @@ public class InserimentoTartarugaRiammissione extends JDialog {
 	private JTextField Eta_Turtle;
 	private JTextField Num_Targhetta;
 	private Controllore controller;
+	private JComboBox<String> comboBoxCentro;
+	private JDateChooser dateChooser;
+	
 
 	public InserimentoTartarugaRiammissione(Controllore contr) {
 		
 		 controller = contr;
 		 
-		setModal(true);
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 568);
 		contentPane = new JPanel();
@@ -123,7 +127,7 @@ public class InserimentoTartarugaRiammissione extends JDialog {
 		Eta_Turtle.setBorder(null);
 		Eta_Turtle.setOpaque(false);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		 dateChooser = new JDateChooser();
 		dateChooser.setBounds(167, 286, 167, 19);
 		sfondo.add(dateChooser);
 		
@@ -182,7 +186,7 @@ public class InserimentoTartarugaRiammissione extends JDialog {
 		scrollPane.setBounds(129, 342, 221, 21);
 		sfondo.add(scrollPane);
 		
-		JComboBox<String> comboBoxCentro = new JComboBox<>();
+		comboBoxCentro = new JComboBox<>();
 		for(int i=0 ; i<controller.getNomeCentri().size();i++) {
 			comboBoxCentro.addItem(controller.getNomeCentri().get(i).toString());
 		}
@@ -199,29 +203,20 @@ public class InserimentoTartarugaRiammissione extends JDialog {
 		Inserisci.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String nome=Nome.getText();
-				String numero_targhetta = Num_Targhetta.getText();
-				
-				SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-				String date = date_format.format(dateChooser.getDate());
-				
-				String centro = (String) comboBoxCentro.getSelectedItem();
-				
-				if(nome.isEmpty())
+				if(Nome.getText().isEmpty())
 					alertNomeNonInserito();
 				else if(Eta_Turtle.getText().isEmpty())
 					alertEtaNonInserita();
-				else if(numero_targhetta.isEmpty())
+				else if(Num_Targhetta.getText().isEmpty())
 					alertNumeroTarghettaNonInserito();
-				else if(centro.isEmpty())
+				else if(comboBoxCentro.getSelectedItem().toString().isEmpty())
 					alertCentroNonInserito() ;
 				else
 				{
-					int eta=Integer.parseInt(Eta_Turtle.getText());
-					boolean flag = controller.InsertTartarugaRiammissione(nome, eta, numero_targhetta, date, centro);
+					boolean flag = controller.InsertTartarugaRiammissione();
 					if(flag=true) {
 						alertInserimentoRiuscito();
-						sfondo.getTopLevelAncestor().setVisible(false);
+						InserimentoTartarugaRiammissione.this.setVisible(true);
 					}
 					else
 						alertInserimentoFallito();
@@ -230,6 +225,32 @@ public class InserimentoTartarugaRiammissione extends JDialog {
 			}
 		});
 		
+	}
+	//FUNCTIONS
+	public String GetNome()
+	{
+		String nome=Nome.getText();
+		return nome;
+	}
+	public int GetEta()
+	{
+		int eta=Integer.parseInt(Eta_Turtle.getText());
+		return eta;
+	}
+	public String GetCentro()
+	{
+		String centro = (String) comboBoxCentro.getSelectedItem();
+		return centro;
+	}
+	public Date GetDate()
+	{
+		java.util.Date data = dateChooser.getDate();
+		return (Date) data;
+	}
+	public String GetNumTarghetta()
+	{
+		String numero_targhetta = Num_Targhetta.getText();
+		return numero_targhetta;
 	}
 	//ALERT
 	public void alertInserimentoFallito() {

@@ -88,10 +88,8 @@ controller = contr;
             public void mouseClicked(MouseEvent e){
             	int index = tbl.getSelectedRow();
             	TableModel model =tbl.getModel();
-            	
             	String turtle_id = model.getValueAt(index,0).toString();
-            	ModificaCartellaMedica info = new ModificaCartellaMedica(controller,turtle_id);
-            	info.setVisible(true);
+            	controller.ModificaCartellaMedicaPage(turtle_id);
             	}
 		});
         GoBack.addMouseListener(new MouseAdapter() {

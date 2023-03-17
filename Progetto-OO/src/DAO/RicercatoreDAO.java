@@ -22,21 +22,21 @@ public class RicercatoreDAO {
 	}
 	//INSERT RICERCATORE 
 	
-	public int InserisciRicercatore(String Nome,String Cognome,String Codice_Fiscale , String Residenza , String Data_Inizio,int Compenso,String sede)
+	public int InserisciRicercatore(Ricercatore ricercatore)
 	{
 		int rowinsert=0;
 		
 		try {
 			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
-					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+					+ " WHERE C.NOME LIKE '"+ricercatore.getSede()+"'  ;");
 			String id_sede = new String();
 			while(rd.next())
 			{
 				id_sede = rd.getString("id_sede");
 			}
 			
-			rowinsert =statement.executeUpdate("INSERT INTO RICERCATORE VALUES (DEFAULT ,'"+Nome+"' , '"+Cognome+"' , '"+Residenza+"' , "
-					+ "'"+Codice_Fiscale+"' , '"+Data_Inizio+"' , null , "+Compenso+", '"+id_sede+"' );");
+			rowinsert =statement.executeUpdate("INSERT INTO RICERCATORE VALUES (DEFAULT ,'"+ricercatore.getNome()+"' , '"+ricercatore.getCognome()+"' , '"+ricercatore.getResidenza()+"' , "
+					+ "'"+ricercatore.getCodice_Fiscale()+"' , '"+ricercatore.getData_Inizio_Lavoro()+"' , null , "+ricercatore.getCompenso()+", '"+id_sede+"' );");
 			
 			return rowinsert;
 			

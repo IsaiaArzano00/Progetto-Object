@@ -21,13 +21,13 @@ public class Cartella_Medica_DegenzaDAO {
 	}
 	
 	//INSERT CARTELLA MEDICA DEGENZA
-	public int InserisciVisita(String date, String farmaco , int peso , String condizioni , String id_turtle , String medico)
+	public int InserisciVisita(Cartella_Medica_Degenza cartella)
 	{
 		int rowinsert=0;
 		try {
 			rowinsert=statement.executeUpdate("INSERT INTO CARTELLA_DEGENZA(data_controllo,farmaco_somministrato,peso,valutazione_condizioni_generali,id_tartaruga, matricola_medico,id_cartelladegenza)"
-					+ " VALUES ('"+date+"' , '"+farmaco+"' , "+peso+" , '"+condizioni+"' , '"
-					+id_turtle+"' , '"+medico+"', DEFAULT  );");
+					+ " VALUES ('"+cartella.getData_controllo()+"' , '"+cartella.getFarmaco_somministrato()+"' , "+cartella.getPeso()+" , '"+cartella.getValutazione_condizioni_generali()+"' , '"
+					+cartella.getId_tartaruga()+"' , '"+cartella.getMatricola_medico()+"', DEFAULT  );");
 					
 			return rowinsert;
 			

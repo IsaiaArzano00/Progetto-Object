@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,16 +25,17 @@ import Components.PanelCustomBlue;
 import Controller.Controllore;
 import javax.swing.JScrollPane;
 
-public class InserimentoVasca extends JDialog {
+public class InserimentoVasca extends JFrame {
 	private JTextField capacita_vasca;
 	private Controllore controller;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField temperatura_vasca;
+	private JComboBox<String> comboBoxCentro;
 
 	public InserimentoVasca(Controllore contr) {
 		controller=contr;
 		
-		setModal(true);
+		setVisible(true);
 		setResizable(false);
 		setBounds(100, 100, 455, 469);
 		getContentPane().setLayout(new BorderLayout());
@@ -147,7 +149,7 @@ public class InserimentoVasca extends JDialog {
 		scrollPane.setBounds(113, 268, 244, 23);
 		sfondo.add(scrollPane);
 		
-		JComboBox<String> comboBoxCentro = new JComboBox<>();
+		 comboBoxCentro = new JComboBox<>();
 		scrollPane.setColumnHeaderView(comboBoxCentro);
 		
 		//FILL COMBOBOXCENTRO CON NOMI DEI CENTRI	
@@ -172,14 +174,11 @@ public class InserimentoVasca extends JDialog {
 							alertTemperaturaNonInserita();
 						else
 						{
-							double capacita=Double.parseDouble(capacita_vasca.getText());
-							double temperatura=Double.parseDouble(temperatura_vasca.getText());
-							String centro=(String) comboBoxCentro.getSelectedItem();
-							boolean flag = controller.InserisciVasca(capacita, temperatura, centro);
+							boolean flag = controller.InserisciVasca();
 							if(flag)
 							{
 								alertInserimentoRiuscito();
-								sfondo.getTopLevelAncestor().setVisible(false);
+								InserimentoVasca.this.setVisible(false);
 							}
 							else
 								alertInserimentoFallito();
@@ -189,20 +188,36 @@ public class InserimentoVasca extends JDialog {
 					}
 				});
 	}
+	//FUNCTION
+	public double getCapacita()
+	{
+		double capacita=Double.parseDouble(capacita_vasca.getText());
+		return capacita;
+	}
+	public double getTemperatura()
+	{
+		double temperatura=Double.parseDouble(temperatura_vasca.getText());
+		return temperatura;
+	}
+	public String getCentro()
+	{
+		String centro=(String) comboBoxCentro.getSelectedItem();
+		return centro;
+	}
 				
-				//ALERT
-				public void alertInserimentoFallito() {
-					JOptionPane.showMessageDialog(this, "Inserimento della vasca non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
-				}
+	//ALERT
+	public void alertInserimentoFallito() {
+		JOptionPane.showMessageDialog(this, "Inserimento della vasca non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
 
-				public void alertCapacitaNonInserita() {
-					JOptionPane.showMessageDialog(this, "Capacità della vasca  non inserita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
-				}
-				public void alertTemperaturaNonInserita() {
-					JOptionPane.showMessageDialog(this, "Temperatura della vasca  non inserita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
-				}
-				
-				public void alertInserimentoRiuscito() {
-					JOptionPane.showMessageDialog(this, "Inserimento della vasca  riuscito!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
-				}
+	public void alertCapacitaNonInserita() {
+		JOptionPane.showMessageDialog(this, "Capacità della vasca  non inserita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	public void alertTemperaturaNonInserita() {
+		JOptionPane.showMessageDialog(this, "Temperatura della vasca  non inserita!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	public void alertInserimentoRiuscito() {
+		JOptionPane.showMessageDialog(this, "Inserimento della vasca  riuscito!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
+	}
 }

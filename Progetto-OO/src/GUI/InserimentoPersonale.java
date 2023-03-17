@@ -13,6 +13,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -26,7 +27,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class InserimentoPersonale extends JDialog {
+public class InserimentoPersonale extends JFrame {
     private JPanel contentPane;
     private PanelCustomDashboard sfondo;
     private JTextField Nome;
@@ -34,12 +35,15 @@ public class InserimentoPersonale extends JDialog {
     private JTextField Indirizzo;
     private JTextField Codice_Fiscale;
     private Controllore controller;
+    private JDateChooser dateChooser;
+    private JComboBox comboBoxQualifica;
+    private JComboBox<String> comboBoxCentro;
 
     public InserimentoPersonale(Controllore contr) {
     	setResizable(false);
         controller = contr;
         
-        setModal(true);
+        setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 568);
 		contentPane = new JPanel();
@@ -82,13 +86,13 @@ public class InserimentoPersonale extends JDialog {
         lblNewLabel_3_6.setBounds(10, 374, 134, 13);
         sfondo.add(lblNewLabel_3_6);
         
-        JComboBox comboBoxQualifica = new JComboBox();
+        comboBoxQualifica = new JComboBox();
         comboBoxQualifica.setFont(new Font("SansSerif", Font.BOLD, 12));
         comboBoxQualifica.setModel(new DefaultComboBoxModel(new String[]{"Ricercatore", "Operatore", "Tecnico di laboratorio", "Ricercatore"}));
         comboBoxQualifica.setBounds(120, 141, 142, 21);
         sfondo.add(comboBoxQualifica);
         comboBoxQualifica.setOpaque(false);
-         JComboBox<String> comboBoxCentro = new JComboBox();
+          comboBoxCentro = new JComboBox();
          comboBoxCentro.setFont(new Font("SansSerif", Font.BOLD, 12));
 
         for(int i = 0; i < controller.getNomeCentri().size(); ++i) {
@@ -133,7 +137,7 @@ public class InserimentoPersonale extends JDialog {
         Indirizzo.setBounds(120, 280, 142, 19);
         sfondo.add(Indirizzo);
         
-         JDateChooser dateChooser = new JDateChooser();
+          dateChooser = new JDateChooser();
          dateChooser.setOpaque(false);
         dateChooser.setBounds(154, 374, 150, 19);
         sfondo.add(dateChooser);
@@ -296,39 +300,28 @@ public class InserimentoPersonale extends JDialog {
 		GoBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sfondo.getTopLevelAncestor().setVisible(false);
+				InserimentoPersonale.this.setVisible(false);
 			}
 		});
 		
 		
         InserisciPersonale.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                String qualifica = (String)comboBoxQualifica.getSelectedItem();
-                String nome = Nome.getText();
-                String cognome = Cognome.getText();
-                String residenza = Indirizzo.getText();
-                String codice_fiscale = Codice_Fiscale.getText();
-                
-                SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-                String date = date_format.format(dateChooser.getDate());
-                
-                String centro = (String)comboBoxCentro.getSelectedItem();
-                
-                if (nome.isEmpty()) {
+                if (Nome.getText().isEmpty()) {
                     alertNomeNonInserito();
-                } else if (cognome.isEmpty()) {
+                } else if (Cognome.getText().isEmpty()) {
                     alertCognomeNonInserito();
-                } else if (residenza.isEmpty()) {
+                } else if (Indirizzo.getText().isEmpty()) {
                     alertResidenzaNonInserita();
-                } else if (!InserimentoPersonale.this.controller.check_CodiceFiscale(codice_fiscale)) {
+                } else if (!InserimentoPersonale.this.controller.check_CodiceFiscale(Codice_Fiscale.getText())) {
                     alertCodFiscaleNonCorretto();
-                } else if (codice_fiscale.isEmpty()) {
+                } else if (Codice_Fiscale.getText().isEmpty()) {
                     alertCodiceFiscaleNonInserito();
                 } else {
-                    boolean flag = controller.InsertPersonale(qualifica, nome, cognome, residenza, codice_fiscale, date, centro);
+                    boolean flag = controller.InsertPersonale();
                     if (flag) {
                         alertInserimentoRiuscito();
-                        sfondo.getTopLevelAncestor().setVisible(false);
+                        InserimentoPersonale.this.setVisible(false);
                     } else {
                         alertInserimentoFallito();
                     }
@@ -338,6 +331,43 @@ public class InserimentoPersonale extends JDialog {
         });
     }
 
+    //FUNCTIONS
+    public String GetQualifica()
+    {
+    	String qualifica = (String)comboBoxQualifica.getSelectedItem();
+    	return qualifica;
+    }
+    public String GetNome()
+    {
+    	String nome = Nome.getText();
+    	return nome;
+    }
+    public String GetCognome()
+    {
+    	String cognome = Cognome.getText();
+    	return cognome;
+    }
+    public String GetIndirizzo()
+    {
+    	 String residenza = Indirizzo.getText();
+    	 return residenza;
+    }
+    public String GetCodiceFiscale()
+    {
+    	String codice_fiscale = Codice_Fiscale.getText();
+    	return codice_fiscale;
+    }
+    public String GetCentro()
+    {
+    	String centro = (String)comboBoxCentro.getSelectedItem();
+    	return centro;
+    }
+    public Date GetData()
+    {
+    	Date data = (Date) dateChooser.getDate();
+    	return data;
+    }
+    //ALERT
     public void alertInserimentoFallito() {
         JOptionPane.showMessageDialog(this, "Inserimento del personale non riuscito!", "<ATTENZIONE>", 2);
     }

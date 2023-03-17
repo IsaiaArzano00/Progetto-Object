@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,10 +24,12 @@ import javax.swing.border.EmptyBorder;
 import Components.PanelCustomBlue;
 import Controller.Controllore;
 
-public class InserimentoLaboratorio extends JDialog {
+public class InserimentoLaboratorio extends JFrame {
 	private JTextField numero_lab;
 	private Controllore controller;
-	private final JPanel contentPanel = new JPanel();
+	private JComboBox<String> comboBoxSede;
+	private JComboBox comboBoxFinalita;
+	private  JPanel contentPanel = new JPanel();
 
 	public InserimentoLaboratorio(Controllore contr) {
 		controller = contr;
@@ -34,7 +37,7 @@ public class InserimentoLaboratorio extends JDialog {
 		getContentPane().setLayout(null);
 		setBounds(100,100,454,472);
 		setResizable(false);
-		setModal(true);
+		setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 658, 508);
@@ -126,13 +129,13 @@ public class InserimentoLaboratorio extends JDialog {
 		
 		
 		
-		JComboBox comboBoxFinalita = new JComboBox();
+		comboBoxFinalita = new JComboBox();
 		comboBoxFinalita.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxFinalita.setModel(new DefaultComboBoxModel(new String[] {"monitoraggio qualita ambiente marino", "raccolta materiale e attivita subacquea", "rilievo idrografici e campionamento", "monitoraggio specie protette", "monitoraggio specie a rischio estinzione"}));
 		comboBoxFinalita.setBounds(157, 195, 242, 21);
 		sfondo.add(comboBoxFinalita);
 		
-		JComboBox<String> comboBoxSede = new JComboBox<>();
+		comboBoxSede = new JComboBox<>();
 		comboBoxSede.setBounds(116, 269, 69, 21);
 		sfondo.add(comboBoxSede);
 		for(int i=0 ; i<controller.getIDSede().size();i++) {
@@ -151,21 +154,16 @@ public class InserimentoLaboratorio extends JDialog {
 				Inserisci.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-					
-						String finalita = (String) comboBoxFinalita.getSelectedItem();
-						String centro = (String) comboBoxSede.getSelectedItem();
-						
 						if(numero_lab.getText().isEmpty())
 							alertNumeroNonInserito();
 						
 						else
 						{
-							int numero=Integer.parseInt(numero_lab.getText());
-							boolean flag = controller.InserisciLaboratorio(finalita, numero, centro);
+							boolean flag = controller.InserisciLaboratorio();
 							if(flag=true)
 							{
 								alertInserimentoRiuscito();
-							sfondo.getTopLevelAncestor().setVisible(false);
+								InserimentoLaboratorio.this.setVisible(false);
 							}
 							else
 								alertInserimentoFallito();
@@ -173,20 +171,36 @@ public class InserimentoLaboratorio extends JDialog {
 						
 					}
 				});
-	}			
-				//ALERT
-				public void alertInserimentoFallito() {
-					JOptionPane.showMessageDialog(this, "Inserimento del laboratorio non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
-				}
+	}		
+	//FUNCTIONS
+	public String getCentro()
+	{
+		String centro = (String) comboBoxSede.getSelectedItem();
+		return centro;
+	}
+	public String getFinalita()
+	{
+		String finalita = (String) comboBoxFinalita.getSelectedItem();
+		return finalita;
+	}
+	public int getNumero()
+	{
+		int numero=Integer.parseInt(numero_lab.getText());
+		return numero;
+	}
+	//ALERT
+	public void alertInserimentoFallito() {
+		JOptionPane.showMessageDialog(this, "Inserimento del laboratorio non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
 
-				public void alertNumeroNonInserito() {
-					JOptionPane.showMessageDialog(this, "Numero  non inserito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
-				}
-				
-				
-				public void alertInserimentoRiuscito() {
-					JOptionPane.showMessageDialog(this, "Inserimento del laboratorio  riuscito!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
-				}
+	public void alertNumeroNonInserito() {
+		JOptionPane.showMessageDialog(this, "Numero  non inserito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	
+	public void alertInserimentoRiuscito() {
+		JOptionPane.showMessageDialog(this, "Inserimento del laboratorio  riuscito!","<ATTENZIONE>", JOptionPane.INFORMATION_MESSAGE);
+	}
 				
 	
 

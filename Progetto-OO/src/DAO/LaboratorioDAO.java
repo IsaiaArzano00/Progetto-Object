@@ -21,11 +21,11 @@ public class LaboratorioDAO {
 
 	
 	//INSERT NUOVO LABORATORIO
-	public int InserisciLaboratorio(int numero_lab , String finalita , String sede)
+	public int InserisciLaboratorio(Laboratorio lab)
 	{
 		int rowinsert =0;
 		try {
-			rowinsert=statement.executeUpdate("INSERT INTO LABORATORIO VALUES(DEFAULT, '"+numero_lab+"' , '"+finalita+"' , '"+sede+"' );");
+			rowinsert=statement.executeUpdate("INSERT INTO LABORATORIO VALUES(DEFAULT, '"+lab.getNumero_lab()+"' , '"+lab.getFinalita_laboratorio()+"' , '"+lab.getId_sede()+"' );");
 			return rowinsert;
 			
 		}catch(SQLException e)
@@ -86,6 +86,30 @@ public class LaboratorioDAO {
 		{
 			e.printStackTrace();
 			return rowdelete;
+		}
+	}
+	
+	//LISTA DEI LABORATORI
+	public ArrayList<Laboratorio> listaLaboratori()
+	{
+		ArrayList<Laboratorio> lista = new ArrayList<Laboratorio>();
+		try {
+			ResultSet rs = statement.executeQuery("SELECT * FROM LABORATORIO ;");
+			while(rs.next())
+			{
+				Laboratorio lab = new Laboratorio();
+				lab.setId_laboratorio(rs.getString("id_laboratorio"));
+				lab.setFinalita_laboratorio(rs.getString("finalita_laboratorio"));
+				lab.setNumero_lab(rs.getInt("numero_lab"));
+				lab.setId_sede(rs.getString("id_sede"));
+				
+				lista.add(lab);
+			}
+			return lista;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return lista;
 		}
 	}
 }

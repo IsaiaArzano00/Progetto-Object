@@ -85,8 +85,8 @@ controller = contr;
         
         JLabel Elimina_CartellaMedica = new JLabel("");
        
-        Elimina_CartellaMedica.setIcon(new ImageIcon(PanelPersonale.class.getResource("/Media/delete_80px.png")));
-        Elimina_CartellaMedica.setBounds(119, 86, 154, 107);
+        Elimina_CartellaMedica.setIcon(new ImageIcon(PanelCartellaMedica.class.getResource("/Media/remove__c_100px.png")));
+        Elimina_CartellaMedica.setBounds(147, 87, 154, 107);
         panel_rimuovi.add(Elimina_CartellaMedica);
         
         JLabel lblNewLabel = new JLabel("GESTIONE DELLE CARTELLE MEDICHE");
@@ -109,8 +109,7 @@ controller = contr;
         InserisciCartellaMedica.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		InserimentoCartellaMedica insertcartella = new InserimentoCartellaMedica(controller);
-        		insertcartella.setVisible(true);
+        		controller.InserimentoCartellaMedicaPage();
         		
         	}
         });

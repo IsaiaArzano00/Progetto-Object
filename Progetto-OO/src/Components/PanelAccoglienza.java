@@ -51,7 +51,7 @@ public class PanelAccoglienza extends JPanel {
         
         JLabel Riammissione = new JLabel("");
        
-        Riammissione.setIcon(new ImageIcon(PanelAccoglienza.class.getResource("/Media/add_100px.png")));
+        Riammissione.setIcon(new ImageIcon(PanelAccoglienza.class.getResource("/Media/add_c_100px.png")));
         Riammissione.setBounds(104, 63, 246, 144);
         panel_riammissione.add(Riammissione);
         
@@ -68,7 +68,7 @@ public class PanelAccoglienza extends JPanel {
         panel_primo_ingresso.add(lblNewLabel_3);
         
         JLabel PrimoIngresso = new JLabel("");
-        PrimoIngresso.setIcon(new ImageIcon(PanelAccoglienza.class.getResource("/Media/add_100px.png")));
+        PrimoIngresso.setIcon(new ImageIcon(PanelAccoglienza.class.getResource("/Media/add_c_100px.png")));
         PrimoIngresso.setBounds(137, 71, 169, 132);
         panel_primo_ingresso.add(PrimoIngresso);
         
@@ -84,7 +84,7 @@ public class PanelAccoglienza extends JPanel {
         panel_targhetta.add(lblNewLabel_7);
         
         JLabel AggiungiTarghetta = new JLabel("");
-        AggiungiTarghetta.setIcon(new ImageIcon(PanelAccoglienza.class.getResource("/Media/add_100px.png")));
+        AggiungiTarghetta.setIcon(new ImageIcon(PanelAccoglienza.class.getResource("/Media/add_c_100px.png")));
         AggiungiTarghetta.setBounds(119, 86, 154, 107);
         panel_targhetta.add(AggiungiTarghetta);
         
@@ -108,24 +108,21 @@ public class PanelAccoglienza extends JPanel {
         Riammissione.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		InserimentoTartarugaRiammissione insertturtle=new InserimentoTartarugaRiammissione(controller);
-        		insertturtle.setVisible(true);
+        		controller.InserimentoTurtleRiammssionePage();
         	}
         });
         
         PrimoIngresso.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		InserimentoTartarugaPrima insertturtle=new InserimentoTartarugaPrima(controller);
-        		insertturtle.setVisible(true);
+        		controller.InserimentoTurtlePrimaPage();
         	}
         });
         
         AggiungiTarghetta.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		InserimentoTarghetta insert_targhetta=new InserimentoTarghetta(controller);
-        		insert_targhetta.setVisible(true);
+        		controller.InserimentoTarghettaPage();
         	}
         });
 	}

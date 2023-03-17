@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,16 +23,18 @@ import Controller.Controllore;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-public class InserimentoVisita extends JDialog {
+public class InserimentoVisita extends JFrame {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField PesoTurtle;
 	private JTextField Id_turtleField;
 	private JTextField matricola_medicoField;
 	private Controllore controller;
-
+	private JDateChooser dateChooser;
+	private JComboBox comboBoxFarmaco;
+	private JComboBox<String> comboBoxCondizioni;
 	
 	public InserimentoVisita(Controllore contr) {
 		controller =contr;
@@ -39,7 +42,7 @@ public class InserimentoVisita extends JDialog {
 		getContentPane().setLayout(null);
 		setBounds(100,100,454,541);
 		setResizable(false);
-		setModal(true);
+		setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 658, 508);
@@ -120,19 +123,19 @@ public class InserimentoVisita extends JDialog {
 		
 		
 		
-		JComboBox comboBoxFarmaco = new JComboBox();
+		comboBoxFarmaco = new JComboBox();
 		comboBoxFarmaco.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxFarmaco.setModel(new DefaultComboBoxModel(new String[] {"antibiotico", "antidolorifico", "multivitaminico", "altro"}));
 		comboBoxFarmaco.setBounds(193, 179, 179, 21);
 		sfondo.add(comboBoxFarmaco);
 		
-		JComboBox<String> comboBoxCondizioni = new JComboBox<>();
+		comboBoxCondizioni = new JComboBox<>();
 		comboBoxCondizioni.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioni.setModel(new DefaultComboBoxModel(new String[] {"Perfetta", "Buona", "Con ferite superficiali", "Con ferite profonde", "Compromessa"}));
 		comboBoxCondizioni.setBounds(193, 262, 179, 21);
 		sfondo.add(comboBoxCondizioni);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		 dateChooser = new JDateChooser();
 		dateChooser.setBounds(193, 136, 179, 21);
 		sfondo.add(dateChooser);
 		
@@ -195,28 +198,19 @@ public class InserimentoVisita extends JDialog {
 		Inserisci.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String id_turtle = Id_turtleField.getText();
-				String matricola = matricola_medicoField.getText();
-				
 				if(PesoTurtle.getText().isEmpty())
 					alertPesoNonInserito();
-				else if (id_turtle.isEmpty())
+				else if (Id_turtleField.getText().isEmpty())
 					alertTartarugaNonInserito();
-				else if(matricola.isEmpty())
+				else if(matricola_medicoField.getText().isEmpty())
 					alertMatricolaNonInserita();
-				else if(!controller.checkID_Turtle(id_turtle))
+				else if(!controller.checkID_Turtle(Id_turtleField.getText()))
 					alertIDNonPresente();
-				else if(!controller.checkMatricoloMedico(matricola))
+				else if(!controller.checkMatricoloMedico(matricola_medicoField.getText()))
 					alertMatricolaNonPresente();
 				else
 				{
-					String farmaco = (String) comboBoxFarmaco.getSelectedItem();
-					String condizioni = (String) comboBoxCondizioni.getSelectedItem();
-					int peso = Integer.parseInt(PesoTurtle.getText());
-					SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-					String date = date_format.format(dateChooser.getDate());
-					
-					boolean flag =controller.InserisciVisita(date, farmaco, peso, condizioni, id_turtle, matricola);
+					boolean flag =controller.InserisciVisita();
 					if(flag)
 					{
 						alertInserimentoRiuscito();
@@ -237,6 +231,37 @@ public class InserimentoVisita extends JDialog {
 		
 		}
 	
+	//FUNCTIONS
+	public String GetTurtle()
+	{
+		String id_turtle = Id_turtleField.getText();
+		return id_turtle;
+	}
+	public String GetMatricolaMedico()
+	{
+		String matricola = matricola_medicoField.getText();
+		return matricola;
+	}
+	public int GetPeso()
+	{
+		int peso = Integer.parseInt(PesoTurtle.getText());
+		return peso;
+	}
+	public String GetFarmaco()
+	{
+		String farmaco = (String) comboBoxFarmaco.getSelectedItem();
+		return farmaco;
+	}
+	public String GetCondizione()
+	{
+		String condizioni = (String) comboBoxCondizioni.getSelectedItem();
+		return condizioni;
+	}
+	public Date GetData()
+	{
+		Date data = (Date) dateChooser.getDate();
+		return data;
+	}
 	//ALERT 
 	
 	public void alertInserimentoFallito() {

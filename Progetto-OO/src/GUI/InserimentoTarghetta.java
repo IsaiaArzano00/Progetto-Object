@@ -20,19 +20,23 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-public class InserimentoTarghetta extends JDialog {
+public class InserimentoTarghetta extends JFrame {
 	private JPanel contentPane;
 	private Controllore controller;
 	private JTextField Matricola_Ope;
+	private JComboBox comboBoxTurtle;
+	private JComboBox comboBoxGPS;
+	private JDateChooser dateChooser;
 	/**
 	 * Create the panel.
 	 */
 	public InserimentoTarghetta(Controllore contr) {
 		controller=contr;
 		
-		setModal(true);
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 568);
 		contentPane = new JPanel();
@@ -93,7 +97,7 @@ public class InserimentoTarghetta extends JDialog {
 		lblNewLabel_6.setBounds(10, 324, 102, 13);
 		sfondo.add(lblNewLabel_6);
 		
-		JComboBox comboBoxTurtle = new JComboBox();
+		 comboBoxTurtle = new JComboBox();
 		comboBoxTurtle.setBounds(182, 136, 154, 21);
 		sfondo.add(comboBoxTurtle);
 		
@@ -105,11 +109,11 @@ public class InserimentoTarghetta extends JDialog {
 		sfondo.add(Matricola_Ope);
 		Matricola_Ope.setColumns(10);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		 dateChooser = new JDateChooser();
 		dateChooser.setBounds(182, 264, 154, 21);
 		sfondo.add(dateChooser);
 		
-		JComboBox comboBoxGPS = new JComboBox();
+		 comboBoxGPS = new JComboBox();
 		comboBoxGPS.setFont(new Font("SansSerif", Font.BOLD, 13));
 		comboBoxGPS.setModel(new DefaultComboBoxModel(new String[] {"SI", "NO"}));
 		comboBoxGPS.setBounds(182, 321, 154, 21);
@@ -151,46 +155,56 @@ public class InserimentoTarghetta extends JDialog {
 		Inserisci.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String turtle =comboBoxTurtle.getSelectedItem().toString();
-				String matricola_ope =Matricola_Ope.getText();
-				String presenza_gps="";
-				if(matricola_ope.isEmpty())
+				if(Matricola_Ope.getText().isEmpty())
 					alertMatricolaNonInserita();
-				else if (!controller.CheckMatricolaOperatore(matricola_ope))
+				else if (!controller.CheckMatricolaOperatore(Matricola_Ope.getText()))
 					alertMatricolaNonPresente();
 				else 
 				{
-					 SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-		             String date = date_format.format(dateChooser.getDate());
-		                
-					if(comboBoxGPS.getSelectedItem().toString().equals("SI"))
-						presenza_gps="TRUE";
-					else
-						presenza_gps="FALSE";
-					
-					boolean flag = controller.InserisciTarghetta(turtle, matricola_ope, date, presenza_gps);
+					boolean flag = controller.InserisciTarghetta();
 					if(flag)
 					{
 						alertInserimentoRiuscito();
-						sfondo.getTopLevelAncestor().setVisible(false);
+						InserimentoTarghetta.this.setVisible(false);
 					}
 					else
-						alertInserimentoFallito();
-							
+						alertInserimentoFallito();	
 				}
-				
-				
 			}
 		});
 		GoBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sfondo.getTopLevelAncestor().setVisible(false);
+				InserimentoTarghetta.this.setVisible(false);
 			}
 		});
 
 	}
-	
+	//FUNCTION
+	public String getMatricolaOpe()
+	{
+		String matricola_ope =Matricola_Ope.getText();
+		return matricola_ope;
+	}
+	public String getTurtle()
+	{
+		String turtle =comboBoxTurtle.getSelectedItem().toString();
+		return turtle;
+	}
+	public boolean getSceltaGPS()
+	{
+		boolean presenza_gps;
+		if(comboBoxGPS.getSelectedItem().toString().equals("SI"))
+			presenza_gps=true;
+		else
+			presenza_gps=false;
+		return presenza_gps;
+	}
+	public Date getData()
+	{
+		Date data = (Date) dateChooser.getDate();
+		return data;
+	}
 	//ALERT 
 	public void alertInserimentoFallito() {
 		JOptionPane.showMessageDialog(this, "Inserimento della targhetta non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);

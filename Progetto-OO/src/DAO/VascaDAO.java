@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 import DTO.Vasca;
 import connection.Connessione;
 
@@ -63,11 +64,11 @@ public class VascaDAO {
 	}
 
 	
-	public int InsertVasca(double capacita , double temperatura , String centro)
+	public int InsertVasca(Vasca vasca)
 	{
 		int rowinsert=0;
 		try {
-			rowinsert=statement.executeUpdate("INSERT INTO VASCA VALUES (DEFAULT , "+capacita+" , "+temperatura+" , '"+centro+"' );");
+			rowinsert=statement.executeUpdate("INSERT INTO VASCA VALUES (DEFAULT , "+vasca.getCapacita_vasca()+" , "+vasca.getTemperatura_acqua()+" , '"+vasca.getNome_centro()+"' );");
 			return rowinsert;
 		}catch(SQLException e)
 		{
@@ -125,4 +126,27 @@ public class VascaDAO {
 			return rowdelete;
 		}
 	}
+	//LISTA DELLE VASCE
+		public ArrayList<Vasca> listaVasche()
+		{
+			ArrayList<Vasca> lista = new ArrayList<Vasca>();
+			try {
+				ResultSet rs = statement.executeQuery("SELECT * FROM VASCA ;");
+				while(rs.next())
+				{
+					Vasca vasca = new Vasca();
+					vasca.setCodice_vasca(rs.getString("codice_vasca"));
+					vasca.setCapacita_vasca(rs.getDouble("capacita_vasca"));
+					vasca.setTemperatura_acqua(rs.getDouble("temperatura_acqua"));
+					vasca.setNome_centro(rs.getString("nome_centro"));
+					
+					lista.add(vasca);
+				}
+				return lista;
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+				return lista;
+			}
+		}
 }

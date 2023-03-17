@@ -50,7 +50,7 @@ public class PanelDegenza extends JPanel {
 		JLabel VisualizzaVisite = new JLabel("");
 		
 	
-		VisualizzaVisite.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/treatment_list_100px.png")));
+		VisualizzaVisite.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/ecg__c100px.png")));
 		VisualizzaVisite.setBounds(104, 63, 246, 144);
 		panel_1_1.add(VisualizzaVisite);
 		
@@ -68,7 +68,7 @@ public class PanelDegenza extends JPanel {
 		JLabel NuovaVisita = new JLabel("");
 	
 		
-		NuovaVisita.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/medical_bag_100px.png")));
+		NuovaVisita.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/medical_bag_c_100px.png")));
 		NuovaVisita.setBounds(137, 71, 169, 132);
 		panel_1_2.add(NuovaVisita);
 		
@@ -85,7 +85,7 @@ public class PanelDegenza extends JPanel {
 		
 		JLabel CiboVasca = new JLabel("");
 		
-		CiboVasca.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/fish_and_vegetables_100px.png")));
+		CiboVasca.setIcon(new ImageIcon(PanelDegenza.class.getResource("/Media/shrimp_and_lobster_100px.png")));
 		CiboVasca.setBounds(119, 86, 154, 107);
 		panel_1_3.add(CiboVasca);
 		
@@ -106,8 +106,7 @@ public class PanelDegenza extends JPanel {
 		NuovaVisita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoVisita newvisita = new InserimentoVisita(controller);
-				newvisita.setVisible(true);
+				controller.InserimentoVisitaPage();
 			}
 		});
 		
@@ -122,8 +121,7 @@ public class PanelDegenza extends JPanel {
 		CiboVasca.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				InserimentoCibo insertcibo = new InserimentoCibo(controller);
-				insertcibo.setVisible(true);
+				controller.InserimentoCiboPage();
 			}
 		});
 	}

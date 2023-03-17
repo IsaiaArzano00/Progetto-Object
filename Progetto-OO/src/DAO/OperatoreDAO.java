@@ -21,21 +21,21 @@ public class OperatoreDAO {
 	}
 	
 	//INSERT IN OPERATORE
-	public int InserisciOperatore(String Nome,String Cognome,String Codice_Fiscale , String Residenza , String Data_Inizio,int Compenso,String sede)
+	public int InserisciOperatore(Operatore operatore)
 	{
 		int rowinsert=0;
 		
 		try {
 			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
-					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+					+ " WHERE C.NOME LIKE '"+operatore.getSede()+"'  ;");
 			String id_sede = new String();
 			while(rd.next())
 			{
 				id_sede = rd.getString("id_sede");
 			}
 			
-			rowinsert =statement.executeUpdate("INSERT INTO OPERATORE VALUES (DEFAULT ,'"+Nome+"' , '"+Cognome+"' , '"+Residenza+"' , "
-					+ "'"+Codice_Fiscale+"' , '"+Data_Inizio+"' , null , "+Compenso+", '"+id_sede+"' );");
+			rowinsert =statement.executeUpdate("INSERT INTO OPERATORE VALUES (DEFAULT ,'"+operatore.getNome()+"' , '"+operatore.getCognome()+"' , '"+operatore.getResidenza()+"' , "
+					+ "'"+operatore.getCodice_Fiscale()+"' , '"+operatore.getData_Inizio_Lavoro()+"' , null , "+operatore.getCompenso()+", '"+id_sede+"' );");
 			
 			return rowinsert;
 			

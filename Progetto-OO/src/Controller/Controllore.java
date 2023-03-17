@@ -3,6 +3,7 @@ package Controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -41,9 +42,35 @@ public class Controllore {
 	private TarghettaDAO targhetta;
 	private Cartella_MedicaDAO cartella;
 	private IngressiTurtleDAO ingresso;
+	private InserimentoDonazione insertDonazione;
+	private ModificaDonazione modificadonazione;
+	private Donazione donation;
+	private Cartella_Medica cartellamedica;
+	private InserimentoCartellaMedica insertcartella;
+	private ModificaCartellaMedica modificacartella;
+	private InserimentoVasca inserimentovasca;
+	private InserimentoLaboratorio inserimentolaboratorio;
+	private Laboratorio lab;
+	private Vasca vasca_centro;
+	private Tartaruga turtle;
+	private InserimentoTartarugaPrima inserimentotartarugaprima;
+	private InserimentoTartarugaRiammissione inserttartarugariammissione;
+	private InserimentoTarghetta inserimentotarghetta;
+	private Targhetta targhetta_metallica;
+	private Centro centro_recupero;
+	private InserimentoCentro inserimentocentro;
+	private Cartella_Medica_Degenza cartella_degenza;
+	private InserimentoVisita inserimentovisita;
+	private OccupareVasca gestionevasca;
+	private InserimentoCibo inserimentocibo;
+	private InserimentoPersonale inserimentopersonale;
+	private Ricercatore ricercatore_centro;
+	private Tecnico_di_Laboratorio tecnico_di_laboratorio;
+	private Medico_Veterinario medico_veterinario;
+	private Operatore operatore_centro;
 	
 	
-
+	
 	public static void main(String[] args) {
 		Controllore controller = new Controllore();
 		
@@ -136,7 +163,7 @@ public class Controllore {
 	public void VisualizzaPersonale(String qualifica , String centro ,JPanel actual)
 	{
 		TablePersonale PanelTable = new TablePersonale(qualifica , centro, this);
-		PanelTable.setBounds(0, 0, 796, 399);
+		PanelTable.setBounds(0, 0, 991, 399);
 		actual.removeAll();
 		actual.add(PanelTable);
 		actual.repaint();
@@ -306,19 +333,19 @@ public class Controllore {
 		return tbl;
 	}
 	
-	public boolean InsertPersonale(String qualifica ,String nome , String cognome , String residenza , String cod_fiscale , String date ,String centro)
+	public boolean InsertPersonale()
 	{
 		int rowinsert=0;
 		boolean check_insert=false ;
 		
-		if(qualifica.equals("Operatore"))
-			 rowinsert=operatore.InserisciOperatore(nome, cognome, cod_fiscale, residenza, date, 0, centro);
-		else if(qualifica.equals("Ricercatore"))
-			rowinsert=ricercatore.InserisciRicercatore(nome, cognome, cod_fiscale, residenza, date, 0, centro);
-		else if(qualifica.equals("Medico Veterinario"))
-			 rowinsert=medico.InserisciMedico(nome, cognome, cod_fiscale, residenza, date, 0, centro);
-		else if(qualifica.equals("Tecnico di Laboratorio"))
-			 rowinsert=tecnico.InserisciTecnico(nome, cognome, cod_fiscale, residenza, date, 0, centro);
+		if(inserimentopersonale.GetQualifica().equals("Operatore"))
+			 rowinsert=operatore.InserisciOperatore(GetOperatore());
+		else if(inserimentopersonale.GetQualifica().equals("Ricercatore"))
+			rowinsert=ricercatore.InserisciRicercatore(GetRicercatore());
+		else if(inserimentopersonale.GetQualifica().equals("Medico Veterinario"))
+			 rowinsert=medico.InserisciMedico(GetMedico());
+		else if(inserimentopersonale.GetQualifica().equals("Tecnico di Laboratorio"))
+			 rowinsert=tecnico.InserisciTecnico(GetTecnicoDiLaboratorio());
 		
 		if(rowinsert>0)
 			check_insert=true;
@@ -326,12 +353,12 @@ public class Controllore {
 		return check_insert;
 	}
 	
-	public boolean InsertDonazione(int importo ,String emailDonatore , String date , String metodoPagamento ,String centro)
+	public boolean InsertDonazione()
 	{
 		int rowinsert=0;
 		boolean check_insert=false ;
-		
-		rowinsert = donazione.InserisciDonazione(importo, emailDonatore, date, metodoPagamento, centro);
+		Donazione don= GetDonazione();
+		rowinsert = donazione.InserisciDonazione(don);
 		
 		if(rowinsert>0)
 			check_insert=true;
@@ -361,9 +388,9 @@ public class Controllore {
 		return nomi;
 	}
 	
-	public boolean InsertTartarugaRiammissione(String nome,int eta , String old_number_targhetta ,String data_accoglienza_centro,String sede)
+	public boolean InsertTartarugaRiammissione()
 	{
-		int rowinsert=tartaruga.InserisciTartaruga(nome, eta, old_number_targhetta, data_accoglienza_centro, sede);
+		int rowinsert=tartaruga.InserisciTartaruga(GetTartarugaRiammissione());
 		
 		if(rowinsert>0)
 			return true;
@@ -372,9 +399,9 @@ public class Controllore {
 		
 	}
 	
-	public boolean InsertTartarugaPrimoIngresso(String nome,int eta  ,String data_accoglienza_centro,String sede)
+	public boolean InsertTartarugaPrimoIngresso()
 	{
-		int rowinsert=tartaruga.InserisciTartarugaPrimo(nome, eta,data_accoglienza_centro, sede);
+		int rowinsert=tartaruga.InserisciTartarugaPrimo(GetTartarugaPrima());
 		
 		if(rowinsert>0)
 			return true;
@@ -386,8 +413,12 @@ public class Controllore {
 		return donazione;
 	}
 	
-	public String modificaDonazione(String idDonazione, int importo, String email, String data, String pagamento) {
-		return donazione.modificaDonazione(idDonazione, importo,  email,  data,  pagamento);
+	public boolean modificaDonazione() {
+		int rowupdate = donazione.modificaDonazione(GetDonazioneModifica());
+		if(rowupdate>0)
+			return true;
+		else
+			return false;
 	}
 	
 	public Donazione recuperaDonazione(String idDonazione) {
@@ -437,7 +468,7 @@ public class Controllore {
 	public void VisualizzaTurtle( String centro ,JPanel actual)
 	{
 		TableTartaruga PanelTable = new TableTartaruga(this,centro);
-		PanelTable.setBounds(0, 0, 796, 399);
+		PanelTable.setBounds(0, 0, 981, 336);
 		actual.removeAll();
 		actual.add(PanelTable);
 		actual.repaint();
@@ -446,27 +477,27 @@ public class Controllore {
 
 	}
 	
-	public boolean InserisciLaboratorio(String finalita , int numero_lab , String sede)
+	public boolean InserisciLaboratorio()
 	{
-		int rowinsert = laboratorio.InserisciLaboratorio(numero_lab, finalita, sede);
+		int rowinsert = laboratorio.InserisciLaboratorio(GetLaboratorio());
 		if(rowinsert>0)
 			return true;
 		else
 			return false;
 	}
 	
-	public boolean InserisciVasca (double capacita , double temperatura , String centro)
+	public boolean InserisciVasca ()
 	{
-		int rowinsert=vasca.InsertVasca(capacita, temperatura, centro);
+		int rowinsert=vasca.InsertVasca(GetVasca());
 		if(rowinsert>0)
 			return true;
 		else
 			return false;
 	}
 
-	public boolean InserisciVisita(String date , String farmaco , int peso , String condizioni , String id_turtle , String medico)
+	public boolean InserisciVisita()
 	{
-		int rowinsert=degenza.InserisciVisita(date, farmaco, peso, condizioni, id_turtle, medico);
+		int rowinsert=degenza.InserisciVisita(GetVisitaDegenza());
 		if(rowinsert>0)
 			return true;
 		else
@@ -532,9 +563,9 @@ public class Controllore {
 		return tbl;
 	}
 
-	public boolean InserisciCibo(String matricola , String data , String codice_vasca , double cibo_inserito , double cibo_rimosso , String tipologia_cibo)
+	public boolean InserisciCibo()
 	{
-		int rowinsert=occupare.InserisciCibo(matricola, data, codice_vasca, cibo_inserito, cibo_rimosso, tipologia_cibo);
+		int rowinsert=occupare.InserisciCibo(GetControlloVasca());
 		if(rowinsert>0)
 			return true;
 		else
@@ -575,20 +606,36 @@ public class Controllore {
 	
 	
 	
-	public void InserimentoDonazionePage() { new InserimentoDonazione(this); }
+	public void InserimentoDonazionePage() { insertDonazione= new InserimentoDonazione(this);
+							}
 	public void RimozioneDonazionePage() {new RimozioneDonazione(this);}
 	public void ListaDonazioniPage() {new ViewDonazioni(this);	}
-	public void ModificaDonazioniPage() {new ModificaDonazione(this);};
+	public void ModificaDonazioniPage() {modificadonazione = new ModificaDonazione(this);} 
 	
+	public void InserimentoCartellaMedicaPage() { insertcartella= new InserimentoCartellaMedica(this);}
+	public void ModificaCartellaMedicaPage(String id) {modificacartella=new ModificaCartellaMedica(this,id);}
+	
+	public void InserimentoLaboratorioPage() {inserimentolaboratorio=new InserimentoLaboratorio(this);}
+	public void InserimentovascaPage() {inserimentovasca=new InserimentoVasca(this);}
+	
+	public void InserimentoTurtlePrimaPage() {inserimentotartarugaprima=new InserimentoTartarugaPrima(this);}
+	public void InserimentoTurtleRiammssionePage() {inserttartarugariammissione=new InserimentoTartarugaRiammissione(this);}
+	public void InserimentoTarghettaPage() {inserimentotarghetta=new InserimentoTarghetta(this);}
+	
+	public void InserimentoCentroPage() {inserimentocentro = new InserimentoCentro(this);}
+	public void InserimentoVisitaPage() {inserimentovisita = new InserimentoVisita(this);}
+	public void InserimentoCiboPage() {inserimentocibo=new InserimentoCibo(this);}
+	
+	public void InserimentoPersonalePage() {inserimentopersonale=new InserimentoPersonale(this);}
 	
 	public ArrayList<String> ListaTartarugheSenzaTarghetta()
 	{
 		return tartaruga.ListaTurtleSenzaTarghetta();
 	}
 	
-	public boolean InserisciTarghetta(String turtle,String matricola_ope, String date , String GPS)
+	public boolean InserisciTarghetta()
 	{
-		int rowinsert = targhetta.InserisciTarghetta(turtle, matricola_ope, date, GPS);
+		int rowinsert = targhetta.InserisciTarghetta(GetTarghetta());
 		if(rowinsert>0)
 			return true;
 		else
@@ -750,9 +797,9 @@ public class Controllore {
 		return medico.MatricolaMedicoCartellaMedica(turtle);
 	}
 	
-	public boolean InsertCartellaMedica(String id_turtle ,String medico, double peso , double lunghezza , double larghezza , String specie , String luogo , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	public boolean InsertCartellaMedica()
 	{
-		int rowinsert= cartella.InserisciCartellaMedica(id_turtle, medico, peso, lunghezza, larghezza, specie, luogo, data, condizioni_generali, condizioniCollo, condizioniTesta, condizioniOcchi, condizioniPinne, condizioniNaso, condizioniBecco, condizioniCoda);
+		int rowinsert= cartella.InserisciCartellaMedica(GetCartellaMedica());
 		if(rowinsert>0)
 			return true;
 		else
@@ -770,9 +817,9 @@ public class Controllore {
 		return cartella.recuperaCartellaMedica(id);
 	}
 	
-	public boolean UpdateCartellaMedica(String id, double peso , double lunghezza , double larghezza , String data, String condizioni_generali , String condizioniCollo,String condizioniTesta,String condizioniOcchi,String condizioniPinne,String condizioniNaso,String condizioniBecco,String condizioniCoda)
+	public boolean UpdateCartellaMedica()
 	{
-		int rowupdate = cartella.ModificaDatiCartellaMedica(id, peso, lunghezza, larghezza, data, condizioni_generali, condizioniCollo, condizioniTesta, condizioniOcchi, condizioniPinne, condizioniNaso, condizioniBecco, condizioniCoda);
+		int rowupdate = cartella.ModificaDatiCartellaMedica(GetCartellaMedicaModifica());
 		if(rowupdate>0)
 			return true;
 		else
@@ -891,7 +938,355 @@ public class Controllore {
 		
 		return flag;
 	}
+	
+	public JTable SetTableLaboratorio()
+	{
+		String[] tblHead={"ID Laboratorio", "Numero Laboratorio", "Finalità", "ID Sede"};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+		
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		for(int i=0 ; i<laboratorio.listaLaboratori().size();i++)
+		{
+			Object [] rowdata = new Object[6];
+			rowdata[0]=laboratorio.listaLaboratori().get(i).getId_laboratorio();
+			rowdata[1]=laboratorio.listaLaboratori().get(i).getNumero_lab();
+			rowdata[2]=laboratorio.listaLaboratori().get(i).getFinalita_laboratorio();
+			rowdata[3]=laboratorio.listaLaboratori().get(i).getId_sede();
+			
+			
+			dtm.addRow(rowdata);
+		}
+		tbl.setRowHeight(50);
+		return tbl;
+	}
+	public JTable SetTableVasche()
+	{
+		String[] tblHead={"Codice Vasca ", "Capacità ", "Temperatura " ,"Centro"};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+		
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		for(int i=0 ; i<vasca.listaVasche().size();i++)
+		{
+			Object [] rowdata = new Object[4];
+			rowdata[0]=vasca.listaVasche().get(i).getCodice_vasca();
+			rowdata[1]=vasca.listaVasche().get(i).getCapacita_vasca();
+			rowdata[2]=vasca.listaVasche().get(i).getTemperatura_acqua();
+			rowdata[3]=vasca.listaVasche().get(i).getNome_centro();
+			
+			
+			dtm.addRow(rowdata);
+		}
+		tbl.setRowHeight(50);
+		return tbl;
+	}
+	
+	public JTable SetTableCentri()
+	{
+		String[] tblHead={"Codice Centro ","Nome", "Partita IVA ", "Indirizzo " ,"Numero Telefono"};
+		DefaultTableModel dtm=new DefaultTableModel(tblHead,0);
+		
+		JTable tbl=new JTable(dtm);
+		tbl.setEnabled(false);
+		for(int i=0 ; i<centro.listaCentri().size();i++)
+		{
+			Object [] rowdata = new Object[5];
+			rowdata[0]=centro.listaCentri().get(i).getID_Centro();
+			rowdata[1]=centro.listaCentri().get(i).getNome();
+			rowdata[2]=centro.listaCentri().get(i).getPartita_Iva();
+			rowdata[3]=centro.listaCentri().get(i).getIndirizzo();
+			rowdata[4]=centro.listaCentri().get(i).getNumero_Telefono();
+			
+			
+			dtm.addRow(rowdata);
+		}
+		tbl.setRowHeight(50);
+		return tbl;
+	}
+	
+	public boolean InserisciCentro()
+	{
+		int rowinsert = centro.InserisciCentro(GetCentro());
+		if(rowinsert>0)
+			return true;
+		else
+			return false;
+	}
+	public ArrayList<String> ListaIDCentro()
+	{
+		return centro.getIDCentri();
+	}
+	
+	public Centro RecuperaCentro (String id)
+	{
+		return centro.RecuperaCentro(id);
+	}
+	
+	public boolean EliminaCentro(String id)
+	{
+		int rowdelete=centro.EliminaCentro(id);
+		if(rowdelete>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public int eseguiFunzioneTartarugheAccolte(int anno)
+	{
+		return tartaruga.eseguiFunzioneTartarugheAccolte(anno);
+	}
+	
+	public int eseguiFunzioneTartarugheRilasciate(int anno)
+	{
+		return tartaruga.eseguiFunzioneTartarugheRilasciate(anno);
+	}
+	
+	public int eseguiFunzioneTartarugheMorte(int anno)
+	{
+		return tartaruga.eseguiFunzioneTartarugheMorte(anno);
+	}
+	
+	public Donazione GetDonazione() {
+		donation = new Donazione();
+		
+		donation.setEmailDonatore(insertDonazione.getemaildonate());
+		donation.setImportoDonazione(insertDonazione.getImportoDonate());
+		donation.setIdCentro(insertDonazione.getCentroDonate());
+		donation.setMetodoPagamento(insertDonazione.getMetodoPagamento());
+		donation.setDataDonazione(insertDonazione.getDateDonate());
+
+		return donation;
+	}
+	
+	public Donazione GetDonazioneModifica() {
+		donation = new Donazione();
+		
+		donation.setEmailDonatore(modificadonazione.getemaildonate());
+		donation.setImportoDonazione(modificadonazione.getImportoDonate());
+		donation.setIdCentro(modificadonazione.getCentroDonate());
+		donation.setMetodoPagamento(modificadonazione.getMetodoPagamento());
+		donation.setDataDonazione(modificadonazione.getDateDonate());
+
+		return donation;
+	}
+	
+	public Cartella_Medica GetCartellaMedica()
+	{
+		cartellamedica=new Cartella_Medica();
+		
+		cartellamedica.setCondizioni_becco(insertcartella.getCondizioniBecco());
+		cartellamedica.setCondizioni_coda(insertcartella.getCondizioniCoda());
+		cartellamedica.setCondizioni_collo(insertcartella.getCondizioniCollo());
+		cartellamedica.setCondizioni_generali(insertcartella.getCondizioniGenerali());
+		cartellamedica.setCondizioni_naso(insertcartella.getCondizioniNaso());
+		cartellamedica.setCondizioni_occhi(insertcartella.getCondizioniOcchi());
+		cartellamedica.setCondizioni_pinna(insertcartella.getCondizioniPinne());
+		cartellamedica.setCondizioni_testa(insertcartella.getCondizioniTesta());
+		cartellamedica.setData_Apertura_Cartella(insertcartella.getDateDonate());
+		cartellamedica.setId_tartaruga(insertcartella.getTurtle());
+		cartellamedica.setLarghezza(insertcartella.getLarghezza());
+		cartellamedica.setLunghezza(insertcartella.getLunghezza());
+		cartellamedica.setLuogo_ritrovamento(insertcartella.getLuogo());
+		cartellamedica.setMatricola_medico(insertcartella.getMedico());
+		cartellamedica.setPeso(insertcartella.getPeso());
+		cartellamedica.setSpecie(insertcartella.getSpecie());
+		
+		return cartellamedica;
+		
+	}
+	public Cartella_Medica GetCartellaMedicaModifica()
+	{
+		cartellamedica=new Cartella_Medica();
+		
+		cartellamedica.setId_cartella_medica(modificacartella.getIdCartella());
+		cartellamedica.setCondizioni_becco(modificacartella.getCondizioniBecco());
+		cartellamedica.setCondizioni_coda(modificacartella.getCondizioniCoda());
+		cartellamedica.setCondizioni_collo(modificacartella.getCondizioniCollo());
+		cartellamedica.setCondizioni_generali(modificacartella.getCondizioniGenerali());
+		cartellamedica.setCondizioni_naso(modificacartella.getCondizioniNaso());
+		cartellamedica.setCondizioni_occhi(modificacartella.getCondizioniOcchi());
+		cartellamedica.setCondizioni_pinna(modificacartella.getCondizioniPinne());
+		cartellamedica.setCondizioni_testa(modificacartella.getCondizioniTesta());
+		cartellamedica.setData_Apertura_Cartella(modificacartella.getDateDonate());
+		cartellamedica.setId_tartaruga(modificacartella.getTurtle());
+		cartellamedica.setLarghezza(modificacartella.getLarghezza());
+		cartellamedica.setLunghezza(modificacartella.getLunghezza());
+		cartellamedica.setLuogo_ritrovamento(modificacartella.getLuogo());
+		cartellamedica.setMatricola_medico(modificacartella.getMedico());
+		cartellamedica.setPeso(modificacartella.getPeso());
+		cartellamedica.setSpecie(modificacartella.getSpecie());
+		
+		return cartellamedica;
+		
+	}
+	public Laboratorio GetLaboratorio()
+	{
+		lab=new Laboratorio();
+		
+		lab.setFinalita_laboratorio(inserimentolaboratorio.getFinalita());
+		lab.setId_sede(inserimentolaboratorio.getCentro());
+		lab.setNumero_lab(inserimentolaboratorio.getNumero());
+		
+		return lab;
+		
+	}
+	
+	public Vasca GetVasca()
+	{
+		vasca_centro = new Vasca();
+		
+		vasca_centro.setCapacita_vasca(inserimentovasca.getCapacita());
+		vasca_centro.setTemperatura_acqua(inserimentovasca.getTemperatura());
+		vasca_centro.setNome_centro(inserimentovasca.getCentro());
+		
+		return vasca_centro;
+	}
+	
+	public Tartaruga GetTartarugaPrima()
+	{
+		turtle = new Tartaruga();
+		
+		turtle.setNome(inserimentotartarugaprima.GetNome());
+		turtle.setData_accoglienza_centro(inserimentotartarugaprima.GetDate());
+		turtle.setID_Sede(inserimentotartarugaprima.GetCentro());
+		turtle.setEta(inserimentotartarugaprima.GetEta());
+		
+		return turtle;
+	}
+	
+	public Tartaruga GetTartarugaRiammissione()
+	{
+		turtle = new Tartaruga();
+		
+		turtle.setNome(inserttartarugariammissione.GetNome());
+		turtle.setData_accoglienza_centro(inserttartarugariammissione.GetDate());
+		turtle.setID_Sede(inserttartarugariammissione.GetCentro());
+		turtle.setEta(inserttartarugariammissione.GetEta());
+		turtle.setId_tartaruga(inserttartarugariammissione.GetNumTarghetta());
+		
+		return turtle;
+	}
+	
+	public Targhetta GetTarghetta()
+	{
+		targhetta_metallica = new Targhetta();
+		
+		targhetta_metallica.setData_emissione_targhetta(inserimentotarghetta.getData());
+		targhetta_metallica.setId_tartaruga(inserimentotarghetta.getTurtle());
+		targhetta_metallica.setMatricola_operatore(inserimentotarghetta.getMatricolaOpe());
+		targhetta_metallica.setPresenza_chip_GPS(inserimentotarghetta.getSceltaGPS());
+		
+		return targhetta_metallica;
+	}
+	
+	public Centro GetCentro()
+	{
+		centro_recupero = new Centro();
+		
+		centro_recupero.setCodice_Ateco(inserimentocentro.getCodiceAteco());
+		centro_recupero.setE_mail(inserimentocentro.getEmail());
+		centro_recupero.setE_mail_PEC(inserimentocentro.getEmailPEC());
+		centro_recupero.setIBAN(inserimentocentro.getIBAN());
+		centro_recupero.setIndirizzo(inserimentocentro.getIndirizzo());
+		centro_recupero.setNome(inserimentocentro.getNome());
+		centro_recupero.setNumero_Atto_Costitutivo(inserimentocentro.getNumeroAtto());
+		centro_recupero.setNumero_Telefono(inserimentocentro.getTelefono());
+		centro_recupero.setPartita_Iva(inserimentocentro.getPartitaIVA());
+		centro_recupero.setRagione_Sociale(inserimentocentro.getRagioneSociale());
+		
+		return centro_recupero;
+	}
+	
+	public Cartella_Medica_Degenza GetVisitaDegenza()
+	{
+		cartella_degenza = new Cartella_Medica_Degenza();
+		
+		cartella_degenza.setData_controllo(inserimentovisita.GetData());
+		cartella_degenza.setFarmaco_somministrato(inserimentovisita.GetFarmaco());
+		cartella_degenza.setId_tartaruga(inserimentovisita.GetTurtle());
+		cartella_degenza.setMatricola_medico(inserimentovisita.GetMatricolaMedico());
+		cartella_degenza.setPeso(inserimentovisita.GetPeso());
+		cartella_degenza.setValutazione_condizioni_generali(inserimentovisita.GetCondizione());
+		
+		return cartella_degenza;
+	}
+	
+	public OccupareVasca GetControlloVasca()
+	{
+		gestionevasca = new OccupareVasca();
+		
+		gestionevasca.setData_versamento_cibo(inserimentocibo.GetData());
+		gestionevasca.setMatricola_operatore(inserimentocibo.GetMatricolaOpe());
+		gestionevasca.setQuantita_cibo_inserito(inserimentocibo.GetPesoInserito());
+		gestionevasca.setQuantita_cibo_rimosso(inserimentocibo.GetPesoRimosso());
+		gestionevasca.setTipologia_cibo_inserito(inserimentocibo.GetTipologiaCibo());
+		gestionevasca.setCodice_vasca(inserimentocibo.GetCodiceVasca());
+		
+		return gestionevasca;
+	}
+	
+	public Operatore GetOperatore()
+	{
+		operatore_centro = new Operatore();
+		
+		operatore_centro.setCodice_Fiscale(inserimentopersonale.GetCodiceFiscale());
+		operatore_centro.setCognome(inserimentopersonale.GetCognome());
+		operatore_centro.setData_Inizio_Lavoro(inserimentopersonale.GetData());
+		operatore_centro.setNome(inserimentopersonale.GetNome());
+		operatore_centro.setResidenza(inserimentopersonale.GetIndirizzo());
+		operatore_centro.setSede(inserimentopersonale.GetCentro());
+		operatore_centro.setCompenso(0);
+		
+		return operatore_centro;
+	}
+	
+	public Ricercatore GetRicercatore()
+	{
+		ricercatore_centro = new Ricercatore();
+		
+		ricercatore_centro.setCodice_Fiscale(inserimentopersonale.GetCodiceFiscale());
+		ricercatore_centro.setCognome(inserimentopersonale.GetCognome());
+		ricercatore_centro.setData_Inizio_Lavoro(inserimentopersonale.GetData());
+		ricercatore_centro.setNome(inserimentopersonale.GetNome());
+		ricercatore_centro.setResidenza(inserimentopersonale.GetIndirizzo());
+		ricercatore_centro.setSede(inserimentopersonale.GetCentro());
+		ricercatore_centro.setCompenso(0);
+		
+		return ricercatore_centro;
+	}
+	
+	public Medico_Veterinario GetMedico()
+	{
+		medico_veterinario = new Medico_Veterinario();
+		
+		medico_veterinario.setCodice_Fiscale(inserimentopersonale.GetCodiceFiscale());
+		medico_veterinario.setCognome(inserimentopersonale.GetCognome());
+		medico_veterinario.setData_Inizio_Lavoro(inserimentopersonale.GetData());
+		medico_veterinario.setNome(inserimentopersonale.GetNome());
+		medico_veterinario.setResidenza(inserimentopersonale.GetIndirizzo());
+		medico_veterinario.setSede(inserimentopersonale.GetCentro());
+		medico_veterinario.setCompenso(0);
+		
+		return medico_veterinario;
+	}
+	
+	public Tecnico_di_Laboratorio GetTecnicoDiLaboratorio()
+	{
+		tecnico_di_laboratorio = new Tecnico_di_Laboratorio();
+		
+		tecnico_di_laboratorio.setCodice_Fiscale(inserimentopersonale.GetCodiceFiscale());
+		tecnico_di_laboratorio.setCognome(inserimentopersonale.GetCognome());
+		tecnico_di_laboratorio.setData_Inizio_Lavoro(inserimentopersonale.GetData());
+		tecnico_di_laboratorio.setNome(inserimentopersonale.GetNome());
+		tecnico_di_laboratorio.setResidenza(inserimentopersonale.GetIndirizzo());
+		tecnico_di_laboratorio.setSede(inserimentopersonale.GetCentro());
+		tecnico_di_laboratorio.setCompenso(0);
+		
+		return tecnico_di_laboratorio;
+	}
 }
+
 
 
 

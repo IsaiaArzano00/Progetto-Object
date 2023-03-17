@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import DTO.OccupareVasca;
 import connection.Connessione;
 
 public class OccupareVascaDAO {
@@ -18,12 +19,12 @@ public class OccupareVascaDAO {
 	}
 	
 	//INSERT VERSAMENTO CIBO
-	public int InserisciCibo(String matricola , String data , String codice_vasca , double cibo_inserito , double cibo_rimosso , String tipologia_cibo)
+	public int InserisciCibo(OccupareVasca gestione)
 	{
 		int rowinsert=0;
 		try {
-			rowinsert=statement.executeUpdate("INSERT INTO OCCUPARE VALUES ('"+matricola+"' , '"+codice_vasca+"' , '"+tipologia_cibo+"' , "
-					+cibo_inserito+" , '"+data+"' , "+cibo_rimosso+" ); ");
+			rowinsert=statement.executeUpdate("INSERT INTO OCCUPARE VALUES ('"+gestione.getMatricola_operatore()+"' , '"+gestione.getCodice_vasca()+"' , '"+gestione.getTipologia_cibo_inserito()+"' , "
+					+gestione.getQuantita_cibo_inserito()+" , '"+gestione.getData_versamento_cibo()+"' , "+gestione.getQuantita_cibo_rimosso()+" ); ");
 			
 			return rowinsert;
 					

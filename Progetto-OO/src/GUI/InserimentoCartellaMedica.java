@@ -23,9 +23,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
-public class InserimentoCartellaMedica extends JDialog{
+public class InserimentoCartellaMedica extends JFrame{
 
 	private JPanel contentPane;
 	private PanelWhite sfondo;
@@ -34,10 +35,22 @@ public class InserimentoCartellaMedica extends JDialog{
 	private JTextField Larghezza;
 	private JTextField LuogoRitrovamento;
 	private Controllore controller;
+	private JComboBox<String> comboBoxMedico;
+	private JComboBox<String> comboBoxCondizioniGenerali;
+	private JComboBox<String> comboBoxCondizioniTesta;
+	private JComboBox<String> comboBoxCondizioniOcchi;
+	private JComboBox<String> comboBoxCondizioniPinne;
+	private JComboBox<String> comboBoxCondizioniBecco;
+	private JComboBox<String> comboBoxCondizioniNaso;
+	private JComboBox<String> comboBoxCondizioniCoda;
+	private JComboBox<String> comboBoxCondizioniCollo;
+	private JComboBox<String> comboBoxTurtle;
+	private JComboBox<String> comboBoxSpecie;
+	private JDateChooser dateChooser;
 
 	public InserimentoCartellaMedica(Controllore contr) {
 		controller=contr;
-		setModal(true);
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 849, 668);
 		contentPane = new JPanel();
@@ -101,7 +114,7 @@ public class InserimentoCartellaMedica extends JDialog{
 		lblNewLabel_3_5.setBounds(11, 413, 157, 21);
 		sfondo.add(lblNewLabel_3_5);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		 dateChooser = new JDateChooser();
 		dateChooser.setBounds(178, 415, 171, 19);
 		sfondo.add(dateChooser);
 		
@@ -153,7 +166,7 @@ public class InserimentoCartellaMedica extends JDialog{
 		separator_3.setBounds(178, 377, 171, 21);
 		sfondo.add(separator_3);
 		
-		JComboBox comboBoxSpecie = new JComboBox();
+		 comboBoxSpecie = new JComboBox();
 		comboBoxSpecie.setFont(new Font("SansSerif", Font.BOLD, 11));
 		comboBoxSpecie.setModel(new DefaultComboBoxModel(new String[] {"Tartaruga comune (Caretta caretta)", "Tartaruga verde (Chelonia mydas)", "Tartaruga liuto (Dermochelys coriacea)", "Tartaruga embricata (Eretmochelys imbricata)", "Tartaruga bastarda (Lepidochelys kempii)", "Tartaruga olivacea (Lepidochelys olivacea)", "Tartaruga piatta (Natator depressus)"}));
 		comboBoxSpecie.setBounds(167, 307, 205, 21);
@@ -194,7 +207,7 @@ public class InserimentoCartellaMedica extends JDialog{
 		lblNewLabel_3_12.setBounds(10, 119, 147, 16);
 		sfondo.add(lblNewLabel_3_12);
 		
-		JComboBox comboBoxTurtle = new JComboBox();
+		comboBoxTurtle = new JComboBox();
 		comboBoxTurtle.setBounds(167, 115, 182, 21);
 		sfondo.add(comboBoxTurtle);
 		
@@ -208,49 +221,49 @@ public class InserimentoCartellaMedica extends JDialog{
 		lblNewLabel_3_7_2.setBounds(436, 418, 136, 16);
 		sfondo.add(lblNewLabel_3_7_2);
 		
-		JComboBox comboBoxCondizioniCollo = new JComboBox();
+		 comboBoxCondizioniCollo = new JComboBox();
 		comboBoxCondizioniCollo.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniCollo.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniCollo.setBounds(582, 118, 171, 21);
 		sfondo.add(comboBoxCondizioniCollo);
 		
-		JComboBox comboBoxCondizioniTesta = new JComboBox();
+		comboBoxCondizioniTesta = new JComboBox();
 		comboBoxCondizioniTesta.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniTesta.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniTesta.setBounds(582, 166, 171, 21);
 		sfondo.add(comboBoxCondizioniTesta);
 		
-		JComboBox comboBoxCondizioniOcchi = new JComboBox();
+		 comboBoxCondizioniOcchi = new JComboBox();
 		comboBoxCondizioniOcchi.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniOcchi.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniOcchi.setBounds(582, 210, 171, 21);
 		sfondo.add(comboBoxCondizioniOcchi);
 		
-		JComboBox comboBoxCondizioniPinne = new JComboBox();
+		comboBoxCondizioniPinne = new JComboBox();
 		comboBoxCondizioniPinne.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniPinne.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniPinne.setBounds(582, 264, 171, 21);
 		sfondo.add(comboBoxCondizioniPinne);
 		
-		JComboBox comboBoxCondizioniNaso = new JComboBox();
+		comboBoxCondizioniNaso = new JComboBox();
 		comboBoxCondizioniNaso.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniNaso.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniNaso.setBounds(582, 317, 171, 21);
 		sfondo.add(comboBoxCondizioniNaso);
 		
-		JComboBox comboBoxCondizioniBecco = new JComboBox();
+		comboBoxCondizioniBecco = new JComboBox();
 		comboBoxCondizioniBecco.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniBecco.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniBecco.setBounds(582, 371, 171, 21);
 		sfondo.add(comboBoxCondizioniBecco);
 		
-		JComboBox comboBoxCondizioniCoda = new JComboBox();
+		 comboBoxCondizioniCoda = new JComboBox();
 		comboBoxCondizioniCoda.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniCoda.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniCoda.setBounds(582, 414, 171, 21);
 		sfondo.add(comboBoxCondizioniCoda);
 		
-		JComboBox comboBoxCondizioniGenerali = new JComboBox();
+		comboBoxCondizioniGenerali = new JComboBox();
 		comboBoxCondizioniGenerali.setModel(new DefaultComboBoxModel(new String[] {"Compromesso", "Con ferite profonde", "Con ferite superficiali", "Buona", "Perfetta"}));
 		comboBoxCondizioniGenerali.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCondizioniGenerali.setBounds(582, 460, 171, 21);
@@ -276,7 +289,7 @@ public class InserimentoCartellaMedica extends JDialog{
 		lblNewLabel_3_5_1.setBounds(10, 465, 157, 21);
 		sfondo.add(lblNewLabel_3_5_1);
 		
-		JComboBox comboBoxMedico = new JComboBox();
+		comboBoxMedico = new JComboBox<String>();
 		comboBoxMedico.setBounds(178, 466, 182, 21);
 		sfondo.add(comboBoxMedico);
 		
@@ -316,31 +329,12 @@ public class InserimentoCartellaMedica extends JDialog{
 					alertLuogoNonInserito();
 				else
 				{
-					 SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-		             String date = date_format.format(dateChooser.getDate());
+					
 		             
-		             double peso=Double.parseDouble(Peso.getText().toString());
-		             double lunghezza=Double.parseDouble(Lunghezza.getText().toString());
-		             double larghezza=Double.parseDouble(Larghezza.getText().toString());
-		             
-		             String condizioni_generali= comboBoxCondizioniGenerali.getSelectedItem().toString();
-		             String condizioni_testa= comboBoxCondizioniTesta.getSelectedItem().toString();
-		             String condizioni_occhi= comboBoxCondizioniOcchi.getSelectedItem().toString();
-		             String condizioni_pinne= comboBoxCondizioniPinne.getSelectedItem().toString();
-		             String condizioni_becco= comboBoxCondizioniBecco.getSelectedItem().toString();
-		             String condizioni_naso= comboBoxCondizioniNaso.getSelectedItem().toString();
-		             String condizioni_coda= comboBoxCondizioniCoda.getSelectedItem().toString();
-		             String condizioni_collo= comboBoxCondizioniCollo.getSelectedItem().toString();
-		             
-		             String medico = comboBoxMedico.getSelectedItem().toString();
-		             String turtle = comboBoxTurtle.getSelectedItem().toString();
-		             String specie = comboBoxSpecie.getSelectedItem().toString();
-		             String luogo= LuogoRitrovamento.getText();
-		             
-		             boolean flag = controller.InsertCartellaMedica(turtle, medico, peso, lunghezza, larghezza, specie, luogo, date, condizioni_generali, condizioni_collo, condizioni_testa, condizioni_occhi, condizioni_pinne, condizioni_naso, condizioni_becco, condizioni_coda);
+		             boolean flag = controller.InsertCartellaMedica();
 		             if(flag) {
 							alertInserimentoRiuscito();
-							sfondo.getTopLevelAncestor().setVisible(false);
+							InserimentoCartellaMedica.this.setVisible(false);
 						}
 						else
 							alertInserimentoFallito();
@@ -348,7 +342,92 @@ public class InserimentoCartellaMedica extends JDialog{
 			}
 		
 	});
+	
 }
+
+	//FUNCTION
+	public String getMedico()
+	{
+		String medico=comboBoxMedico.getSelectedItem().toString();
+		return medico;
+	}
+	public String getTurtle()
+	{
+		String turtle=comboBoxTurtle.getSelectedItem().toString();
+		return turtle;
+	}
+	public String getSpecie()
+	{
+		return comboBoxSpecie.getSelectedItem().toString();
+		
+	}
+	public String getLuogo()
+	{
+		return LuogoRitrovamento.getText();
+	}
+	public double getPeso()
+	{
+		double peso=Double.parseDouble(Peso.getText().toString());
+		return peso;
+	}
+	public double getLarghezza()
+	{
+		double larghezza=Double.parseDouble(Larghezza.getText().toString());
+		return larghezza;
+	}
+	public double getLunghezza()
+	{
+		double lunghezza=Double.parseDouble(Lunghezza.getText().toString());
+		return lunghezza;
+	}
+	 public java.sql.Date getDateDonate()
+	 {
+	    	java.util.Date utilDate =  dateChooser.getDate();
+	    	java.sql.Date  sqlDate = new java.sql.Date(utilDate.getTime());
+	    	return sqlDate;
+	  }
+	 
+	 public String getCondizioniGenerali()
+	 {
+		 String condizioni_generali= comboBoxCondizioniGenerali.getSelectedItem().toString();
+		 return condizioni_generali;
+	 }
+	 public String getCondizioniCollo()
+	 {
+		 String condizioni_collo= comboBoxCondizioniCollo.getSelectedItem().toString();
+		 return condizioni_collo;
+	 }
+	 public String getCondizioniTesta()
+	 {
+		 String condizioni_testa= comboBoxCondizioniTesta.getSelectedItem().toString();
+		 return condizioni_testa;
+	 }
+	 public String getCondizioniNaso()
+	 {
+		 String condizioni_naso= comboBoxCondizioniNaso.getSelectedItem().toString();
+		 return condizioni_naso;
+	 }
+	 public String getCondizioniBecco()
+	 {
+		 String condizioni_becco= comboBoxCondizioniBecco.getSelectedItem().toString();
+		 return condizioni_becco;
+	 }
+	 public String getCondizioniPinne()
+	 {
+		 String condizioni_pinne= comboBoxCondizioniPinne.getSelectedItem().toString();
+		 return condizioni_pinne;
+	 }
+	 public String getCondizioniCoda()
+	 {
+		 String condizioni_coda= comboBoxCondizioniCoda.getSelectedItem().toString();
+		 return condizioni_coda;
+	 }
+	 public String getCondizioniOcchi()
+	 {
+		 String condizioni_occhi= comboBoxCondizioniOcchi.getSelectedItem().toString();
+		 return condizioni_occhi;
+	 }
+	
 	//ALERT
 	public void alertInserimentoFallito() {
 		JOptionPane.showMessageDialog(this, "Inserimento della cartella medica  non riuscito!","<ATTENZIONE>", JOptionPane.WARNING_MESSAGE);

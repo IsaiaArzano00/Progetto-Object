@@ -21,21 +21,21 @@ public class Tecnico_di_LaboratorioDAO {
 	}
 	//INSERT TECNICO DI LABORATORIO
 	
-	public int InserisciTecnico(String Nome,String Cognome,String Codice_Fiscale , String Residenza , String Data_Inizio,int Compenso,String sede)
+	public int InserisciTecnico(Tecnico_di_Laboratorio tecnico)
 	{
 		int rowinsert=0;
 		
 		try {
 			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
-					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+					+ " WHERE C.NOME LIKE '"+tecnico.getSede()+"'  ;");
 			String id_sede = new String();
 			while(rd.next())
 			{
 				id_sede = rd.getString("id_sede");
 			}
 			
-			rowinsert =statement.executeUpdate("INSERT INTO TECNICO_DI_LABORATORIO VALUES (DEFAULT ,'"+Nome+"' , '"+Cognome+"' , '"+Residenza+"' , "
-					+ "'"+Codice_Fiscale+"' , '"+Data_Inizio+"' , null , "+Compenso+", '"+id_sede+"' );");
+			rowinsert =statement.executeUpdate("INSERT INTO TECNICO_DI_LABORATORIO VALUES (DEFAULT ,'"+tecnico.getNome()+"' , '"+tecnico.getCognome()+"' , '"+tecnico.getResidenza()+"' , "
+					+ "'"+tecnico.getCodice_Fiscale()+"' , '"+tecnico.getData_Inizio_Lavoro()+"' , null , "+tecnico.getCompenso()+", '"+id_sede+"' );");
 			
 			return rowinsert;
 			

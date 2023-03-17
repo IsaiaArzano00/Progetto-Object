@@ -1,9 +1,11 @@
 package DAO;
 
+import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import connection.Connessione;
@@ -13,6 +15,7 @@ public class TartarugaDAO {
 	private Connessione connection ;
 	private Statement statement ;
 	private ResultSet ResultSet ;
+	private CallableStatement cstmt;
 	
 	public TartarugaDAO() {
 		connection = Connessione.getConnessione();
@@ -20,21 +23,21 @@ public class TartarugaDAO {
 	}
 	
 	//INSERT TARTARUGA PRIMO INGRESSO
-	public int InserisciTartarugaPrimo(String nome,int eta  ,String data_accoglienza_centro,String sede)
+	public int InserisciTartarugaPrimo(Tartaruga turtle)
 	{
 		int rowinsert =0;
 		try
 		{
 			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
-					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+					+ " WHERE C.NOME LIKE '"+turtle.getID_Sede()+"'  ;");
 			String id_sede = new String();
 			while(rd.next())
 			{
 				id_sede = rd.getString("id_sede");
 			}
 			
-			rowinsert=statement.executeUpdate("INSERT INTO TARTARUGA VALUES (DEFAULT , '"+nome+"' , "+eta+" , 'NULL' "
-					+ " , '"+data_accoglienza_centro+"' , FALSE , FALSE, NULL, NULL , '"+id_sede+"' , NULL , NULL );");
+			rowinsert=statement.executeUpdate("INSERT INTO TARTARUGA VALUES (DEFAULT , '"+turtle.getNome()+"' , "+turtle.getEta()+" , 'NULL' "
+					+ " , '"+turtle.getData_accoglienza_centro()+"' , FALSE , FALSE, NULL, NULL , '"+id_sede+"' , NULL , NULL );");
 			
 			return rowinsert;
 		}catch(SQLException e )
@@ -44,21 +47,22 @@ public class TartarugaDAO {
 		}
 	}
 	//INSERIMENTO TARTARUGA RIAMMISSIONE
-	public int InserisciTartaruga(String nome,int eta , String old_number_targhetta ,String data_accoglienza_centro,String sede)
+	public int InserisciTartaruga(Tartaruga turtle)
 	{
 		int rowinsert =0;
 		try
 		{
 			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
-					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+					+ " WHERE C.NOME LIKE '"+turtle.getID_Sede()+"'  ;");
 			String id_sede = new String();
 			while(rd.next())
 			{
 				id_sede = rd.getString("id_sede");
 			}
 			
-			rowinsert=statement.executeUpdate("INSERT INTO TARTARUGA VALUES (DEFAULT , '"+nome+"' , "+eta+" , '"+old_number_targhetta+"' "
-					+ " , '"+data_accoglienza_centro+"' , FALSE , FALSE, NULL, NULL , '"+id_sede+"' , NULL , NULL );");
+			rowinsert=statement.executeUpdate("INSERT INTO TARTARUGA VALUES (DEFAULT , '"+turtle.getNome()+"' , "+turtle.getEta()+" , '"+turtle.getNumero_targhetta()+"' "
+					+ " , '"+turtle.getData_accoglienza_centro()
+					+"' , FALSE , FALSE, NULL, NULL , '"+id_sede+"' , NULL , NULL );");
 			
 			return rowinsert;
 		}catch(SQLException e )
@@ -474,6 +478,86 @@ public class TartarugaDAO {
 			return date_ingr;
 		}
 	}
+	//TARTARUGHE ACCOLTE PER ANNO
+	 public int eseguiFunzioneTartarugheAccolte(int Anno){
+	    	int result = 0;
+	    	 try {
+
+	             //Create a callable statement
+	             cstmt =( connection).prepareCall("{ ? = call number_turtle_accolte_all_year(?) }");
+
+	             //Register the OUT parameter
+	             cstmt.registerOutParameter(1, Types.INTEGER);
+
+	             //Set the input parameter
+	             cstmt.setInt(2, Anno);
+
+	             //Execute the statement
+	             cstmt.execute();
+
+	             //Get the result
+	             result = cstmt.getInt(1);
+	             
+	     
+	         } catch (SQLException e) {
+	             e.printStackTrace();
+	    }
+			return result;
+	   }
+
+		
+	    //TARTARUGHE RILASCIATE
+	    public int eseguiFunzioneTartarugheRilasciate(int Anno){
+	    	int result = 0;
+	    	 try {
+	             //Create a callable statement
+	             cstmt = ( connection).prepareCall("{ ? = call numero_tartarughe_rilasciate_all_year(?) }");
+
+	             //Register the OUT parameter
+	             cstmt.registerOutParameter(1, Types.INTEGER);
+
+	             //Set the input parameter
+	             cstmt.setInt(2, Anno);
+
+	             //Execute the statement
+	             cstmt.execute();
+
+	             //Get the result
+	             result = cstmt.getInt(1);
+	             
+	     
+	         } catch (SQLException e) {
+	             e.printStackTrace();
+	    }
+			return result;
+	   } 
+	    
+	    //TARTARUGHE MORTE 
+	    public int eseguiFunzioneTartarugheMorte(int Anno){
+	    	int result = 0;
+	    	 try {
+	             //Create a callable statement
+	             cstmt = ( connection).prepareCall("{ ? = call numero_tartarughe_morte_all_year(?) }");
+
+	             //Register the OUT parameter
+	             cstmt.registerOutParameter(1, Types.INTEGER);
+
+	             //Set the input parameter
+	             cstmt.setInt(2, Anno);
+
+	             //Execute the statement
+	             cstmt.execute();
+
+	             //Get the result
+	             result = cstmt.getInt(1);
+	            
+	     
+	         } catch (SQLException e) {
+	             e.printStackTrace();
+	    }
+			return result;
+	   } 
+	
 }
 
 

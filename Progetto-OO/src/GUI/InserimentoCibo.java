@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,9 +24,10 @@ import Components.PanelCustomBlue;
 import Controller.Controllore;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-public class InserimentoCibo extends JDialog {
+public class InserimentoCibo extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField CiboInserito;
@@ -33,6 +35,8 @@ public class InserimentoCibo extends JDialog {
 	private JTextField matricola_operatoreField;
 	private JTextField CiboRimosso;
 	private Controllore controller;
+	private JComboBox<String> comboBoxCibo;
+	private JDateChooser dateChooser;
 
 	public InserimentoCibo(Controllore contr) {
 		controller = contr;
@@ -40,7 +44,7 @@ public class InserimentoCibo extends JDialog {
 		getContentPane().setLayout(null);
 		setBounds(100,100,454,541);
 		setResizable(false);
-		setModal(true);
+		setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 658, 508);
@@ -120,13 +124,13 @@ public class InserimentoCibo extends JDialog {
 		lblNewLabel_10.setBounds(359, 477, 62, 13);
 		sfondo.add(lblNewLabel_10);
 		
-		JComboBox<String> comboBoxCibo = new JComboBox<>();
+		 comboBoxCibo = new JComboBox<>();
 		comboBoxCibo.setFont(new Font("SansSerif", Font.BOLD, 12));
 		comboBoxCibo.setModel(new DefaultComboBoxModel(new String[] {"Pesci", "Gamberetti", "Alici", "Integratori_alimentari"}));
 		comboBoxCibo.setBounds(193, 225, 179, 21);
 		sfondo.add(comboBoxCibo);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		dateChooser.setBounds(193, 316, 179, 21);
 		sfondo.add(dateChooser);
 		
@@ -201,22 +205,22 @@ public class InserimentoCibo extends JDialog {
 		GoBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sfondo.getTopLevelAncestor().setVisible(false);
+				InserimentoCibo.this.setVisible(false);
 			}
 		});
 		Inserisci.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String matricola_operatore=matricola_operatoreField.getText();
-				String codice_vasca =codiceVascaField.getText();
+				
+				
 				
 				if(matricola_operatoreField.getText().isEmpty())
 					alertMatricolaNonInserita();
-				else if(!controller.CheckMatricolaOperatore(matricola_operatore))
+				else if(!controller.CheckMatricolaOperatore(matricola_operatoreField.getText()))
 					alertMatricolaNonPresente();
 				else if(codiceVascaField.getText().isEmpty())
 					alertCodiceVascaNonInserito();
-				else if(!controller.CheckCodiceVasca(codice_vasca))
+				else if(!controller.CheckCodiceVasca(codiceVascaField.getText()))
 					alertVascaNonPresente();
 				else if(CiboInserito.getText().isEmpty())
 					alertCiboNonInserito();
@@ -224,18 +228,11 @@ public class InserimentoCibo extends JDialog {
 					alertCiboRimossoNonInserito();
 				else 
 				{
-					
-					String tipologia_cibo = (String) comboBoxCibo.getSelectedItem();
-					SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-					String date = date_format.format(dateChooser.getDate());
-					double quantita_cibo_inserita =Double.parseDouble(CiboInserito.getText());
-					double quantita_cibo_rimosso=Double.parseDouble(CiboRimosso.getText());
-					
-					boolean flag = controller.InserisciCibo(matricola_operatore, date, codice_vasca, quantita_cibo_inserita, quantita_cibo_rimosso, tipologia_cibo);
+					boolean flag = controller.InserisciCibo();
 					if(flag)
 					{
 						alertInserimentoRiuscito();
-						sfondo.getTopLevelAncestor().setVisible(false);
+						InserimentoCibo.this.setVisible(false);
 					}else
 						alertInserimentoFallito();
 				}
@@ -243,6 +240,38 @@ public class InserimentoCibo extends JDialog {
 					
 			}
 		});
+	}
+	
+	//FUNCTIONS
+	public String GetTipologiaCibo()
+	{
+		String tipologia_cibo = (String) comboBoxCibo.getSelectedItem();
+		return tipologia_cibo;
+	}
+	public String GetMatricolaOpe()
+	{
+		String matricola_operatore=matricola_operatoreField.getText();
+		return matricola_operatore;
+	}
+	public String GetCodiceVasca()
+	{
+		String codice_vasca =codiceVascaField.getText();
+		return codice_vasca;
+	}
+	public double GetPesoInserito()
+	{
+		double quantita_cibo_inserita =Double.parseDouble(CiboInserito.getText());
+		return quantita_cibo_inserita;
+	}
+	public double GetPesoRimosso()
+	{
+		double quantita_cibo_rimosso=Double.parseDouble(CiboRimosso.getText());
+		return quantita_cibo_rimosso;
+	}
+	public Date GetData()
+	{
+		Date data = (Date) dateChooser.getDate();
+		return data;
 	}
 	//ALERT
 	public void alertInserimentoFallito() {

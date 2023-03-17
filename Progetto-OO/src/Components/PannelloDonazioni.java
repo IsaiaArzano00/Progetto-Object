@@ -40,7 +40,7 @@ public class PannelloDonazioni extends JPanel {
         panel_aggiungi.add(label_AggiungiDonazione);
         
         JLabel tasto_AggiungiDonazione = new JLabel("");
-        tasto_AggiungiDonazione.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/add_100px.png")));
+        tasto_AggiungiDonazione.setIcon(new ImageIcon(PannelloDonazioni.class.getResource("/Media/add_c_100px.png")));
         tasto_AggiungiDonazione.setBounds(114, 70, 117, 126);
         panel_aggiungi.add(tasto_AggiungiDonazione);
         
@@ -56,7 +56,7 @@ public class PannelloDonazioni extends JPanel {
         panel_lista.add(lblListaDonazioni);
         
         JLabel tasto_ListaDonazioni = new JLabel("");
-        tasto_ListaDonazioni.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/search_100px.png")));
+        tasto_ListaDonazioni.setIcon(new ImageIcon(PannelloDonazioni.class.getResource("/Media/search_c_100px.png")));
         tasto_ListaDonazioni.setBounds(105, 69, 117, 126);
         panel_lista.add(tasto_ListaDonazioni);
         
@@ -71,7 +71,7 @@ public class PannelloDonazioni extends JPanel {
         panel_rimuovi.add(lblRimuoviDonazione);
         
         JLabel tasto_RimuoviDonazione = new JLabel("");
-        tasto_RimuoviDonazione.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/remove_100px.png")));
+        tasto_RimuoviDonazione.setIcon(new ImageIcon(PannelloDonazioni.class.getResource("/Media/remove__c_100px.png")));
         tasto_RimuoviDonazione.setBounds(128, 70, 117, 126);
         panel_rimuovi.add(tasto_RimuoviDonazione);
         
@@ -87,7 +87,7 @@ public class PannelloDonazioni extends JPanel {
         panel_modifica.add(label_ModificaDonazioni);
         
         JLabel tasto_ModificaDonazione = new JLabel("");
-        tasto_ModificaDonazione.setIcon(new ImageIcon(PanelTartarughe.class.getResource("/Media/change_100px.png")));
+        tasto_ModificaDonazione.setIcon(new ImageIcon(PannelloDonazioni.class.getResource("/Media/replace_100px.png")));
         tasto_ModificaDonazione.setBounds(133, 70, 117, 126);
         panel_modifica.add(tasto_ModificaDonazione);
         

@@ -35,8 +35,7 @@ public class DashBoard extends JFrame {
 	private PanelCustomDashboard Menu;
 	private JTextField txtInserireUsernameDellutente;
 	private PanelCustomSfondoDashboard sfondo;
-	private PanelPersonale personale ;
-	private PanelTartarughe tartarughe;
+
 	
 
 	public DashBoard(Controllore contr,String utente) {
@@ -62,14 +61,6 @@ public class DashBoard extends JFrame {
 		contentPane.add(sfondo_1);
 		sfondo_1.setOpaque(false);
 		sfondo_1.setLayout(new BorderLayout(0, 0));
-		
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 34));
-		lblNewLabel.setIcon(new ImageIcon(DashBoard.class.getResource("/media/icons8_menu_48px_1.png")));
-		lblNewLabel.setBounds(10, 0, 53, 50);
-		panelSuperiore.add(lblNewLabel);
 		
 		JLabel UserLab = new JLabel("New label");
 		UserLab.setIcon(new ImageIcon(DashBoard.class.getResource("/media/male_user_50px.png")));
@@ -104,7 +95,7 @@ public class DashBoard extends JFrame {
 		Home.setFont(new Font("SansSerif", Font.BOLD, 14));
 		Home.setBounds(10, 0, 255, 41);
 		panel_home.add(Home);
-		Home.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/home_28px.png")));
+		Home.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/home_c_28px.png")));
 		
 		JPanel panel_personale = new JPanel();
 		panel_personale.setBounds(0, 123, 277, 41);
@@ -116,7 +107,7 @@ public class DashBoard extends JFrame {
 		Personale.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Personale.setBounds(10, 0, 277, 41);
 		panel_personale.add(Personale);
-		Personale.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/Add User Group Woman Man_28px.png")));
+		Personale.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/Add Male User Group_28px.png")));
 		
 		JPanel panel_turtle = new JPanel();
 		panel_turtle.setBounds(0, 202, 275, 41);
@@ -124,17 +115,12 @@ public class DashBoard extends JFrame {
 		panel_turtle.setLayout(null);
 		
 		JLabel Turtle = new JLabel("Tartarughe");
-		Turtle.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PanelTartarughe panelTurtle = new PanelTartarughe(controller);
-				controller.SetPanelDashBoard(sfondo_1, panelTurtle);
-			}
-		});
+		
+		
 		Turtle.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Turtle.setBounds(10, 0, 255, 41);
 		panel_turtle.add(Turtle);
-		Turtle.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/turtle_28px.png")));
+		Turtle.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/turtled_28px.png")));
 		
 		JPanel panel_stats = new JPanel();
 		panel_stats.setBounds(0, 281, 275, 41);
@@ -145,7 +131,7 @@ public class DashBoard extends JFrame {
 		Stats.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Stats.setBounds(10, 0, 255, 41);
 		panel_stats.add(Stats);
-		Stats.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/combo_chart_28px.png")));
+		Stats.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/statistics_28px.png")));
 		
 		JPanel panel_logout = new JPanel();
 		panel_logout.setBounds(0, 585, 277, 41);
@@ -165,7 +151,7 @@ public class DashBoard extends JFrame {
 		pannelloMenu.add(panel_CartellaMedica);
 		
 		JLabel Cartella_Medica = new JLabel("Cartella Medica");
-		Cartella_Medica.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/health_book_28px.png")));
+		Cartella_Medica.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/health_book_red_28px.png")));
 		Cartella_Medica.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Cartella_Medica.setBounds(10, 0, 265, 41);
 		panel_CartellaMedica.add(Cartella_Medica);
@@ -181,7 +167,7 @@ public class DashBoard extends JFrame {
 		Laboratorio.setBounds(10, 0, 255, 41);
 		panel_laboratorio_e_vasche.add(Laboratorio);
 		Laboratorio.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Laboratorio.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/laboratory_28px.png")));
+		Laboratorio.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/Laboratorio_28px.png")));
 		
 		JPanel panel_degenza = new JPanel();
 		panel_degenza.setBounds(0, 243, 277, 41);
@@ -193,7 +179,7 @@ public class DashBoard extends JFrame {
 		Vasche.setBounds(10, 0, 257, 41);
 		panel_degenza.add(Vasche);
 		Vasche.setFont(new Font("SansSerif", Font.BOLD, 12));
-		Vasche.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/medical_history_28px.png")));
+		Vasche.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/Medical Mobile App_28px.png")));
 		
 		JPanel panel_donazioni = new JPanel();
 		panel_donazioni.setBounds(0, 405, 277, 41);
@@ -204,7 +190,7 @@ public class DashBoard extends JFrame {
 		JLabel Donazioni = new JLabel("Donazioni\r\n");
 		Donazioni.setBounds(10, 0, 265, 34);
 		panel_donazioni.add(Donazioni);
-		Donazioni.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/bank_euro_28px.png")));
+		Donazioni.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/Banknotes_28px.png")));
 		Donazioni.setFont(new Font("SansSerif", Font.BOLD, 12));
 		
 		JPanel panel_accogli = new JPanel();
@@ -214,10 +200,21 @@ public class DashBoard extends JFrame {
 		panel_accogli.setLayout(null);
 		
 		JLabel Accogli = new JLabel("Accogli");
-		Accogli.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/stethoscope_28px.png")));
+		Accogli.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/stethoscoped_28px.png")));
 		Accogli.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Accogli.setBounds(10, 0, 255, 41);
 		panel_accogli.add(Accogli);
+		
+		JPanel panel_Centri = new JPanel();
+		panel_Centri.setLayout(null);
+		panel_Centri.setBounds(0, 445, 275, 41);
+		pannelloMenu.add(panel_Centri);
+		
+		JLabel Centri = new JLabel("Centri");
+		Centri.setIcon(new ImageIcon(DashBoard.class.getResource("/Media/downtown_28px.png")));
+		Centri.setFont(new Font("SansSerif", Font.BOLD, 12));
+		Centri.setBounds(10, 0, 265, 41);
+		panel_Centri.add(Centri);
 		
 		JLabel lblNewLabel_7 = new JLabel("Accogli ");
 		
@@ -232,7 +229,7 @@ public class DashBoard extends JFrame {
 		Personale.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelPersonale panelPersonale = new PanelPersonale(controller);
+				PanelPersonaleDashBoard panelPersonale = new PanelPersonaleDashBoard(controller);
 				controller.SetPanelDashBoard(sfondo_1, panelPersonale);
 			}
 			@Override
@@ -260,7 +257,7 @@ public class DashBoard extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PanelLaboratorioVasca panelLab = new PanelLaboratorioVasca(controller);
+				PanelLabEVascheDashboard panelLab = new PanelLabEVascheDashboard(controller);
 				controller.SetPanelDashBoard(sfondo_1, panelLab);
 			}
 		});
@@ -274,7 +271,12 @@ public class DashBoard extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				panel_turtle.setBackground(new Color(240,240,240));
 			}
-			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelTurtleDash panelTurtle = new PanelTurtleDash(controller);
+				controller.SetPanelDashBoard(sfondo_1, panelTurtle);
+			}
+		
 		});
 		
 		
@@ -347,6 +349,8 @@ public class DashBoard extends JFrame {
 				PannelloDonazioni panelDonazioni = new PannelloDonazioni(controller);
 				controller.SetPanelDashBoard(sfondo_1, panelDonazioni);
 				
+				
+				
 			}
 		});
 		
@@ -398,6 +402,21 @@ public class DashBoard extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				PanelAccoglienza panel_acco = new PanelAccoglienza(controller);
 				controller.SetPanelDashBoard(sfondo_1, panel_acco);
+			}
+		});
+		Centri.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				panel_Centri.setBackground(new Color(187, 187, 187));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel_Centri.setBackground(new Color(240,240,240));
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PanelCentri pannelloCentri = new PanelCentri(controller);
+				controller.SetPanelDashBoard(sfondo_1, pannelloCentri);
 			}
 		});
 	}

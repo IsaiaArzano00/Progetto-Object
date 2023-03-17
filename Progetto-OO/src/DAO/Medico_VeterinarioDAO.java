@@ -22,21 +22,21 @@ public class Medico_VeterinarioDAO {
 
 	//INSERT MEDICO VETERINARIO
 	
-	public int InserisciMedico (String Nome,String Cognome,String Codice_Fiscale , String Residenza , String Data_Inizio,int Compenso,String sede)
+	public int InserisciMedico (Medico_Veterinario medico)
 	{
 		int rowinsert=0;
 		
 		try {
 			ResultSet rd = statement.executeQuery("SELECT S.ID_SEDE FROM CENTRO  AS C JOIN SEDE AS S ON S.ID_CENTRO =C.ID_CENTRO "
-					+ " WHERE C.NOME LIKE '"+sede+"'  ;");
+					+ " WHERE C.NOME LIKE '"+medico.getSede()+"'  ;");
 			String id_sede = new String();
 			while(rd.next())
 			{
 				id_sede = rd.getString("id_sede");
 			}
 			
-			rowinsert =statement.executeUpdate("INSERT INTO MEDICO_VETERINARIO VALUES (DEFAULT ,'"+Nome+"' , '"+Cognome+"' , '"+Residenza+"' , "
-					+ "'"+Codice_Fiscale+"' , '"+Data_Inizio+"' , null , "+Compenso+", '"+id_sede+"' );");
+			rowinsert =statement.executeUpdate("INSERT INTO MEDICO_VETERINARIO VALUES (DEFAULT ,'"+medico.getNome()+"' , '"+medico.getCognome()+"' , '"+medico.getResidenza()+"' , "
+					+ "'"+medico.getCodice_Fiscale()+"' , '"+medico.getData_Inizio_Lavoro()+"' , null , "+medico.getCompenso()+", '"+id_sede+"' );");
 			
 			return rowinsert;
 			

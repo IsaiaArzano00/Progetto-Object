@@ -3,6 +3,7 @@ package GUI;
 import Components.PanelWhite;
 import Controller.Controllore;
 
+import java.sql.Date;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
@@ -12,7 +13,7 @@ import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -27,7 +28,8 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
-public class InserimentoDonazione extends JDialog {
+
+public class InserimentoDonazione extends JFrame {
     private JPanel contentPane;
     private PanelWhite sfondo;
     private JTextField importo_in;
@@ -139,12 +141,6 @@ public class InserimentoDonazione extends JDialog {
         separator_1.setBounds(156, 241, 271, 21);
         sfondo.add(separator_1);
         
-        JDateChooser dateChooser = new JDateChooser();
-        dateChooser.setBounds(166, 162, 261, 19);
-        Date date = new Date();
-        dateChooser.setDate(date);
-        sfondo.add(dateChooser);
-        
         comboBoxMetodiPagamento = new JComboBox();
         comboBoxMetodiPagamento.setFont(new Font("SansSerif", Font.BOLD, 12));
         comboBoxMetodiPagamento.setModel(new DefaultComboBoxModel(new String[] {"PayPal", "Mastercard", "Visa", "Bonifico_bancario"}));
@@ -157,6 +153,10 @@ public class InserimentoDonazione extends JDialog {
         sfondo.add(scrollPane);
         comboBoxCentro = new JComboBox();
         scrollPane.setRowHeaderView(comboBoxCentro);
+        
+        JDateChooser dateChooser = new JDateChooser();
+        dateChooser.setBounds(156, 165, 261, 19);
+        sfondo.add(dateChooser);
 
         for(int i = 0; i < controller.getNomeCentri().size(); ++i) {
             this.comboBoxCentro.addItem((controller.getNomeCentri().get(i)).toString());
@@ -165,17 +165,11 @@ public class InserimentoDonazione extends JDialog {
         //LISTENER
         tasto_Salva.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                int importo = Integer.parseInt(importo_in.getText());
-                   
-
-                String emailDonatore = emailDonatore_in.getText();
-                String metodoPagamento = (String)comboBoxMetodiPagamento.getSelectedItem();
-                
-                SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
-                String date = date_format.format(dateChooser.getDate());
-                
-                String centro = (String)comboBoxCentro.getSelectedItem();
-                
+            	int importo = Integer.parseInt(importo_in.getText());
+            	String emailDonatore = emailDonatore_in.getText();
+            	String metodoPagamento = (String)comboBoxMetodiPagamento.getSelectedItem();
+            	String centro = (String)comboBoxCentro.getSelectedItem();
+            	
                 LocalDate dataScelta = dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate currentDate = LocalDate.now();
                 if (importo <= 0) {
@@ -185,9 +179,9 @@ public class InserimentoDonazione extends JDialog {
                 	alertImportoNonInserito();
                 else if (dataScelta.isAfter(currentDate)) {
                     alertDataNonValida();
-                } else if (emailDonatore.isEmpty()) {
+                } else if (emailDonatore.isEmpty()) 
                     alertEmailNonInserito();
-                } else if (controller.InsertDonazione(importo, emailDonatore, date, metodoPagamento, centro)) {
+                 else if (controller.InsertDonazione()) {
                     alertInserimentoRiuscito();
                     importo_in.setText((String)null);
                     emailDonatore_in.setText((String)null);
@@ -203,10 +197,39 @@ public class InserimentoDonazione extends JDialog {
             }
         });
         
-        setModal(true);
+       // setModal(true);
         setVisible(true);
     }
 
+    
+    //FUNCTION 
+    public String getemaildonate()
+    {
+    	String emailDonatore = new String();
+    	return emailDonatore = emailDonatore_in.getText();
+    }
+    public int getImportoDonate()
+    {
+    	int importo = Integer.parseInt(importo_in.getText());
+    	return importo;
+    }
+    public String getMetodoPagamento()
+    {
+    	String metodoPagamento = (String)comboBoxMetodiPagamento.getSelectedItem();
+    	return metodoPagamento;
+    }
+    public String getCentroDonate()
+    {
+    	String centro = (String)comboBoxCentro.getSelectedItem();
+    	return centro;
+    }
+    public Date getDateDonate()
+    {
+    	java.util.Date utilDate =  dateChooser.getDate();
+    	Date  sqlDate = new java.sql.Date(utilDate.getTime());
+    	return sqlDate;
+    	
+    }
     //ALERT
     public void alertImportoNonInserito() {
         JOptionPane.showMessageDialog(this, "Importo della donazione non valido!", "<ATTENZIONE>", 2);

@@ -46,6 +46,7 @@ public class PanelLoginPage extends JPanel {
             }
         });
         panel_1.setLayout(null);
+        panel_1.setLayout(null);
         txtUsername.setForeground(Color.WHITE);
         txtUsername.setBorder((Border)null);
         txtUsername.setBackground(SystemColor.controlShadow);
@@ -83,13 +84,13 @@ public class PanelLoginPage extends JPanel {
         panel_1.add(separator_1);
         
         JLabel lblNewLabel = new JLabel("\r\n");
-        lblNewLabel.setIcon(new ImageIcon(Home.class.getResource("/media/user_25px.png")));
-        lblNewLabel.setBounds(101, 171, 45, 37);
+        lblNewLabel.setIcon(new ImageIcon(PanelLoginPage.class.getResource("/Media/user_male_28px.png")));
+        lblNewLabel.setBounds(101, 168, 45, 37);
         panel_1.add(lblNewLabel);
         
         JLabel lblNewLabel_1 = new JLabel("\r\n");
-        lblNewLabel_1.setIcon(new ImageIcon(Home.class.getResource("/media/password_20px.png")));
-        lblNewLabel_1.setBounds(101, 248, 45, 43);
+        lblNewLabel_1.setIcon(new ImageIcon(PanelLoginPage.class.getResource("/Media/Password_28px.png")));
+        lblNewLabel_1.setBounds(101, 240, 45, 43);
         panel_1.add(lblNewLabel_1);
         
         JLabel RecoveryPassword = new JLabel("Password dimenticata ?");
@@ -101,7 +102,7 @@ public class PanelLoginPage extends JPanel {
         
         JPanel panel_login = new JPanel();
         
-        panel_login.setBackground(SystemColor.controlShadow);
+        panel_login.setBackground(new Color(0,0,0,70));
         panel_login.setBorder(new LineBorder(new Color(0, 0, 0)));
         panel_login.setBounds(123, 366, 211, 28);
         panel_1.add(panel_login);
@@ -129,8 +130,8 @@ public class PanelLoginPage extends JPanel {
         lblNewLabel_8.setBounds(77, 52, 325, 23);
         panel_info.add(lblNewLabel_8);
         JLabel GoHome = new JLabel("");
-        GoHome.setIcon(new ImageIcon(PanelLoginPage.class.getResource("/Media/home_50px.png")));
-        GoHome.setBounds(10, 443, 45, 48);
+        GoHome.setIcon(new ImageIcon(PanelLoginPage.class.getResource("/Media/home_c_50px.png")));
+        GoHome.setBounds(10, 443, 55, 48);
         panel_1.add(GoHome);
         
         JLabel ShowPassword = new JLabel("");

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import DTO.Targhetta;
 import connection.Connessione;
 
 public class TarghettaDAO {
@@ -18,11 +19,11 @@ public class TarghettaDAO {
 	}
 	
 	//INSERT TARGHETTA
-	public int InserisciTarghetta(String turtle,String matricola , String date , String GPS)
+	public int InserisciTarghetta(Targhetta targhetta)
 	{
 		int rowinsert =0;
 		try {
-			rowinsert=statement.executeUpdate("INSERT INTO TARGHETTA VALUES (DEFAULT , '"+date+"' , "+GPS+" , '"+matricola+"' , '"+turtle+"' );");
+			rowinsert=statement.executeUpdate("INSERT INTO TARGHETTA VALUES (DEFAULT , '"+targhetta.getData_emissione_targhetta()+"' , '"+targhetta.isPresenza_chip_GPS()+"' , '"+targhetta.getMatricola_operatore()+"' , '"+targhetta.getId_tartaruga()+"' );");
 			
 			return rowinsert;
 			

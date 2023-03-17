@@ -28,6 +28,7 @@ public class PanelSceltaHome extends JPanel {
         panel_scelta.setBounds(0, 0, 450, 550);
         add(panel_scelta);
         panel_scelta.setLayout(null);
+       
         
         JTextArea txtrBenvenutoNelSoftware = new JTextArea();
         txtrBenvenutoNelSoftware.setEditable(false);
@@ -46,16 +47,19 @@ public class PanelSceltaHome extends JPanel {
         
         
         JButton LOGIN = new JButton("LOGIN");
+        LOGIN.setForeground(new Color(0,0,0));
         
         LOGIN.setFont(new Font("SansSerif", 1, 24));
-        LOGIN.setBounds(74, 233, 291, 64);
+        LOGIN.setBounds(74, 269, 291, 64);
         panel_scelta.add(LOGIN);
-        JButton REGISTRATI = new JButton("REGISTRATI");
-      
-        REGISTRATI.setFont(new Font("SansSerif", 1, 24));
-        REGISTRATI.setBounds(74, 334, 291, 64);
-        panel_scelta.add(REGISTRATI);
         
+        JLabel registrazione = new JLabel("Non sei ancora registrato ? Registrati ora !");
+        registrazione.setForeground(new Color(83, 83, 83));
+        registrazione.setFont(new Font("SansSerif", Font.BOLD, 13));
+        registrazione.setBounds(88, 343, 291, 18);
+        panel_scelta.add(registrazione);
+        
+        //LISTENER
         LOGIN.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
             	PanelLoginPage panellogin = new PanelLoginPage(controller,panel_scelta);
@@ -63,16 +67,21 @@ public class PanelSceltaHome extends JPanel {
             	controller.SetHomePage(panel_scelta, panellogin);
             }
         });
-        
-        REGISTRATI.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-            	PanelRegister panelregister = new PanelRegister(controller);
+        registrazione.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		PanelRegister panelregister = new PanelRegister(controller);
             	panelregister.setBounds(0,0,450,550);
                 controller.SetHomePage(panel_scelta, panelregister);
-            }
+        	}
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		registrazione.setForeground(new Color(255,255,255));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		registrazione.setForeground(new Color(83, 83, 83));
+        	}
         });
-		
-        
 	}
-
 }

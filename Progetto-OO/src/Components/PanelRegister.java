@@ -134,8 +134,8 @@ public class PanelRegister extends JPanel {
 		
 		JLabel GoHome = new JLabel("");
 	
-		GoHome.setIcon(new ImageIcon(PanelRegister.class.getResource("/Media/home_50px.png")));
-		GoHome.setBounds(10, 443, 45, 48);
+		GoHome.setIcon(new ImageIcon(PanelRegister.class.getResource("/Media/home_c_50px.png")));
+		GoHome.setBounds(10, 443, 56, 48);
 		panel_sfondo.add(GoHome);
 		
 		JSeparator separator_3_1 = new JSeparator();

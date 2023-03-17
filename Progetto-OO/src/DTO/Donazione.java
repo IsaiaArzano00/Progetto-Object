@@ -1,6 +1,6 @@
 package DTO;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 public class Donazione {
@@ -50,8 +50,8 @@ public class Donazione {
         this.emailDonatore = email;
     }
 
-    public void setDataDonazione(Date data) {
-        this.dataDonazione = data;
+    public void setDataDonazione(Date date) {
+        this.dataDonazione = date;
     }
 
     public void setMetodoPagamento(String metodo) {

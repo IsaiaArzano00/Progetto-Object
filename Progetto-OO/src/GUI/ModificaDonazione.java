@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,7 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 
-public class ModificaDonazione extends JDialog {
+public class ModificaDonazione extends JFrame {
     private JPanel contentPanel = new JPanel();
     private Controllore controller;
     private JComboBox<String> comboBoxDonazioni;
@@ -219,7 +220,7 @@ public class ModificaDonazione extends JDialog {
 
                 try {
                     String id_Donazione = (String)ModificaDonazione.this.comboBoxDonazioni.getSelectedItem();
-                    if (id_Donazione != null) {             
+                                
                         importoDonazione_in.setEditable(true);
                         emailDonatore_in.setEditable(true);
                         comboBoxPagamento.setEnabled(true);
@@ -232,9 +233,8 @@ public class ModificaDonazione extends JDialog {
                         comboBoxPagamento.setSelectedItem(controller.recuperaDonazione(id_Donazione).getMetodoPagamento());
                         dataDonazione_in.setDate(controller.recuperaDonazione(id_Donazione).getDataDonazione());
                         idCentro_in.setText(controller.recuperaDonazione(id_Donazione).getIdCentro());
-                    } else {
-                        ModificaDonazione.this.reset();
-                    }
+                    
+                    
                 } catch (Exception var4) {
                     ModificaDonazione.this.alertSelezionareDonazione();
                 }
@@ -269,26 +269,53 @@ public class ModificaDonazione extends JDialog {
                     alertDataNonValida();
                 else if (metodoPagamento.isEmpty()) 
                     alertSelezionareMetodoPagamento();
-                else if (controller.modificaDonazione(idDonazione, importo, email, data, metodoPagamento).equals("modifica riuscita")) {
+                else if (controller.modificaDonazione()) {
                     ModificaOK();
-                    reset();
                 } 
                 else {
-                    ModificaKO(controller.modificaDonazione(idDonazione, importo, email, data, metodoPagamento));
+                    ModificaKO();
                 }
        	}
        });
        
-        this.setModal(true);
+        
         this.setVisible(true);
     }
-
+    //FUNCTION 
+    public String getemaildonate()
+    {
+    	String emailDonatore = new String();
+    	return emailDonatore = emailDonatore_in.getText();
+    }
+    public int getImportoDonate()
+    {
+    	int importo = Integer.parseInt(importoDonazione_in.getText());
+    	return importo;
+    }
+    public String getMetodoPagamento()
+    {
+    	String metodoPagamento = (String)comboBoxPagamento.getSelectedItem();
+    	return metodoPagamento;
+    }
+    public String getCentroDonate()
+    {
+    	String centro = idCentro_in.getText();
+    	return centro;
+    }
+    public Date getDateDonate()
+    {
+    	java.util.Date utilDate =  dataDonazione_in.getDate();
+    	Date  sqlDate = new java.sql.Date(utilDate.getTime());
+    	return sqlDate;
+    	
+    }
+    //ALERT
     public void ModificaOK() {
         JOptionPane.showMessageDialog(this, "Donazione modificata con successo!");
     }
 
-    public void ModificaKO(String exMess) {
-        JOptionPane.showMessageDialog(this, exMess);
+    public void ModificaKO() {
+        JOptionPane.showMessageDialog(this, "Modifica donazione fallita ! ");
     }
 
     public void alertInserireImporto() {
@@ -313,21 +340,6 @@ public class ModificaDonazione extends JDialog {
 
     public void alertInserireImportoValido() {
         JOptionPane.showMessageDialog(this, "Inserire un importo valido!");
-    }
-
-    public void reset() {
-        importoDonazione_in.setText((String)null);
-        emailDonatore_in.setText((String)null);
-        dataDonazione_in.setDate((Date)null);
-        idCentro_in.setText((String)null);
-        comboBoxPagamento.setSelectedItem((Object)null);
-        comboBoxDonazioni.setSelectedItem((Object)null);
-        importoDonazione_in.setEditable(false);
-        emailDonatore_in.setEditable(false);
-        dataDonazione_in.setFocusable(false);
-       comboBoxPagamento.setEnabled(false);
-        dataDonazione_in.setEnabled(false);
-        tasto_Modifica.setEnabled(false);
     }
 
     public void alertDataNonValida() {

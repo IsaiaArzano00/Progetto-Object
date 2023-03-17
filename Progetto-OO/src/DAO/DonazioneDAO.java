@@ -21,15 +21,15 @@ public class DonazioneDAO {
         this.statement = this.connection.getStatement();
     }
 
-    public int InserisciDonazione(int importo, String emailDonatore, String date, String metodoPagamento, String centro) {
+    public int InserisciDonazione(Donazione don) {
         int rowinsert = 0;
 
         try {
-            ResultSet rs = this.statement.executeQuery("SELECT C.ID_CENTRO FROM CENTRO  AS C WHERE C.NOME LIKE '" + centro + "'  ;");
+            ResultSet rs = this.statement.executeQuery("SELECT C.ID_CENTRO FROM CENTRO  AS C WHERE C.NOME LIKE '" + don.getIdCentro() + "'  ;");
             new String();
             rs.next();
             String id_centro = rs.getString("id_centro");
-            rowinsert = this.statement.executeUpdate("INSERT INTO DONAZIONE (importo_donazione, email_donatore, data_donazione, metodo_pagamento, id_centro) VALUES (" + importo + ", '" + emailDonatore + "', '" + date + "', '" + metodoPagamento + "' ,'" + id_centro + "');");
+            rowinsert = this.statement.executeUpdate("INSERT INTO DONAZIONE (importo_donazione, email_donatore, data_donazione, metodo_pagamento, id_centro) VALUES (" + don.getimportoDonazione() + ", '" + don.getEmailDonatore() + "', '"+don.getDataDonazione()+"' , '" + don.getMetodoPagamento() + "' ,'" + id_centro + "');");
             return rowinsert;
         } catch (SQLException var9) {
             var9.printStackTrace();
@@ -68,15 +68,15 @@ public class DonazioneDAO {
         }
     }
 
-    public String modificaDonazione(String idDonazione, int importo, String email, String data, String metodoPagamento) {
+    public int modificaDonazione(Donazione don) {
+    	int rowupdate =0;
         try {
-            if (this.statement.executeUpdate("UPDATE DONAZIONE AS D SET importo_donazione = " + importo + ", email_donatore = '" + email + "' , data_donazione = '" + data + "' , metodo_pagamento = '" + metodoPagamento + "' WHERE D.id_donazione = '" + idDonazione + "';") > 0) {
-            }
-
-            return "modifica riuscita";
+            rowupdate=statement.executeUpdate("UPDATE DONAZIONE SET importo_donazione = " +don.getimportoDonazione()+ ", email_donatore = '" +don.getEmailDonatore()+ "' , data_donazione = '" +don.getDataDonazione()+ "' , metodo_pagamento = '" +don.getMetodoPagamento()+ "' WHERE id_donazione = '" +don.getIdDonazione()+ "';");
+         
+            return rowupdate;
         } catch (SQLException var7) {
             var7.printStackTrace();
-            return var7.getErrorCode() == 1 ? "email non valida!" : var7.getLocalizedMessage();
+            return rowupdate;
         }
     }
 

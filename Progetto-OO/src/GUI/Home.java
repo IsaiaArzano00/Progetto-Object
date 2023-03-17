@@ -28,7 +28,7 @@ import javax.swing.border.LineBorder;
 import Components.PanelCustomBlue;
 import Components.PanelHome;
 import Components.PanelLoginPage;
-import Components.PanelPersonale;
+
 import Components.PanelRegister;
 import Controller.Controllore;
 import javax.swing.JButton;

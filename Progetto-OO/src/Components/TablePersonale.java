@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class TablePersonale extends JPanel {
     private Controllore controller;
@@ -16,12 +18,12 @@ public class TablePersonale extends JPanel {
         controller = contr;
         setLayout(null);
         PanelCustomGrey panel = new PanelCustomGrey();
-        panel.setBounds(0, 0, 800, 350);
+        panel.setBounds(0, 0, 1068, 350);
         add(panel);
         panel.setLayout(null);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 10, 780, 340);
+        scrollPane.setBounds(10, 10, 958, 340);
         panel.add(scrollPane);
         
         JLabel Search = new JLabel("");
